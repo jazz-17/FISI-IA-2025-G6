@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { BookOpen, Calendar, Info, ExternalLink, Film, FileText, FileType } from 'lucide-react'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@radix-ui/react-tabs'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from './components/ui/tabs'
 
 function App() {
   // Sample course data - replace with your actual cours information

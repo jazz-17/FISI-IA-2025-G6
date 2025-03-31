@@ -10,4 +10,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: "https://jazz-17.github.io/FISI-IA-2025-G6/",
+  root: "src",
+  publicDir: "../public",
+  build: {
+    outDir: '../dist',
+    emptyOutDir: true,
+  },
 })
