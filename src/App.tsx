@@ -1,18 +1,17 @@
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
-import { BookOpen, Calendar, Info, ExternalLink, Film, FileText, FileType } from 'lucide-react'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from './components/ui/tabs'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { Info, ExternalLink, Film, FileText, FileType, Download, Users, User } from 'lucide-react'
 
 function App() {
-  // Sample course data - replace with your actual cours information
   const courseInfo = {
-    title: "Advanced Web Development",
+    title: "Inteligencia Artificial 2025-I ",
     code: "CS4080",
-    instructor: "Dr. Jane Smith",
+    instructor: "Dr. Hugo Vega Huerta",
     semester: "Spring 2025",
     description:
-      "This course covers modern web development techniques, frameworks, and best practices. Students will learn to build responsive, accessible, and performant web applications using the latest technologies.",
+      "Este curso abarca los fundamentos de la Inteligencia Artificial (IA) para el desarrollo de sistemas informáticos inteligentes. Explora conceptos, paradigmas y aplicaciones de la IA, incluyendo la representación del conocimiento, los métodos de búsqueda, los sistemas expertos, los motores de inferencia y la ingeniería del conocimiento. También incluye juegos hombre-máquina, la metodología CommonKADS y la validación de sistemas expertos.",
     objectives: [
       "Understand modern web architecture and design patterns",
       "Build responsive web applications using React and Next.js",
@@ -21,40 +20,95 @@ function App() {
     ],
   }
 
+
   // Sample weeks data - replace with your actual weekly content
   const weeks = [
     {
       number: 1,
-      title: "Introduction to Modern Web Development",
-      description: "Overview of the course, introduction to modern web development concepts and tools.",
-      topics: ["Course overview", "Web development landscape", "Setting up development environment"],
-      resources: [
-        { name: "Course Introduction Slides", type: "slides", url: "#" },
-        { name: "Development Environment Setup Guide", type: "doc", url: "#" },
+      title: "Fundamentos de la IA",
+      description: "",
+      topics: ["Conceptos, Historia", "Áreas", "Aprendizaje automático", "Niveles de la IA"],
+      classes: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "CSS3 Features Documentation", type: "doc", url: "#" },
+      ],
+      labs: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "Responsive Design Exercise", type: "pdf", url: "#" },
       ],
     },
     {
       number: 2,
-      title: "HTML5 and CSS3 Fundamentals",
-      description: "Deep dive into HTML5 semantic elements and CSS3 features.",
-      topics: ["HTML5 semantic elements", "CSS3 features", "Responsive design principles"],
-      resources: [
+      title: "Agentes",
+      description: "",
+      topics: ["Conceptos, Tipos, Arquitectura", "Diseño de un agente", "Aplicaciones"],
+      classes: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "Responsive Design Exercise", type: "pdf", url: "#" },
+      ],
+      labs: [
         { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
         { name: "CSS3 Features Documentation", type: "doc", url: "#" },
+      ],
+    },
+    {
+      number: 3,
+      title: "Búsquedas",
+      description: "",
+      topics: ["Resolución de problemas como búsqueda, Espacios de estados, Búsqueda cieg", "Búsqueda informada"],
+      classes: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
         { name: "Responsive Design Exercise", type: "pdf", url: "#" },
+      ],
+      labs: [
+        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "CSS3 Features Documentation", type: "doc", url: "#" },
       ],
     },
     // Weeks 3-16 would follow the same pattern
   ]
 
+  // Sample group members - replace with your actual group members
+  const groupMembers = [
+    { name: "Quispe Carbajal, Kevin", avatar: "QK" },
+    { name: "", avatar: "SR" },
+    { name: "Taylor Kim", avatar: "TK" },
+    { name: "Jordan Lee", avatar: "JL" },
+  ]
+  // Sample other groups - replace with actual groups
+  const otherGroups = [
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5 },
+  ]
+
   // Generate remaining weeks for the sample
-  for (let i = 3; i <= 16; i++) {
+  for (let i = 4; i <= 16; i++) {
     weeks.push({
       number: i,
       title: `Week ${i} Content`,
       description: `Description for week ${i} of the course.`,
       topics: [`Topic ${i}.1`, `Topic ${i}.2`, `Topic ${i}.3`],
-      resources: [
+      classes: [
+        { name: `Week ${i} Slides`, type: "slides", url: "#" },
+        { name: `Week ${i} Assignment`, type: "doc", url: "#" },
+      ],
+      homeworks: [
+        { name: `Week ${i} Slides`, type: "slides", url: "#" },
+        { name: `Week ${i} Assignment`, type: "doc", url: "#" },
+      ],
+      labs: [
         { name: `Week ${i} Slides`, type: "slides", url: "#" },
         { name: `Week ${i} Assignment`, type: "doc", url: "#" },
       ],
@@ -63,161 +117,228 @@ function App() {
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
-      {/* Hero section with course info */}
-      <section className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 z-0" />
-        <div className="relative z-10 container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{courseInfo.title}</h1>
-            <div className="flex flex-wrap gap-3 mb-6">
-              <div className="flex items-center text-sm bg-primary/10 px-3 py-1 rounded-full">
-                <BookOpen className="w-4 h-4 mr-2" />
-                <span>{courseInfo.code}</span>
+      {/* University Header */}
+      <header className="bg-white pb-2 dark:bg-slate-900 border-b">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 relative">
+                <img
+                  src="assets/unmsm.png"
+                  alt="Logo"
+                  width={64}
+                  height={64}
+                  className="object-contain"
+                ></img>
               </div>
-              <div className="flex items-center text-sm bg-primary/10 px-3 py-1 rounded-full">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>{courseInfo.semester}</span>
-              </div>
-              <div className="flex items-center text-sm bg-primary/10 px-3 py-1 rounded-full">
-                <Info className="w-4 h-4 mr-2" />
-                <span>{courseInfo.instructor}</span>
+              <div>
+                <h2 className="font-bold text-xl">Universidad Nacional Mayor de San Marcos</h2>
+                <p className="text-sm text-muted-foreground">Facultad de ingeniería de sistemas e informática</p>
               </div>
             </div>
-            <p className="text-lg text-muted-foreground mb-8">{courseInfo.description}</p>
-            <Button asChild>
-              <a href="#syllabus">View Syllabus</a>
-            </Button>
+            <div className="text-right">
+              <p className="text-sm font-medium">Escuela de Ingeniería de Sistemas</p>
+              <p className="text-xs text-muted-foreground">Año académico 2025 - I</p>
+            </div>
           </div>
+        </div>
+      </header>
+      {/* Hero section with course info */}
+      <section className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 z-0" />
+        <div className="relative z-10 container mx-auto px-4 py-12">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{courseInfo.title}</h1>
+          <div className="flex flex-wrap gap-3 mb-6">
+            {/* <div className="flex items-center text-sm bg-primary/10 px-3 py-1 rounded-full">
+              <BookOpen className="w-4 h-4 mr-2" />
+              <span>{courseInfo.code}</span>
+            </div>
+            <div className="flex items-center text-sm bg-primary/10 px-3 py-1 rounded-full">
+              <Calendar className="w-4 h-4 mr-2" />
+              <span>{courseInfo.semester}</span>
+            </div> */}
+            <div className="flex items-center text-sm bg-primary/10 font-semibold px-3 py-1 rounded-full">
+              <Info className="w-4 h-4 mr-2" />
+              <span>Grupo 06</span>
+            </div>
+          </div>
+          <p className="text-lg opacity-80 mb-8">{courseInfo.description}</p>
+          <Button asChild>
+            <a href="assets/syllabus.pdf" download>
+              Descargar Syllabus
+              <Download></Download>
+            </a>
+          </Button>
         </div>
       </section>
 
-      {/* Course details section */}
+      {/* Course information section */}
       <section className="container mx-auto px-4 py-12">
-        <Tabs defaultValue="overview" className="max-w-4xl mx-auto">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="objectives">Objectives</TabsTrigger>
-            <TabsTrigger value="resources">Resources</TabsTrigger>
-          </TabsList>
-          <TabsContent value="overview" className="p-6 bg-white dark:bg-slate-900 rounded-lg mt-4 shadow-sm">
-            <h2 className="text-2xl font-bold mb-4">Course Overview</h2>
-            <p className="text-muted-foreground">{courseInfo.description}</p>
-            <div className="mt-6">
-              <img
-                src="/placeholder.svg?height=300&width=600"
-                alt="Course overview image"
-                width={600}
-                height={300}
-                className="rounded-lg w-full object-cover"
-              />
-            </div>
-          </TabsContent>
-          <TabsContent value="objectives" className="p-6 bg-white dark:bg-slate-900 rounded-lg mt-4 shadow-sm">
-            <h2 className="text-2xl font-bold mb-4">Learning Objectives</h2>
-            <ul className="space-y-2">
-              {courseInfo.objectives.map((objective, index) => (
-                <li key={index} className="flex items-start">
-                  <div className="bg-primary/10 text-primary rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5">
-                    {index + 1}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          {/* Professor Information */}
+          <Card className="md:col-span-3">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2">
+                <User className="h-5 w-5" />
+                Profesor
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex min-h-full flex-col items-center text-center">
+              <div className="w-36 h-36  relative rounded-full overflow-hidden ">
+                <img
+                  src="assets/profesor.avif"
+                  alt="Professor"
+                />
+              </div>
+              <h3 className="text-xl font-bold">{courseInfo.instructor}</h3>
+            </CardContent>
+          </Card>
+
+          {/* Group Members */}
+          <Card className="md:col-span-5">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                Integrantes
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {groupMembers.map((member, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
+                    <Avatar>
+                      <AvatarImage src={`/placeholder.svg?height=40&width=40&text=${member.avatar}`} />
+                      <AvatarFallback>{member.avatar}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-medium">{member.name}</h4>
+                    </div>
                   </div>
-                  <span>{objective}</span>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
-          <TabsContent value="resources" className="p-6 bg-white dark:bg-slate-900 rounded-lg mt-4 shadow-sm">
-            <h2 className="text-2xl font-bold mb-4">Course Resources</h2>
-            <div className="grid gap-4">
-              <div className="flex items-start p-4 border rounded-lg">
-                <BookOpen className="w-8 h-8 text-primary mr-4" />
-                <div>
-                  <h3 className="font-medium">Textbook</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Modern Web Development: Principles and Practices (2024)
-                  </p>
-                </div>
+                ))}
               </div>
-              <div className="flex items-start p-4 border rounded-lg">
-                <ExternalLink className="w-8 h-8 text-primary mr-4" />
-                <div>
-                  <h3 className="font-medium">Online Resources</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Course materials available on the university learning platform
-                  </p>
-                </div>
+            </CardContent>
+          </Card>
+
+          {/* Other Groups */}
+          <Card className="md:col-span-4">
+            <CardHeader className="pb-4">
+              <CardTitle className="flex items-center gap-2">
+                <ExternalLink className="h-5 w-5" />
+                Otros Grupos
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {otherGroups.map((group) => (
+                  <a
+                    key={group.id}
+                    href={`#group-${group.id}`}
+                    className="flex flex-col p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                  >
+
+                    <span className="text-sm bg-primary/10 self-start px-2 py-1 rounded-full">Group {group.id}</span>
+                  </a>
+                ))}
               </div>
-            </div>
-          </TabsContent>
-        </Tabs>
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
       {/* Syllabus section */}
       <section id="syllabus" className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">Course Syllabus</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">Contenido del Curso</h2>
 
-          <div className="space-y-6">
+          <div className="space-y-12">
             {weeks.map((week) => (
               <Card key={week.number} className="overflow-hidden">
                 <CardHeader className="bg-primary/5">
                   <div className="flex justify-between items-start">
                     <div>
                       <CardTitle>
-                        Week {week.number}: {week.title}
+                        Semana {week.number}: {week.title}
                       </CardTitle>
-                      <CardDescription className="mt-2">{week.description}</CardDescription>
-                    </div>
-                    <div className="bg-primary text-primary-foreground w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold">
-                      {week.number}
+                      <CardDescription className="mt-1">{week.description}</CardDescription>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-6">
-                  <h4 className="font-semibold mb-2">Topics:</h4>
-                  <ul className="list-disc pl-5 mb-4 space-y-1">
-                    {week.topics.map((topic, index) => (
-                      <li key={index} className="text-muted-foreground">
-                        {topic}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <h4 className="font-semibold mb-2">Resources:</h4>
-                  <div className="grid gap-2">
-                    {week.resources.map((resource, index) => (
-                      <a
-                        key={index}
-                        href={resource.url}
-                        className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors"
-                      >
-                        {resource.type === "slides" && <Film className="w-4 h-4 mr-2 text-primary" />}
-                        {resource.type === "doc" && <FileText className="w-4 h-4 mr-2 text-primary" />}
-                        {resource.type === "pdf" && <FileType className="w-4 h-4 mr-2 text-primary" />}
-                        <span className="text-sm">{resource.name}</span>
-                      </a>
-                    ))}
+                  <div className='mb-3'>
+                    <h4 className="font-semibold mb-1">Temas:</h4>
+                    <ul className="list-disc pl-5  space-y-1">
+                      {week.topics.map((topic, index) => (
+                        <li key={index} className="opacity-80">
+                          {topic}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className='flex gap-12 justify-between'>
+                    <div>
+                      <h4 className="font-semibold mb-1">Clases:</h4>
+                      <div className="grid gap-2">
+                      </div>
+                      {week.classes.map((_class, index) => (
+                        <a
+                          key={index}
+                          href={_class.url}
+                          className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors my-2"
+                        >
+                          {_class.type === "slides" && <Film className="w-4 h-4 mr-2 text-primary" />}
+                          {_class.type === "doc" && <FileText className="w-4 h-4 mr-2 text-primary" />}
+                          {_class.type === "pdf" && <FileType className="w-4 h-4 mr-2 text-primary" />}
+                          <span className="text-sm">{_class.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Tarea:</h4>
+                      <div className="grid gap-2">
+                      </div>
+                      {week.homeworks.map((homework, index) => (
+                        <a
+                          key={index}
+                          href={homework.url}
+                          className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors my-2"
+                        >
+                          {homework.type === "slides" && <Film className="w-4 h-4 mr-2 text-primary" />}
+                          {homework.type === "doc" && <FileText className="w-4 h-4 mr-2 text-primary" />}
+                          {homework.type === "pdf" && <FileType className="w-4 h-4 mr-2 text-primary" />}
+                          <span className="text-sm">{homework.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Laboratorio:</h4>
+                      <div className="grid gap-2">
+                      </div>
+                      {week.labs.map((lab, index) => (
+                        <a
+                          key={index}
+                          href={lab.url}
+                          className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors my-2"
+                        >
+                          {lab.type === "slides" && <Film className="w-4 h-4 mr-2 text-primary" />}
+                          {lab.type === "doc" && <FileText className="w-4 h-4 mr-2 text-primary" />}
+                          {lab.type === "pdf" && <FileType className="w-4 h-4 mr-2 text-primary" />}
+                          <span className="text-sm">{lab.name}</span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
-                <CardFooter className="bg-muted/50 flex justify-end">
+                {/* <CardFooter className="bg-muted/50 flex justify-end">
                   <Button variant="outline" size="sm">
                     <a href={`#week-${week.number}`}>View Details</a>
                   </Button>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-100 dark:bg-slate-900 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">
-            © {new Date().getFullYear()} {courseInfo.title} - {courseInfo.code}
-          </p>
-          <p className="text-sm text-muted-foreground mt-2">Created by [Your Name] for {courseInfo.semester}</p>
-        </div>
-      </footer>
     </main>
   )
 }
