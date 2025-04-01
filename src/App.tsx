@@ -1,5 +1,4 @@
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Info, ExternalLink, Film, FileText, FileType, Download, Users, User } from 'lucide-react'
@@ -79,10 +78,12 @@ function App() {
 
   // Sample group members - replace with your actual group members
   const groupMembers = [
-    { name: "Quispe Carbajal, Kevin", avatar: "QK" },
-    { name: "", avatar: "SR" },
-    { name: "Taylor Kim", avatar: "TK" },
-    { name: "Jordan Lee", avatar: "JL" },
+    { name: "Quispe Carbajal, Kevin", avatar: "22200137" },
+    { name: "Ordóñez Neyra Andrés Rafael", avatar: "22200174" },
+    { name: "Tito Carhuas Carolhay ", avatar: "22200136" },
+    { name: "Segura Pérez, Gerson", avatar: "22200043" },
+    { name: "Tantahuillca Navarro Alexander ", avatar: "19200145" },
+    { name: "Contreras Auqui Erikson", avatar: "13200151" },
   ]
   // Sample other groups - replace with actual groups
   const otherGroups = [
@@ -124,7 +125,7 @@ function App() {
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 relative">
                 <img
-                  src="assets/unmsm.png"
+                  src="unmsm.png"
                   alt="Logo"
                   width={64}
                   height={64}
@@ -164,7 +165,7 @@ function App() {
           </div>
           <p className="text-lg opacity-80 mb-8">{courseInfo.description}</p>
           <Button asChild>
-            <a href="assets/syllabus.pdf" download>
+            <a href="syllabus.pdf" download>
               Descargar Syllabus
               <Download></Download>
             </a>
@@ -186,7 +187,7 @@ function App() {
             <CardContent className="flex min-h-full flex-col items-center text-center">
               <div className="w-36 h-36  relative rounded-full overflow-hidden ">
                 <img
-                  src="assets/profesor.avif"
+                  src="profesor.avif"
                   alt="Professor"
                 />
               </div>
@@ -206,13 +207,10 @@ function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {groupMembers.map((member, index) => (
                   <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
-                    <Avatar>
-                      <AvatarImage src={`/placeholder.svg?height=40&width=40&text=${member.avatar}`} />
-                      <AvatarFallback>{member.avatar}</AvatarFallback>
-                    </Avatar>
                     <div>
                       <h4 className="font-medium">{member.name}</h4>
                     </div>
+                    {member.avatar}
                   </div>
                 ))}
               </div>
