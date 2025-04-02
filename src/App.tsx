@@ -28,15 +28,15 @@ function App() {
       description: "",
       topics: ["Conceptos, Historia", "Áreas", "Aprendizaje automático", "Niveles de la IA"],
       classes: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "Fundamentos de la IA", type: "slides", url: "https://drive.google.com/file/d/14yhuqM8RVraOoP-9kVHPgKzCLI8U5vRX/view" },
       ],
       homeworks: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-        { name: "CSS3 Features Documentation", type: "doc", url: "#" },
+        { name: "Sistemas Inteligentes", type: "slides", url: "https://drive.google.com/file/d/12TYvaGH2WHvvc6AM5zZfQeqdVknL-0MG/view" },
+        // { name: "CSS3 Features Documentation", type: "doc", url: "#" },
       ],
       labs: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-        { name: "Responsive Design Exercise", type: "pdf", url: "#" },
+        //  { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        //  { name: "Responsive Design Exercise", type: "pdf", url: "#" },
       ],
     },
     {
@@ -45,15 +45,15 @@ function App() {
       description: "",
       topics: ["Conceptos, Tipos, Arquitectura", "Diseño de un agente", "Aplicaciones"],
       classes: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "IA - Agentes", type: "slides", url: "https://drive.google.com/file/d/1w_zwMjRLThvoz_fPhnMZpU9Q57mfg1Jx/view" },
       ],
       homeworks: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-        { name: "Responsive Design Exercise", type: "pdf", url: "#" },
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        // { name: "Responsive Design Exercise", type: "pdf", url: "#" },
       ],
       labs: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-        { name: "CSS3 Features Documentation", type: "doc", url: "#" },
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        // { name: "CSS3 Features Documentation", type: "doc", url: "#" },
       ],
     },
     {
@@ -62,25 +62,150 @@ function App() {
       description: "",
       topics: ["Resolución de problemas como búsqueda, Espacios de estados, Búsqueda cieg", "Búsqueda informada"],
       classes: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
       ],
       homeworks: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-        { name: "Responsive Design Exercise", type: "pdf", url: "#" },
       ],
       labs: [
-        { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-        { name: "CSS3 Features Documentation", type: "doc", url: "#" },
       ],
     },
-    // Weeks 3-16 would follow the same pattern
+    {
+      number: 4,
+      title: "Juegos de estrategia",
+      description: "",
+      topics: ["Juego de estrategia humano - máquina", "Algoritmo de juego de estrategia humano – máquina", "Juegos de estrategia con aprendizaje automático "],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 5,
+      title: "Métodos supervisados",
+      description: "",
+      topics: ["Fundamentos de Machine Learning", "Problemas de aprendizaje", "Fundamentos del aprendizaje supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 6,
+      title: "Métodos no supervisados",
+      description: "",
+      topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje no supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones", "Limitaciones"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 7,
+      title: "Métodos por refuerzo",
+      description: "",
+      topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje por refuerzo", "Modelos básicos de aprendizaje por refuerzo", "Aplicaciones", "Limitaciones"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 9,
+      title: "Fundamentos del Deep Learning",
+      description: "",
+      topics: ["Fundamentos del Deep learning", "Diferencias con ML clásico.", "Redes neuronales artificiales", "Arquitectura de una red"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 10,
+      title: "Algoritmos de entrenamiento",
+      description: "",
+      topics: ["Forward & backward propagation", "TensorFlow, Keras"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 11,
+      title: "Redes",
+      description: "",
+      topics: ["Redes convolucionales (CNNs) para visión por computadora.", "Redes recurrentes (RNNs, LSTM) para secuencias y texto.", "Overfitting y regularización: dropout, batch normalization"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 12,
+      title: "IA generativa (GAI)",
+      description: "",
+      topics: ["Conceptos", "Diferencias con la IA tradicional", "Fundamentos y aplicaciones.", "Transformers"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 13,
+      title: "Redes generativas adversarias",
+      description: "",
+      topics: ["Generación de imágenes", "Transferencia de estilo", "Aumento de datos", "Generación de texto", "Traducción automática", "Generación de diálogos"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
+    {
+      number: 14,
+      title: "IA creativa",
+      description: "",
+      topics: ["Concepto", "Fundamentos y aplicaciones", "Generación de obras de arte, música, poesía, y narraciones", "Marco legal en IA", "Ética y futuro en la IA"],
+      classes: [
+        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+      ],
+      homeworks: [
+      ],
+      labs: [
+      ],
+    },
   ]
 
   // Sample group members - replace with your actual group members
   const groupMembers = [
     { name: "Quispe Carbajal, Kevin", avatar: "22200137" },
     { name: "Ordóñez Neyra Andrés Rafael", avatar: "22200174" },
-    { name: "Tito Carhuas Carolhay ", avatar: "22200136" },
+    { name: "Ttito Carhuas Carolhay ", avatar: "22200136" },
     { name: "Segura Pérez, Gerson", avatar: "22200043" },
     { name: "Tantahuillca Navarro Alexander ", avatar: "19200145" },
     { name: "Contreras Auqui Erikson", avatar: "13200151" },
@@ -93,28 +218,6 @@ function App() {
     { id: 4 },
     { id: 5 },
   ]
-
-  // Generate remaining weeks for the sample
-  for (let i = 4; i <= 16; i++) {
-    weeks.push({
-      number: i,
-      title: `Week ${i} Content`,
-      description: `Description for week ${i} of the course.`,
-      topics: [`Topic ${i}.1`, `Topic ${i}.2`, `Topic ${i}.3`],
-      classes: [
-        { name: `Week ${i} Slides`, type: "slides", url: "#" },
-        { name: `Week ${i} Assignment`, type: "doc", url: "#" },
-      ],
-      homeworks: [
-        { name: `Week ${i} Slides`, type: "slides", url: "#" },
-        { name: `Week ${i} Assignment`, type: "doc", url: "#" },
-      ],
-      labs: [
-        { name: `Week ${i} Slides`, type: "slides", url: "#" },
-        { name: `Week ${i} Assignment`, type: "doc", url: "#" },
-      ],
-    })
-  }
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
@@ -196,7 +299,7 @@ function App() {
           </Card>
 
           {/* Group Members */}
-          <Card className="md:col-span-5">
+          <Card className="md:col-span-6">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <Users className="h-5 w-5" />
@@ -218,7 +321,7 @@ function App() {
           </Card>
 
           {/* Other Groups */}
-          <Card className="md:col-span-4">
+          <Card className="md:col-span-3">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2">
                 <ExternalLink className="h-5 w-5" />
@@ -231,10 +334,10 @@ function App() {
                   <a
                     key={group.id}
                     href={`#group-${group.id}`}
-                    className="flex flex-col p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                    className="flex flex-col   rounded-lg hover:bg-muted/50 transition-colors"
                   >
 
-                    <span className="text-sm bg-primary/10 self-start px-2 py-1 rounded-full">Group {group.id}</span>
+                    <span className="text-sm bg-primary/10 self-start px-2 py-1 rounded-full">Grupo {group.id}</span>
                   </a>
                 ))}
               </div>
@@ -283,9 +386,7 @@ function App() {
                           href={_class.url}
                           className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors my-2"
                         >
-                          {_class.type === "slides" && <Film className="w-4 h-4 mr-2 text-primary" />}
-                          {_class.type === "doc" && <FileText className="w-4 h-4 mr-2 text-primary" />}
-                          {_class.type === "pdf" && <FileType className="w-4 h-4 mr-2 text-primary" />}
+                          <FileText className="w-4 h-4 mr-2 text-primary" />
                           <span className="text-sm">{_class.name}</span>
                         </a>
                       ))}
@@ -311,7 +412,7 @@ function App() {
                       <h4 className="font-semibold mb-1">Laboratorio:</h4>
                       <div className="grid gap-2">
                       </div>
-                      {week.labs.map((lab, index) => (
+                      {/* {week.labs.map((lab, index) => (
                         <a
                           key={index}
                           href={lab.url}
@@ -322,15 +423,10 @@ function App() {
                           {lab.type === "pdf" && <FileType className="w-4 h-4 mr-2 text-primary" />}
                           <span className="text-sm">{lab.name}</span>
                         </a>
-                      ))}
+                      ))} */}
                     </div>
                   </div>
                 </CardContent>
-                {/* <CardFooter className="bg-muted/50 flex justify-end">
-                  <Button variant="outline" size="sm">
-                    <a href={`#week-${week.number}`}>View Details</a>
-                  </Button>
-                </CardFooter> */}
               </Card>
             ))}
           </div>
@@ -341,3 +437,5 @@ function App() {
   )
 }
 export default App
+
+
