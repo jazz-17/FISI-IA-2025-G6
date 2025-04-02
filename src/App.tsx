@@ -2,7 +2,8 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Info, ExternalLink, Film, FileText, FileType, Download, Users, User } from 'lucide-react'
-
+import Logo from "@/assets/unmsm.png"
+import ProfesorPhoto from "@/assets/profesor.avif"
 function App() {
   const courseInfo = {
     title: "Inteligencia Artificial 2025-I ",
@@ -228,7 +229,7 @@ function App() {
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 relative">
                 <img
-                  src="unmsm.png"
+                  src={Logo}
                   alt="Logo"
                   width={64}
                   height={64}
@@ -290,7 +291,7 @@ function App() {
             <CardContent className="flex min-h-full flex-col items-center text-center">
               <div className="w-36 h-36  relative rounded-full overflow-hidden ">
                 <img
-                  src="profesor.avif"
+                  src={ProfesorPhoto}
                   alt="Professor"
                 />
               </div>
