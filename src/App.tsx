@@ -61,7 +61,7 @@ function App() {
       number: 3,
       title: "Búsquedas",
       description: "",
-      topics: ["Resolución de problemas como búsqueda, Espacios de estados, Búsqueda cieg", "Búsqueda informada"],
+      topics: ["Resolución de problemas como búsqueda", "Espacios de estados", "Búsqueda ciega", "Búsqueda informada"],
       classes: [
         { name: "Búsquedas", type: "slides", url: "https://www.canva.com/design/DAGjya74K84/r00sDBiBRJShDouxPhvpcw/edit" },
       ],
