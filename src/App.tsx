@@ -63,7 +63,7 @@ function App() {
       description: "",
       topics: ["Resolución de problemas como búsqueda, Espacios de estados, Búsqueda cieg", "Búsqueda informada"],
       classes: [
-        // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
+        { name: "Búsquedas", type: "slides", url: "https://www.canva.com/design/DAGjya74K84/r00sDBiBRJShDouxPhvpcw/edit" },
       ],
       homeworks: [
       ],
@@ -385,6 +385,7 @@ function App() {
                         <a
                           key={index}
                           href={_class.url}
+                          target='_blank'
                           className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors my-2"
                         >
                           <FileText className="w-4 h-4 mr-2 text-primary" />
@@ -400,6 +401,7 @@ function App() {
                         <a
                           key={index}
                           href={homework.url}
+                          target='_blank'
                           className="flex items-center p-2 border rounded-md hover:bg-muted transition-colors my-2"
                         >
                           {homework.type === "slides" && <Film className="w-4 h-4 mr-2 text-primary" />}
