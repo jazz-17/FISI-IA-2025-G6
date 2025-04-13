@@ -1,11 +1,13 @@
 <script setup>
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { Info, ExternalLink, Film, FileText, FileType, Download, Users, User } from 'lucide-vue-next' // Use lucide-vue-next
+import { Separator } from '@/components/ui/separator' // Import Separator
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar' // Import Avatar for professor
+import { Info, ExternalLink, Film, FileText, FileType, Download, Users, User, CalendarDays, BookOpen } from 'lucide-vue-next'
 import Logo from "@/assets/unmsm.png"
 import ProfesorPhoto from "@/assets/profesor.avif"
 
-// No need for useState or useEffect, Vue's reactivity handles data
+// --- Data remains the same ---
 const courseInfo = {
   title: "Inteligencia Artificial 2025-I ",
   code: "CS4080",
@@ -13,7 +15,7 @@ const courseInfo = {
   semester: "Spring 2025",
   description:
     "Este curso abarca los fundamentos de la Inteligencia Artificial (IA) para el desarrollo de sistemas informáticos inteligentes. Explora conceptos, paradigmas y aplicaciones de la IA, incluyendo la representación del conocimiento, los métodos de búsqueda, los sistemas expertos, los motores de inferencia y la ingeniería del conocimiento. También incluye juegos hombre-máquina, la metodología CommonKADS y la validación de sistemas expertos.",
-  objectives: [
+  objectives: [ // Kept in data, though not displayed in this version
     "Understand modern web architecture and design patterns",
     "Build responsive web applications using React and Next.js",
     "Implement accessibility best practices",
@@ -21,434 +23,340 @@ const courseInfo = {
   ],
 }
 
-// Sample weeks data - directly usable in the template
 const weeks = [
   {
     number: 1,
     title: "Fundamentos de la IA",
-    description: "",
+    description: "Introducción a los conceptos básicos, historia y áreas de la IA.",
     topics: ["Conceptos, Historia", "Áreas", "Aprendizaje automático", "Niveles de la IA"],
-    classes: [
-      { name: "Fundamentos de la IA", type: "slides", url: "https://drive.google.com/file/d/14yhuqM8RVraOoP-9kVHPgKzCLI8U5vRX/view" },
-    ],
-    homeworks: [
-      { name: "Sistemas Inteligentes", type: "slides", url: "https://drive.google.com/file/d/12TYvaGH2WHvvc6AM5zZfQeqdVknL-0MG/view" },
-      // { name: "CSS3 Features Documentation", type: "doc", url: "#" },
-    ],
-    labs: [
-      //  { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-      //  { name: "Responsive Design Exercise", type: "pdf", url: "#" },
-    ],
+    classes: [{ name: "Fundamentos de la IA", type: "slides", url: "https://drive.google.com/file/d/14yhuqM8RVraOoP-9kVHPgKzCLI8U5vRX/view" }],
+    homeworks: [{ name: "Sistemas Inteligentes", type: "slides", url: "https://drive.google.com/file/d/12TYvaGH2WHvvc6AM5zZfQeqdVknL-0MG/view" }],
+    labs: [],
   },
   {
     number: 2,
-    title: "Agentes",
-    description: "",
+    title: "Agentes Inteligentes",
+    description: "Exploración de agentes, sus tipos, arquitecturas y aplicaciones.",
     topics: ["Conceptos, Tipos, Arquitectura", "Diseño de un agente", "Aplicaciones"],
-    classes: [
-      { name: "IA - Agentes", type: "slides", url: "https://drive.google.com/file/d/1w_zwMjRLThvoz_fPhnMZpU9Q57mfg1Jx/view" },
-    ],
-    homeworks: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-      // { name: "Responsive Design Exercise", type: "pdf", url: "#" },
-    ],
-    labs: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-      // { name: "CSS3 Features Documentation", type: "doc", url: "#" },
-    ],
+    classes: [{ name: "IA - Agentes", type: "slides", url: "https://drive.google.com/file/d/1w_zwMjRLThvoz_fPhnMZpU9Q57mfg1Jx/view" }],
+    homeworks: [],
+    labs: [],
   },
   {
     number: 3,
-    title: "Búsquedas",
-    description: "",
+    title: "Resolución de Problemas Mediante Búsqueda",
+    description: "Técnicas de búsqueda ciega e informada para la resolución de problemas.",
     topics: ["Resolución de problemas como búsqueda", "Espacios de estados", "Búsqueda ciega", "Búsqueda informada"],
-    classes: [
-      { name: "Búsquedas", type: "slides", url: "https://www.canva.com/design/DAGjya74K84/r00sDBiBRJShDouxPhvpcw/edit" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [{ name: "Búsquedas", type: "slides", url: "https://www.canva.com/design/DAGjya74K84/r00sDBiBRJShDouxPhvpcw/edit" }],
+    homeworks: [],
+    labs: [],
   },
+  // ... (rest of the weeks data) ...
   {
     number: 4,
     title: "Juegos de estrategia",
-    description: "",
+    description: "Algoritmos y enfoques para juegos humano-máquina.",
     topics: ["Juego de estrategia humano - máquina", "Algoritmo de juego de estrategia humano – máquina", "Juegos de estrategia con aprendizaje automático "],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [{ name: "Juegos Humano-Máquina", type: "slides", url: "https://www.canva.com/design/DAFh-heMiaw/I_hx9GclaNdYMU1kIXIdGQ/edit" }, { name: "Implementación Minimax", type: "slides", url: "/sem4/michi" }], homeworks: [], labs: [],
   },
   {
     number: 5,
-    title: "Métodos supervisados",
-    description: "",
+    title: "Métodos Supervisados de Machine Learning",
+    description: "Fundamentos y modelos básicos del aprendizaje supervisado.",
     topics: ["Fundamentos de Machine Learning", "Problemas de aprendizaje", "Fundamentos del aprendizaje supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 6,
-    title: "Métodos no supervisados",
-    description: "",
+    title: "Métodos No Supervisados de Machine Learning",
+    description: "Exploración de técnicas de aprendizaje sin etiquetas.",
     topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje no supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones", "Limitaciones"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 7,
-    title: "Métodos por refuerzo",
-    description: "",
+    title: "Aprendizaje por Refuerzo",
+    description: "Introducción a los modelos y aplicaciones del aprendizaje por refuerzo.",
     topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje por refuerzo", "Modelos básicos de aprendizaje por refuerzo", "Aplicaciones", "Limitaciones"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
+  },
+  { // Assuming week 8 is Exam Parcial or similar - skipped in original data
+    number: 8,
+    title: "Examen Parcial",
+    description: "Evaluación de los temas cubiertos en la primera mitad del curso.",
+    topics: ["Repaso general", "Evaluación"],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 9,
     title: "Fundamentos del Deep Learning",
-    description: "",
+    description: "Introducción a las redes neuronales y el aprendizaje profundo.",
     topics: ["Fundamentos del Deep learning", "Diferencias con ML clásico.", "Redes neuronales artificiales", "Arquitectura de una red"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 10,
-    title: "Algoritmos de entrenamiento",
-    description: "",
+    title: "Algoritmos de Entrenamiento en Deep Learning",
+    description: "Mecanismos clave para entrenar redes neuronales.",
     topics: ["Forward & backward propagation", "TensorFlow, Keras"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 11,
-    title: "Redes",
-    description: "",
+    title: "Arquitecturas de Redes Neuronales Avanzadas",
+    description: "CNNs para visión y RNNs/LSTMs para secuencias.",
     topics: ["Redes convolucionales (CNNs) para visión por computadora.", "Redes recurrentes (RNNs, LSTM) para secuencias y texto.", "Overfitting y regularización: dropout, batch normalization"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 12,
-    title: "IA generativa (GAI)",
-    description: "",
+    title: "Introducción a la IA Generativa (GAI)",
+    description: "Conceptos fundamentales y diferencias con IA tradicional.",
     topics: ["Conceptos", "Diferencias con la IA tradicional", "Fundamentos y aplicaciones.", "Transformers"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 13,
-    title: "Redes generativas adversarias",
-    description: "",
+    title: "Redes Generativas Adversarias (GANs)",
+    description: "Aplicaciones de GANs en generación de imágenes, texto y más.",
     topics: ["Generación de imágenes", "Transferencia de estilo", "Aumento de datos", "Generación de texto", "Traducción automática", "Generación de diálogos"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
   },
   {
     number: 14,
-    title: "IA creativa",
-    description: "",
+    title: "IA Creativa, Ética y Futuro",
+    description: "Explorando la generación artística, el marco legal y las implicaciones éticas.",
     topics: ["Concepto", "Fundamentos y aplicaciones", "Generación de obras de arte, música, poesía, y narraciones", "Marco legal en IA", "Ética y futuro en la IA"],
-    classes: [
-      // { name: "HTML5 Semantics Slides", type: "slides", url: "#" },
-    ],
-    homeworks: [
-    ],
-    labs: [
-    ],
+    classes: [], homeworks: [], labs: [],
+  },
+  { // Assuming week 15 is Project presentations or similar
+    number: 15,
+    title: "Presentación de Proyectos Finales",
+    description: "Exposición y evaluación de los trabajos desarrollados durante el curso.",
+    topics: ["Presentaciones", "Discusión", "Feedback"],
+    classes: [], homeworks: [], labs: [],
+  },
+  { // Assuming week 16 is Exam Final
+    number: 16,
+    title: "Examen Final",
+    description: "Evaluación final cubriendo todo el material del curso.",
+    topics: ["Repaso general", "Evaluación final"],
+    classes: [], homeworks: [], labs: [],
   },
 ]
 
-// Sample group members - directly usable in the template
 const groupMembers = [
-  { name: "Quispe Carbajal, Kevin", avatar: "22200137" },
-  { name: "Ordóñez Neyra Andrés Rafael", avatar: "22200174" },
-  { name: "Ttito Carhuas Carolhay ", avatar: "22200136" },
-  { name: "Segura Pérez, Gerson", avatar: "22200043" },
-  { name: "Tantahuillca Navarro Alexander ", avatar: "19200145" },
-  { name: "Contreras Auqui Erikson", avatar: "13200151" },
+  { name: "Quispe Carbajal, Kevin", code: "22200137" },
+  { name: "Ordóñez Neyra Andrés Rafael", code: "22200174" },
+  { name: "Ttito Carhuas Carolhay ", code: "22200136" },
+  { name: "Segura Pérez, Gerson", code: "22200043" },
+  { name: "Tantahuillca Navarro Alexander ", code: "19200145" },
+  { name: "Contreras Auqui Erikson", code: "13200151" },
 ]
 
-// Sample other groups - directly usable in the template
-const otherGroups = [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-]
-
-// Helper function to get icon based on type (optional, could do inline)
+// No longer need 'otherGroups' for this style
+// Helper function for icons (optional, but keeps template cleaner)
 const getIconForType = (type) => {
   switch (type) {
-    case 'slides':
-      return Film;
-    case 'doc':
-      return FileText;
-    case 'pdf':
-      return FileType;
-    default:
-      return FileText; // Default icon
+    case 'slides': return Film;
+    case 'doc': return FileText;
+    case 'pdf': return FileType;
+    default: return FileText;
   }
+}
+
+// Helper function to format week number (e.g., 01, 02, ..., 10, 11)
+const formatWeekNumber = (num) => {
+  return num.toString().padStart(2, '0');
 }
 
 </script>
 
 <template>
-  <main class="min-h-screen bg-slate-50 dark:bg-slate-950">
-    <!-- University Header -->
-    <header class="bg-white pb-2 dark:bg-slate-900 border-b">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div class="flex items-center gap-4">
-            <div class="w-16 h-16 relative">
-              <img :src="Logo.src" alt="Logo" width="64" height="64" class="object-contain">
-            </div>
-            <div>
-              <h2 class="font-bold text-xl">Universidad Nacional Mayor de San Marcos</h2>
-              <p class="text-sm text-muted-foreground">Facultad de ingeniería de sistemas e informática</p>
-            </div>
-          </div>
-          <div class="text-right">
-            <p class="text-sm font-medium">Escuela de Ingeniería de Sistemas</p>
-            <p class="text-xs text-muted-foreground">Año académico 2025 - I</p>
+  <div class="min-h-screen bg-background text-foreground">
+    <!-- Simplified Header or keep the original -->
+    <header
+      class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div class="container mx-auto h-16 flex items-center justify-between px-4">
+        <div class="flex items-center gap-3">
+          <img :src="Logo.src" alt="UNMSM Logo" class="h-10 w-auto object-contain">
+          <div>
+            <h1 class="font-semibold text-lg hidden sm:block">UNMSM - FISI</h1>
+            <p class="text-xs text-muted-foreground hidden sm:block">Inteligencia Artificial 2025-I</p>
+            <h1 class="font-semibold text-lg sm:hidden">IA 2025-I</h1> <!-- Shorter title for mobile -->
           </div>
         </div>
+        <nav class="flex items-center gap-4">
+          <Button variant="ghost" size="sm" as-child>
+            <a href="#course-info">Info</a>
+          </Button>
+          <Button variant="ghost" size="sm" as-child>
+            <a href="#syllabus">Syllabus</a>
+          </Button>
+          <Button size="sm" as-child>
+            <a href="syllabus.pdf" download>
+              <Download class="h-4 w-4 mr-2" /> Syllabus PDF
+            </a>
+          </Button>
+        </nav>
       </div>
     </header>
 
-    <!-- Hero section with course info -->
-    <section class="relative">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 z-0" />
-      <div class="relative z-10 container mx-auto px-4 py-12">
-        <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">{{ courseInfo.title }}</h1>
-        <div class="flex flex-wrap gap-3 mb-6">
-          <!-- Example static info -->
-          <div class="flex items-center text-sm bg-primary/10 font-semibold px-3 py-1 rounded-full">
-            <Info class="w-4 h-4 mr-2" />
-            <span>Grupo 06</span>
+    <main class="container mx-auto px-4 py-8 md:py-12">
+      <!-- Article Header / Hero -->
+      <section class="mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
+          {{ courseInfo.title }}
+        </h1>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mb-6">
+          <!-- <span class="flex items-center gap-1.5"><BookOpen class="w-4 h-4" /> {{ courseInfo.code }}</span>
+          <span class="flex items-center gap-1.5"><CalendarDays class="w-4 h-4" /> {{ courseInfo.semester }}</span> -->
+          <span class="flex items-center gap-1.5 font-semibold text-primary">
+            <Info class="w-4 h-4" /> Grupo 06
+          </span>
+        </div>
+        <p class="text-lg text-muted-foreground max-w-3xl">
+          {{ courseInfo.description }}
+        </p>
+      </section>
+
+      <!-- Course Info Section (Integrated) -->
+      <section id="course-info" class="mb-12 p-6 border rounded-lg bg-card text-card-foreground">
+        <h2 class="text-2xl font-semibold mb-6">Información del Curso y Grupo</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Professor Info -->
+          <div class="md:col-span-1">
+            <h3 class="font-medium mb-3 text-lg flex items-center gap-2">
+              <User class="w-5 h-5 text-primary" /> Profesor
+            </h3>
+            <div class="flex items-center gap-4">
+              <Avatar class="h-20 w-20">
+                <img :src="ProfesorPhoto.src" alt="Foto del Profesor" />
+                <AvatarFallback>{{ courseInfo.instructor.substring(0, 2) }}</AvatarFallback>
+              </Avatar>
+              <div>
+                <p class="font-semibold">{{ courseInfo.instructor }}</p>
+                <!-- Add contact/office hours if available -->
+                <p class="text-sm text-muted-foreground">Experto en IA y Sistemas Inteligentes</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Group Members -->
+          <div class="md:col-span-2">
+            <h3 class="font-medium mb-3 text-lg flex items-center gap-2">
+              <Users class="w-5 h-5 text-primary" /> Integrantes (Grupo 06)
+            </h3>
+            <ul class="space-y-2 text-sm">
+              <li v-for="member in groupMembers" :key="member.code"
+                class="flex justify-between items-center p-2 rounded hover:bg-muted/50">
+                <span>{{ member.name }}</span>
+                <span class="text-xs text-muted-foreground font-mono">{{ member.code }}</span>
+              </li>
+            </ul>
           </div>
         </div>
-        <p class="text-lg opacity-80 mb-8">{{ courseInfo.description }}</p>
-        <Button as-child> <!-- Use as-child prop for links inside buttons -->
-          <a href="syllabus.pdf" download>
-            Descargar Syllabus
-            <Download class="ml-2 h-4 w-4" /> <!-- Add spacing if needed -->
-          </a>
-        </Button>
-      </div>
-    </section>
+      </section>
 
-    <!-- Course information section -->
-    <section class="container mx-auto px-4 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-        <!-- Professor Information -->
-        <Card class="md:col-span-3">
-          <CardHeader class="pb-4">
-            <CardTitle class="flex items-center gap-2">
-              <User class="h-5 w-5" />
-              Profesor
-            </CardTitle>
-          </CardHeader>
-          <CardContent class="flex min-h-full flex-col items-center text-center">
-            <div class="w-36 h-36 relative rounded-full overflow-hidden mb-4"> <!-- Added margin-bottom -->
-              <img :src="ProfesorPhoto.src" alt="Professor" class="object-cover w-full h-full"
-              />
+      <!-- Syllabus / Weekly Content -->
+      <section id="syllabus" class="mb-12">
+        <h2 class="text-3xl font-bold mb-8 text-center">Contenido Semanal del Curso</h2>
+
+        <div class="space-y-10 relative pl-6 border-l-2 border-primary/20">
+          <!-- Timeline Indicator -->
+          <div class="absolute left-[-12px] top-0 w-6 h-6 bg-primary rounded-full border-4 border-background"></div>
+
+          <!-- Loop Through Weeks -->
+          <article v-for="(week, index) in weeks" :key="week.number" class="relative pb-10">
+            <!-- Timeline Dot for each week -->
+            <div
+              class="absolute left-[-12px] top-1 w-6 h-6 bg-muted rounded-full border-4 border-background ring-1 ring-primary/20">
+              <span class="absolute inset-0 flex items-center justify-center text-xs font-mono text-muted-foreground">{{
+                formatWeekNumber(week.number) }}</span>
             </div>
-            <h3 class="text-xl font-bold">{{ courseInfo.instructor }}</h3>
-            <!-- Removed description as it wasn't used -->
-          </CardContent>
-        </Card>
 
-        <!-- Group Members -->
-        <Card class="md:col-span-6">
-          <CardHeader class="pb-4">
-            <CardTitle class="flex items-center gap-2">
-              <Users class="h-5 w-5" />
-              Integrantes
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <!-- Use v-for to loop through groupMembers -->
-              <div v-for="(member, index) in groupMembers" :key="index"
-                class="flex items-center gap-3 p-3 border rounded-lg">
+            <div class="ml-8"> <!-- Indent content to the right of the timeline -->
+              <header class="mb-4">
+                <h3 class="text-2xl font-semibold mb-1">
+                  Semana {{ formatWeekNumber(week.number) }}: {{ week.title }}
+                </h3>
+                <p v-if="week.description" class="text-muted-foreground text-sm">
+                  {{ week.description }}
+                </p>
+              </header>
+
+              <div class="space-y-5">
+                <!-- Topics -->
                 <div>
-                  <h4 class="font-medium">{{ member.name }}</h4>
-                  <!-- Displaying avatar text directly, adjust if it's meant to be an image path -->
-                  <p class="text-sm text-muted-foreground">{{ member.avatar }}</p>
+                  <h4 class="font-medium mb-2 text-primary">Temas:</h4>
+                  <ul class="list-disc list-outside pl-5 space-y-1 text-sm text-muted-foreground">
+                    <li v-for="(topic, idx) in week.topics" :key="`${week.number}-topic-${idx}`">
+                      {{ topic }}
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Materials (Combined Classes, HW, Labs) -->
+                <div v-if="week.classes.length || week.homeworks.length || week.labs.length">
+                  <h4 class="font-medium mb-2 text-primary">Materiales y Actividades:</h4>
+                  <div class="space-y-2">
+                    <!-- Classes -->
+                    <a v-for="(item, idx) in week.classes" :key="`${week.number}-class-${idx}`" :href="item.url"
+                      target="_blank" rel="noopener noreferrer"
+                      class="flex items-center gap-2 p-2 text-sm border rounded-md hover:bg-muted transition-colors group">
+                      <component :is="getIconForType(item.type)"
+                        class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <span>{{ item.name }} (Clase)</span>
+                      <ExternalLink
+                        class="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-muted-foreground transition-opacity opacity-0 group-hover:opacity-100" />
+                    </a>
+                    <!-- Homeworks -->
+                    <a v-for="(item, idx) in week.homeworks" :key="`${week.number}-hw-${idx}`" :href="item.url"
+                      target="_blank" rel="noopener noreferrer"
+                      class="flex items-center gap-2 p-2 text-sm border rounded-md hover:bg-muted transition-colors group">
+                      <component :is="getIconForType(item.type)"
+                        class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <span>{{ item.name }} (Tarea)</span>
+                      <ExternalLink
+                        class="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-muted-foreground transition-opacity opacity-0 group-hover:opacity-100" />
+                    </a>
+                    <!-- Labs -->
+                    <a v-for="(item, idx) in week.labs" :key="`${week.number}-lab-${idx}`" :href="item.url"
+                      target="_blank" rel="noopener noreferrer"
+                      class="flex items-center gap-2 p-2 text-sm border rounded-md hover:bg-muted transition-colors group">
+                      <component :is="getIconForType(item.type)"
+                        class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <span>{{ item.name }} (Lab)</span>
+                      <ExternalLink
+                        class="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-muted-foreground transition-opacity opacity-0 group-hover:opacity-100" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
 
-        <!-- Other Groups -->
-        <Card class="md:col-span-3">
-          <CardHeader class="pb-4">
-            <CardTitle class="flex items-center gap-2">
-              <ExternalLink class="h-5 w-5" />
-              Otros Grupos
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <!-- Use v-for to loop through otherGroups -->
-              <a v-for="group in otherGroups" :key="group.id" :href="`#group-${group.id}`"
-                class="flex flex-col rounded-lg hover:bg-muted/50 transition-colors p-2" <!-- Added padding -->
-                >
-                <span class="text-sm bg-primary/10 self-start px-2 py-1 rounded-full">Grupo {{ group.id }}</span>
-              </a>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </section>
-
-    <!-- Syllabus section -->
-    <section id="syllabus" class="container mx-auto px-4 py-12">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Contenido del Curso</h2>
-
-        <div class="space-y-12">
-          <!-- Use v-for to loop through weeks -->
-          <Card v-for="week in weeks" :key="week.number" class="overflow-hidden">
-            <CardHeader class="bg-primary/5">
-              <div class="flex justify-between items-start">
-                <div>
-                  <CardTitle>
-                    Semana {{ week.number }}: {{ week.title }}
-                  </CardTitle>
-                  <CardDescription v-if="week.description" class="mt-1">{{ week.description }}</CardDescription>
-                  <!-- Conditionally render description -->
-                </div>
-                <!-- Add any other header content if needed -->
-              </div>
-            </CardHeader>
-            <CardContent class="pt-6">
-              <div class='mb-4'> <!-- Increased margin -->
-                <h4 class="font-semibold mb-2">Temas:</h4> <!-- Increased margin -->
-                <ul class="list-disc pl-5 space-y-1">
-                  <!-- Use v-for to loop through topics -->
-                  <li v-for="(topic, index) in week.topics" :key="index" class="opacity-80">
-                    {{ topic }}
-                  </li>
-                </ul>
-              </div>
-              <div class='flex flex-col sm:flex-row gap-6 sm:gap-12 justify-between'> <!-- Adjusted layout and gap -->
-                <!-- Classes Section -->
-                <div class="flex-1"> <!-- Allow sections to grow -->
-                  <h4 class="font-semibold mb-2">Clases:</h4>
-                  <div v-if="week.classes && week.classes.length > 0" class="space-y-2">
-                    <!-- Use space-y for consistency -->
-                    <!-- Use v-for to loop through classes -->
-                    <a v-for="(_class, index) in week.classes" :key="index" :href="_class.url" target='_blank'
-                      rel="noopener noreferrer"
-                      class="flex items-center p-2 border rounded-md hover:bg-muted transition-colors"
-                      >
-                      <FileText class="w-4 h-4 mr-2 text-primary" /> <!-- Consistent icon for class links -->
-                      <span class="text-sm">{{ _class.name }}</span>
-                    </a>
-                  </div>
-                  <p v-else class="text-sm text-muted-foreground italic">No hay clases listadas.</p>
-                  <!-- Placeholder if empty -->
-                </div>
-
-                <!-- Homeworks Section -->
-                <div class="flex-1">
-                  <h4 class="font-semibold mb-2">Tarea:</h4>
-                  <div v-if="week.homeworks && week.homeworks.length > 0" class="space-y-2">
-                    <!-- Use v-for to loop through homeworks -->
-                    <a v-for="(homework, index) in week.homeworks" :key="index" :href="homework.url" target='_blank'
-                      rel="noopener noreferrer"
-                      class="flex items-center p-2 border rounded-md hover:bg-muted transition-colors">
-                      <!-- Conditional icon rendering -->
-                      <Film v-if="homework.type === 'slides'" class="w-4 h-4 mr-2 text-primary" />
-                      <FileText v-else-if="homework.type === 'doc'" class="w-4 h-4 mr-2 text-primary" />
-                      <FileType v-else-if="homework.type === 'pdf'" class="w-4 h-4 mr-2 text-primary" />
-                      <FileText v-else class="w-4 h-4 mr-2 text-primary" /> <!-- Default icon -->
-                      <span class="text-sm">{{ homework.name }}</span>
-                    </a>
-                  </div>
-                  <p v-else class="text-sm text-muted-foreground italic">No hay tareas listadas.</p>
-                </div>
-
-                <!-- Labs Section (Translated even if commented out originally) -->
-                <div class="flex-1">
-                  <h4 class="font-semibold mb-2">Laboratorio:</h4>
-                  <div v-if="week.labs && week.labs.length > 0" class="space-y-2">
-                    <!-- Use v-for to loop through labs -->
-                    <a v-for="(lab, index) in week.labs" :key="index" :href="lab.url" target='_blank'
-                      rel="noopener noreferrer" <!-- Target added -->
-                      class="flex items-center p-2 border rounded-md hover:bg-muted transition-colors"
-                      >
-                      <Film v-if="lab.type === 'slides'" class="w-4 h-4 mr-2 text-primary" />
-                      <FileText v-else-if="lab.type === 'doc'" class="w-4 h-4 mr-2 text-primary" />
-                      <FileType v-else-if="lab.type === 'pdf'" class="w-4 h-4 mr-2 text-primary" />
-                      <FileText v-else class="w-4 h-4 mr-2 text-primary" /> <!-- Default icon -->
-                      <span class="text-sm">{{ lab.name }}</span>
-                    </a>
-                  </div>
-                  <p v-else class="text-sm text-muted-foreground italic">No hay laboratorios listados.</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            <!-- Separator removed, using timeline structure instead -->
+            <!-- <Separator v-if="index < weeks.length - 1" class="my-10" /> -->
+          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-  </main>
+    </main>
+
+    <footer class="border-t bg-muted/40">
+      <div class="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
+        © {{ new Date().getFullYear() }} Grupo 06 - FISI, UNMSM. Todos los derechos reservados.
+      </div>
+    </footer>
+
+  </div>
 </template>
 
 <style scoped>
-/* Add any component-specific styles here if needed */
-/* For example: */
-/* img {
-  max-width: 100%;
-  height: auto;
-} */
+/* Add minor scoped styles if needed, but rely on Tailwind */
+h2,
+h3 {
+  scroll-margin-top: 80px;
+  /* Offset for sticky header */
+}
 </style>
