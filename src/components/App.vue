@@ -245,7 +245,7 @@ const getIconForType = (type) => {
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <div class="flex items-center gap-4">
             <div class="w-16 h-16 relative">
-              <img :src="Logo" alt="Logo" width="64" height="64" class="object-contain">
+              <img :src="Logo.src" alt="Logo" width="64" height="64" class="object-contain">
             </div>
             <div>
               <h2 class="font-bold text-xl">Universidad Nacional Mayor de San Marcos</h2>
@@ -295,8 +295,7 @@ const getIconForType = (type) => {
           </CardHeader>
           <CardContent class="flex min-h-full flex-col items-center text-center">
             <div class="w-36 h-36 relative rounded-full overflow-hidden mb-4"> <!-- Added margin-bottom -->
-              <img :src="ProfesorPhoto" alt="Professor" class="object-cover w-full h-full" <!-- Ensure image covers the
-                area -->
+              <img :src="ProfesorPhoto.src" alt="Professor" class="object-cover w-full h-full"
               />
             </div>
             <h3 class="text-xl font-bold">{{ courseInfo.instructor }}</h3>
