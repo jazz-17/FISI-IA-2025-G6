@@ -1,12 +1,11 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
   ],
   "compilerOptions": {
     "baseUrl": ".",
@@ -14,6 +13,7 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "jsx": "preserve"
   }
 }
