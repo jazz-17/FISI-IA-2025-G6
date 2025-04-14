@@ -57,7 +57,7 @@ const weeks = [
     title: "Juegos de estrategia",
     description: "Algoritmos y enfoques para juegos humano-máquina.",
     topics: ["Juego de estrategia humano - máquina", "Algoritmo de juego de estrategia humano – máquina", "Juegos de estrategia con aprendizaje automático "],
-    classes: [{ name: "Juegos Humano-Máquina", type: "slides", url: "https://www.canva.com/design/DAFh-heMiaw/I_hx9GclaNdYMU1kIXIdGQ/edit" }, { name: "Implementación Minimax", type: "slides", url: "/sem4/michi" }], homeworks: [], labs: [],
+    classes: [{ name: "Juegos Humano-Máquina", type: "slides", url: "https://www.canva.com/design/DAFh-heMiaw/I_hx9GclaNdYMU1kIXIdGQ/edit" }, { name: "Implementación Minimax", type: "slides", url: "/FISI-IA-2025-G6/sem4/michi" }], homeworks: [], labs: [],
   },
   {
     number: 5,

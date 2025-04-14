@@ -1,71 +1,3 @@
-<template>
-  <!-- Main container: Centered, padded, max-width for readability -->
-  <div class="grow   flex flex-col justify-center p-6 text-center space-y-6 bg-stone-100">
-    <!-- Titles: Styled using text size, weight, and color utilities -->
-    <h1 class="text-4xl font-bold tracking-tight text-foreground">
-      Tic-Tac-Toe
-    </h1>
-    <h3 class="text-xl text-muted-foreground">Algoritmo Minimax</h3>
-    <h2 class="text-2xl font-semibold text-primary">Eres 'X'</h2>
-
-    <!-- Status Message: Slightly larger, emphasis color -->
-    <div class="status text-lg block font-medium text-foreground min-h-[1.75rem] ">
-      <!-- min-h to prevent layout shift -->
-      <div class="flex justify-center items-center ">
-        {{ statusMessage }}
-        <span v-show="isAiEvaluating" class="animate-spin ml-2">
-
-          <Loader></Loader>
-        </span>
-      </div>
-      <div>
-      </div>
-    </div>
-
-
-    <!-- Board: Grid layout, aspect ratio, borders, background, conditional styling -->
-    <div
-      class="board grid grid-cols-3 gap-2 mx-auto w-64 h-64 md:w-100 md:h-100 p-2 border border-border rounded-lg bg-muted/20 transition-opacity duration-300"
-      :class="{
-        'opacity-60': isGameOver, // Fade out when game over
-        'cursor-default border-primary/50': isAiEvaluating, // Indicate thinking
-      }">
-      <!-- Cell: Flex center, aspect ratio, borders, background, hover, cursor -->
-      <div v-for="(cell, index) in board" :key="index"
-        class="cell flex items-center justify-center aspect-square bg-background border border-border rounded-md transition-colors duration-150 ease-in-out"
-        :class="{
-          'cursor-pointer hover:bg-muted/50': cell === '' && !isGameOver && !isAiEvaluating, // Hover effect only on playable cells
-          '': cell !== '' || isGameOver || isAiEvaluating, // Non-clickable cursor
-        }" @click="makeMove(index)">
-        <!-- AI Evaluation Score: Small, muted color -->
-        <span v-if="isAiEvaluating && getEvaluationScore(index) !== null"
-          class="ai-score text-xs font-mono text-muted-foreground opacity-90"
-          :title="`Minimax score: ${getEvaluationScore(index)}`">
-          {{ getEvaluationScore(index) }}
-        </span>
-
-        <!-- Marker (X/O): Large, bold, distinct colors -->
-        <span v-else class="marker text-5xl md:text-6xl font-bold select-none" :class="[
-          cell === 'X' ? 'text-blue-600 dark:text-blue-400' : '', // Or 'text-primary' if defined
-          cell === 'O' ? 'text-red-600 dark:text-red-400' : ''   // Or 'text-destructive' if defined
-        ]">
-          {{ cell }}
-        </span>
-      </div>
-    </div>
-
-    <div>
-      <!-- Reset Button: Styled like a primary action button -->
-      <button @click="resetGame"
-        class="reset-button inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
-        :disabled="isAiEvaluating">
-        <!-- Standard button classes (similar to shadcn/vue Button) -->
-        Reiniciar Juego
-      </button>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import { Loader } from "lucide-vue-next";
@@ -272,3 +204,71 @@ const minimax = (currentBoard, depth, isMaximizingPlayer) => {
   }
 };
 </script>
+
+<template>
+  <!-- Main container: Centered, padded, max-width for readability -->
+  <div class="grow   flex flex-col justify-center p-6 text-center space-y-6 bg-stone-100">
+    <!-- Titles: Styled using text size, weight, and color utilities -->
+    <h1 class="text-4xl font-bold tracking-tight text-foreground">
+      Tic-Tac-Toe
+    </h1>
+    <h3 class="text-xl text-muted-foreground">Algoritmo Minimax</h3>
+    <h2 class="text-2xl font-semibold text-primary">Eres 'X'</h2>
+
+    <!-- Status Message: Slightly larger, emphasis color -->
+    <div class="status text-lg block font-medium text-foreground min-h-[1.75rem] ">
+      <!-- min-h to prevent layout shift -->
+      <div class="flex justify-center items-center ">
+        {{ statusMessage }}
+        <span v-show="isAiEvaluating" class="animate-spin ml-2">
+
+          <Loader></Loader>
+        </span>
+      </div>
+      <div>
+      </div>
+    </div>
+
+
+    <!-- Board: Grid layout, aspect ratio, borders, background, conditional styling -->
+    <div
+      class="board grid grid-cols-3 gap-2 mx-auto w-64 h-64 md:w-100 md:h-100 p-2 border border-border rounded-lg bg-muted/20 transition-opacity duration-300"
+      :class="{
+        'opacity-60': isGameOver, // Fade out when game over
+        'cursor-default border-primary/50': isAiEvaluating, // Indicate thinking
+      }">
+      <!-- Cell: Flex center, aspect ratio, borders, background, hover, cursor -->
+      <div v-for="(cell, index) in board" :key="index"
+        class="cell flex items-center justify-center aspect-square bg-background border border-border rounded-md transition-colors duration-150 ease-in-out"
+        :class="{
+          'cursor-pointer hover:bg-muted/50': cell === '' && !isGameOver && !isAiEvaluating, // Hover effect only on playable cells
+          '': cell !== '' || isGameOver || isAiEvaluating, // Non-clickable cursor
+        }" @click="makeMove(index)">
+        <!-- AI Evaluation Score: Small, muted color -->
+        <span v-if="isAiEvaluating && getEvaluationScore(index) !== null"
+          class="ai-score text-xs font-mono text-muted-foreground opacity-90"
+          :title="`Minimax score: ${getEvaluationScore(index)}`">
+          {{ getEvaluationScore(index) }}
+        </span>
+
+        <!-- Marker (X/O): Large, bold, distinct colors -->
+        <span v-else class="marker text-5xl md:text-6xl font-bold select-none" :class="[
+          cell === 'X' ? 'text-blue-600 dark:text-blue-400' : '', // Or 'text-primary' if defined
+          cell === 'O' ? 'text-red-600 dark:text-red-400' : ''   // Or 'text-destructive' if defined
+        ]">
+          {{ cell }}
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <!-- Reset Button: Styled like a primary action button -->
+      <button @click="resetGame"
+        class="reset-button inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
+        :disabled="isAiEvaluating">
+        <!-- Standard button classes (similar to shadcn/vue Button) -->
+        Reiniciar Juego
+      </button>
+    </div>
+  </div>
+</template>
