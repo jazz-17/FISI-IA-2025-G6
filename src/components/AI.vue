@@ -2,7 +2,6 @@
 import { ref, computed, watch } from "vue";
 import { Loader } from "lucide-vue-next";
 import { Switch } from "@/components/ui/switch"; // Import Switch
-import { Label } from "@/components/ui/label"; // Import Label
 
 // --- Constants ---
 const PLAYER_X = "X"; // Human (MAX)
@@ -25,7 +24,7 @@ const AI_THINKING_DELAY = 1000;
 
 // --- Reactive State ---
 const board = ref<string[]>(Array(9).fill(EMPTY_CELL));
-const currentPlayer = ref<string>(PLAYER_X);g
+const currentPlayer = ref<string>(PLAYER_X);
 const winner = ref<string | null>(null);
 const isAiEvaluating = ref<boolean>(false);
 const aiEvaluations = ref<{ index: number; score: number }[]>([]);
