@@ -57,7 +57,7 @@ const weeks = [
     title: "Juegos de estrategia",
     description: "Algoritmos y enfoques para juegos humano-máquina.",
     topics: ["Juego de estrategia humano - máquina", "Algoritmo de juego de estrategia humano – máquina", "Juegos de estrategia con aprendizaje automático "],
-    classes: [{ name: "Juegos Humano-Máquina", type: "slides", url: "https://www.canva.com/design/DAFh-heMiaw/I_hx9GclaNdYMU1kIXIdGQ/edit" }, { name: "Implementación Minimax", type: "slides", url: "/FISI-IA-2025-G6/sem4/michi" }], homeworks: [], labs: [],
+    classes: [{ name: "Juegos Humano-Máquina", type: "slides", url: "https://www.canva.com/design/DAGkSWZ2frs/VXP-6ktcDCw6siQpx64nZQ/edit?utm_content=DAGkSWZ2frs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" }, { name: "Implementación Minimax", type: "slides", url: "/FISI-IA-2025-G6/sem4/michi" }], homeworks: [], labs: [],
   },
   {
     number: 5,
@@ -173,7 +173,7 @@ const formatWeekNumber = (num) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-background text-foreground">
+  <div class="min-h-screen bg-background text-foreground grow">
     <!-- Simplified Header or keep the original -->
     <header
       class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
