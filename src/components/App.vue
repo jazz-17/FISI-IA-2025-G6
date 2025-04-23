@@ -64,7 +64,7 @@ const weeks = [
     title: "Métodos Supervisados de Machine Learning",
     description: "Fundamentos y modelos básicos del aprendizaje supervisado.",
     topics: ["Fundamentos de Machine Learning", "Problemas de aprendizaje", "Fundamentos del aprendizaje supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones"],
-    classes: [], homeworks: [], labs: [],
+    classes: [{ name: "Métodos Supervisados", type: "slides", url . "https://www.canva.com/design/DAGlLnuKdY8/ZW8VXBr-uYrpE3hG1yiY9A/edit"}], homeworks: [], labs: [],
   },
   {
     number: 6,
