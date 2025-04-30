@@ -71,7 +71,7 @@ const weeks = [
     title: "Métodos No Supervisados de Machine Learning",
     description: "Exploración de técnicas de aprendizaje sin etiquetas.",
     topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje no supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones", "Limitaciones"],
-    classes: [], homeworks: [], labs: [],
+    classes: [{ name: "Métodos No Supervisados", type: "slides", url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit" }], homeworks: [], labs: [],
   },
   {
     number: 7,
