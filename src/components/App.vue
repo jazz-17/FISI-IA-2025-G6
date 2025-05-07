@@ -1,11 +1,28 @@
-<script setup>
-import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator' // Import Separator
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar' // Import Avatar for professor
-import { Info, ExternalLink, Film, FileText, FileType, Download, Users, User, CalendarDays, BookOpen } from 'lucide-vue-next'
-import Logo from "@/assets/unmsm.png"
-import ProfesorPhoto from "@/assets/profesor.avif"
+<script setup lang="ts">
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator"; // Import Separator
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar for professor
+import {
+  Info,
+  ExternalLink,
+  Film,
+  FileText,
+  FileType,
+  Download,
+  Users,
+  User,
+  CalendarDays,
+  BookOpen,
+} from "lucide-vue-next";
+import Logo from "@/assets/unmsm.png";
+import ProfesorPhoto from "@/assets/profesor.avif";
 
 // --- Data remains the same ---
 const courseInfo = {
@@ -15,135 +32,280 @@ const courseInfo = {
   semester: "Spring 2025",
   description:
     "Este curso abarca los fundamentos de la Inteligencia Artificial (IA) para el desarrollo de sistemas informáticos inteligentes. Explora conceptos, paradigmas y aplicaciones de la IA, incluyendo la representación del conocimiento, los métodos de búsqueda, los sistemas expertos, los motores de inferencia y la ingeniería del conocimiento. También incluye juegos hombre-máquina, la metodología CommonKADS y la validación de sistemas expertos.",
-  objectives: [ // Kept in data, though not displayed in this version
+  objectives: [
+    // Kept in data, though not displayed in this version
     "Understand modern web architecture and design patterns",
     "Build responsive web applications using React and Next.js",
     "Implement accessibility best practices",
     "Deploy and manage web applications in production environments",
   ],
-}
+};
 
-const weeks = [
+type Week = {
+  number: number,
+  title: string,
+  description: string,
+  topics: string[],
+  homework: Array<{
+    name: string,
+    type: string,
+    url: string,
+  }>
+}
+const weeks: Week[] = [
   {
     number: 1,
     title: "Fundamentos de la IA",
-    description: "Introducción a los conceptos básicos, historia y áreas de la IA.",
-    topics: ["Conceptos, Historia", "Áreas", "Aprendizaje automático", "Niveles de la IA"],
-    classes: [{ name: "Fundamentos de la IA", type: "slides", url: "https://drive.google.com/file/d/14yhuqM8RVraOoP-9kVHPgKzCLI8U5vRX/view" }],
-    homeworks: [{ name: "Sistemas Inteligentes", type: "slides", url: "https://drive.google.com/file/d/12TYvaGH2WHvvc6AM5zZfQeqdVknL-0MG/view" }],
-    labs: [],
+    description:
+      "Introducción a los conceptos básicos, historia y áreas de la IA.",
+    topics: [
+      "Conceptos, Historia",
+      "Áreas",
+      "Aprendizaje automático",
+      "Niveles de la IA",
+    ],
+    homework: [
+      {
+        name: "Fundamentos de la IA",
+        type: "slides",
+        url: "https://drive.google.com/file/d/14yhuqM8RVraOoP-9kVHPgKzCLI8U5vRX/view",
+      },
+      {
+        name: "Sistemas Inteligentes",
+        type: "slides",
+        url: "https://drive.google.com/file/d/12TYvaGH2WHvvc6AM5zZfQeqdVknL-0MG/view",
+      },
+    ],
   },
   {
     number: 2,
     title: "Agentes Inteligentes",
-    description: "Exploración de agentes, sus tipos, arquitecturas y aplicaciones.",
-    topics: ["Conceptos, Tipos, Arquitectura", "Diseño de un agente", "Aplicaciones"],
-    classes: [{ name: "IA - Agentes", type: "slides", url: "https://drive.google.com/file/d/1w_zwMjRLThvoz_fPhnMZpU9Q57mfg1Jx/view" }],
-    homeworks: [],
-    labs: [],
+    description:
+      "Exploración de agentes, sus tipos, arquitecturas y aplicaciones.",
+    topics: [
+      "Conceptos, Tipos, Arquitectura",
+      "Diseño de un agente",
+      "Aplicaciones",
+    ],
+    homework: [
+      {
+        name: "IA - Agentes",
+        type: "slides",
+        url: "https://drive.google.com/file/d/1w_zwMjRLThvoz_fPhnMZpU9Q57mfg1Jx/view",
+      },
+    ]
   },
   {
     number: 3,
     title: "Resolución de Problemas Mediante Búsqueda",
-    description: "Técnicas de búsqueda ciega e informada para la resolución de problemas.",
-    topics: ["Resolución de problemas como búsqueda", "Espacios de estados", "Búsqueda ciega", "Búsqueda informada"],
-    classes: [{ name: "Búsquedas", type: "slides", url: "https://www.canva.com/design/DAGjya74K84/r00sDBiBRJShDouxPhvpcw/edit" }],
-    homeworks: [],
-    labs: [],
+    description:
+      "Técnicas de búsqueda ciega e informada para la resolución de problemas.",
+    topics: [
+      "Resolución de problemas como búsqueda",
+      "Espacios de estados",
+      "Búsqueda ciega",
+      "Búsqueda informada",
+    ],
+    homework: [
+      {
+        name: "Búsquedas",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGjya74K84/r00sDBiBRJShDouxPhvpcw/edit",
+      },
+    ],
   },
   // ... (rest of the weeks data) ...
   {
     number: 4,
     title: "Juegos de estrategia",
     description: "Algoritmos y enfoques para juegos humano-máquina.",
-    topics: ["Juego de estrategia humano - máquina", "Algoritmo de juego de estrategia humano – máquina", "Juegos de estrategia con aprendizaje automático "],
-    classes: [{ name: "Juegos Humano-Máquina", type: "slides", url: "https://www.canva.com/design/DAGkSWZ2frs/VXP-6ktcDCw6siQpx64nZQ/edit?utm_content=DAGkSWZ2frs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" }, { name: "Implementación Minimax", type: "slides", url: "/FISI-IA-2025-G6/sem4/michi" }], homeworks: [], labs: [],
+    topics: [
+      "Juego de estrategia humano - máquina",
+      "Algoritmo de juego de estrategia humano – máquina",
+      "Juegos de estrategia con aprendizaje automático ",
+    ],
+    homework: [
+      {
+        name: "Juegos Humano-Máquina",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGkSWZ2frs/VXP-6ktcDCw6siQpx64nZQ/edit?utm_content=DAGkSWZ2frs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
+      },
+      {
+        name: "Implementación Minimax",
+        type: "doc",
+        url: "/FISI-IA-2025-G6/tictactoe",
+      },
+    ],
   },
   {
     number: 5,
     title: "Métodos Supervisados de Machine Learning",
     description: "Fundamentos y modelos básicos del aprendizaje supervisado.",
-    topics: ["Fundamentos de Machine Learning", "Problemas de aprendizaje", "Fundamentos del aprendizaje supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones"],
-    classes: [{ name: "Métodos Supervisados", type: "slides", url: "https://www.canva.com/design/DAGlLnuKdY8/ZW8VXBr-uYrpE3hG1yiY9A/edit" }], homeworks: [], labs: [],
+    topics: [
+      "Fundamentos de Machine Learning",
+      "Problemas de aprendizaje",
+      "Fundamentos del aprendizaje supervisado",
+      "Modelos básicos de aprendizaje supervisado",
+      "Aplicaciones",
+    ],
+    homework: [
+      {
+        name: "Métodos Supervisados",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGlLnuKdY8/ZW8VXBr-uYrpE3hG1yiY9A/edit",
+      },
+    ],
   },
   {
     number: 6,
     title: "Métodos No Supervisados de Machine Learning",
     description: "Exploración de técnicas de aprendizaje sin etiquetas.",
-    topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje no supervisado", "Modelos básicos de aprendizaje supervisado", "Aplicaciones", "Limitaciones"],
-    classes: [{ name: "Métodos No Supervisados", type: "slides", url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit" }], homeworks: [], labs: [],
+    topics: [
+      "Problemas de aprendizaje",
+      "Fundamentos del aprendizaje no supervisado",
+      "Modelos básicos de aprendizaje supervisado",
+      "Aplicaciones",
+      "Limitaciones",
+    ],
+    homework: [
+      {
+        name: "Métodos No Supervisados",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit",
+      },
+      {
+        name: "Implementación algoritmo supervisado (Random  Forest)",
+        type: "doc",
+        url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit",
+      },
+      {
+        name: "Implementación algoritmo no supervisado",
+        type: "doc",
+        url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit",
+      },
+    ],
   },
   {
     number: 7,
     title: "Aprendizaje por Refuerzo",
-    description: "Introducción a los modelos y aplicaciones del aprendizaje por refuerzo.",
-    topics: ["Problemas de aprendizaje", "Fundamentos del aprendizaje por refuerzo", "Modelos básicos de aprendizaje por refuerzo", "Aplicaciones", "Limitaciones"],
-    classes: [], homeworks: [], labs: [],
+    description:
+      "Introducción a los modelos y aplicaciones del aprendizaje por refuerzo.",
+    topics: [
+      "Problemas de aprendizaje",
+      "Fundamentos del aprendizaje por refuerzo",
+      "Modelos básicos de aprendizaje por refuerzo",
+      "Aplicaciones",
+      "Limitaciones",
+    ],
+    homework: [
+      {
+        name: "Aprendizaje por Refuerzo",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGmOxnKQkI/H8yKUFlY8t_66LKxCFKm8Q/edit",
+      }, {
+        name: "Random Forest",
+        type: "doc",
+        url: "https://drive.google.com/file/d/1qMvrvA0W4g6QwGeMQzr12u8heffOwEEZ/view?usp=drive_link",
+      },],
   },
-  { // Assuming week 8 is Exam Parcial or similar - skipped in original data
+  {
+    // Assuming week 8 is Exam Parcial or similar - skipped in original data
     number: 8,
     title: "Examen Parcial",
-    description: "Evaluación de los temas cubiertos en la primera mitad del curso.",
+    description:
+      "Evaluación de los temas cubiertos en la primera mitad del curso.",
     topics: ["Repaso general", "Evaluación"],
-    classes: [], homeworks: [], labs: [],
+    homework: [],
   },
   {
     number: 9,
     title: "Fundamentos del Deep Learning",
-    description: "Introducción a las redes neuronales y el aprendizaje profundo.",
-    topics: ["Fundamentos del Deep learning", "Diferencias con ML clásico.", "Redes neuronales artificiales", "Arquitectura de una red"],
-    classes: [], homeworks: [], labs: [],
+    description:
+      "Introducción a las redes neuronales y el aprendizaje profundo.",
+    topics: [
+      "Fundamentos del Deep learning",
+      "Diferencias con ML clásico.",
+      "Redes neuronales artificiales",
+      "Arquitectura de una red",
+    ],
+    homework: [],
   },
   {
     number: 10,
     title: "Algoritmos de Entrenamiento en Deep Learning",
     description: "Mecanismos clave para entrenar redes neuronales.",
     topics: ["Forward & backward propagation", "TensorFlow, Keras"],
-    classes: [], homeworks: [], labs: [],
+    homework: [],
   },
   {
     number: 11,
     title: "Arquitecturas de Redes Neuronales Avanzadas",
     description: "CNNs para visión y RNNs/LSTMs para secuencias.",
-    topics: ["Redes convolucionales (CNNs) para visión por computadora.", "Redes recurrentes (RNNs, LSTM) para secuencias y texto.", "Overfitting y regularización: dropout, batch normalization"],
-    classes: [], homeworks: [], labs: [],
+    topics: [
+      "Redes convolucionales (CNNs) para visión por computadora.",
+      "Redes recurrentes (RNNs, LSTM) para secuencias y texto.",
+      "Overfitting y regularización: dropout, batch normalization",
+    ],
+    homework: [],
   },
   {
     number: 12,
     title: "Introducción a la IA Generativa (GAI)",
     description: "Conceptos fundamentales y diferencias con IA tradicional.",
-    topics: ["Conceptos", "Diferencias con la IA tradicional", "Fundamentos y aplicaciones.", "Transformers"],
-    classes: [], homeworks: [], labs: [],
+    topics: [
+      "Conceptos",
+      "Diferencias con la IA tradicional",
+      "Fundamentos y aplicaciones.",
+      "Transformers",
+    ],
+    homework: [],
   },
   {
     number: 13,
     title: "Redes Generativas Adversarias (GANs)",
     description: "Aplicaciones de GANs en generación de imágenes, texto y más.",
-    topics: ["Generación de imágenes", "Transferencia de estilo", "Aumento de datos", "Generación de texto", "Traducción automática", "Generación de diálogos"],
-    classes: [], homeworks: [], labs: [],
+    topics: [
+      "Generación de imágenes",
+      "Transferencia de estilo",
+      "Aumento de datos",
+      "Generación de texto",
+      "Traducción automática",
+      "Generación de diálogos",
+    ],
+    homework: [],
   },
   {
     number: 14,
     title: "IA Creativa, Ética y Futuro",
-    description: "Explorando la generación artística, el marco legal y las implicaciones éticas.",
-    topics: ["Concepto", "Fundamentos y aplicaciones", "Generación de obras de arte, música, poesía, y narraciones", "Marco legal en IA", "Ética y futuro en la IA"],
-    classes: [], homeworks: [], labs: [],
+    description:
+      "Explorando la generación artística, el marco legal y las implicaciones éticas.",
+    topics: [
+      "Concepto",
+      "Fundamentos y aplicaciones",
+      "Generación de obras de arte, música, poesía, y narraciones",
+      "Marco legal en IA",
+      "Ética y futuro en la IA",
+    ],
+    homework: [],
   },
-  { // Assuming week 15 is Project presentations or similar
+  {
+    // Assuming week 15 is Project presentations or similar
     number: 15,
     title: "Presentación de Proyectos Finales",
-    description: "Exposición y evaluación de los trabajos desarrollados durante el curso.",
+    description:
+      "Exposición y evaluación de los trabajos desarrollados durante el curso.",
     topics: ["Presentaciones", "Discusión", "Feedback"],
-    classes: [], homeworks: [], labs: [],
+    homework: [],
   },
-  { // Assuming week 16 is Exam Final
+  {
+    // Assuming week 16 is Exam Final
     number: 16,
     title: "Examen Final",
     description: "Evaluación final cubriendo todo el material del curso.",
     topics: ["Repaso general", "Evaluación final"],
-    classes: [], homeworks: [], labs: [],
+    homework: [],
   },
-]
+];
 
 const groupMembers = [
   { name: "Quispe Carbajal, Kevin", code: "22200137" },
@@ -152,24 +314,27 @@ const groupMembers = [
   { name: "Segura Pérez, Gerson", code: "22200043" },
   { name: "Tantahuillca Navarro Alexander ", code: "19200145" },
   { name: "Contreras Auqui Erikson", code: "13200151" },
-]
+];
 
 // No longer need 'otherGroups' for this style
 // Helper function for icons (optional, but keeps template cleaner)
-const getIconForType = (type) => {
+const getIconForType = (type: string) => {
   switch (type) {
-    case 'slides': return Film;
-    case 'doc': return FileText;
-    case 'pdf': return FileType;
-    default: return FileText;
+    case "slides":
+      return Film;
+    case "doc":
+      return FileText;
+    case "pdf":
+      return FileType;
+    default:
+      return FileText;
   }
-}
+};
 
 // Helper function to format week number (e.g., 01, 02, ..., 10, 11)
-const formatWeekNumber = (num) => {
-  return num.toString().padStart(2, '0');
-}
-
+const formatWeekNumber = (num: number) => {
+  return num.toString().padStart(2, "0");
+};
 </script>
 
 <template>
@@ -179,11 +344,14 @@ const formatWeekNumber = (num) => {
       class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container mx-auto h-16 flex items-center justify-between px-4">
         <div class="flex items-center gap-3">
-          <img :src="Logo.src" alt="UNMSM Logo" class="h-10 w-auto object-contain">
+          <img :src="Logo.src" alt="UNMSM Logo" class="h-10 w-auto object-contain" />
           <div>
             <h1 class="font-semibold text-lg hidden sm:block">UNMSM - FISI</h1>
-            <p class="text-xs text-muted-foreground hidden sm:block">Inteligencia Artificial 2025-I</p>
-            <h1 class="font-semibold text-lg sm:hidden">IA 2025-I</h1> <!-- Shorter title for mobile -->
+            <p class="text-xs text-muted-foreground hidden sm:block">
+              Inteligencia Artificial 2025-I
+            </p>
+            <h1 class="font-semibold text-lg sm:hidden">IA 2025-I</h1>
+            <!-- Shorter title for mobile -->
           </div>
         </div>
         <nav class="flex items-center gap-4">
@@ -222,7 +390,9 @@ const formatWeekNumber = (num) => {
 
       <!-- Course Info Section (Integrated) -->
       <section id="course-info" class="mb-12 p-6 border rounded-lg bg-card text-card-foreground">
-        <h2 class="text-2xl font-semibold mb-6">Información del Curso y Grupo</h2>
+        <h2 class="text-2xl font-semibold mb-6">
+          Información del Curso y Grupo
+        </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Professor Info -->
           <div class="md:col-span-1">
@@ -232,12 +402,16 @@ const formatWeekNumber = (num) => {
             <div class="flex items-center gap-4">
               <Avatar class="h-20 w-20">
                 <img :src="ProfesorPhoto.src" alt="Foto del Profesor" />
-                <AvatarFallback>{{ courseInfo.instructor.substring(0, 2) }}</AvatarFallback>
+                <AvatarFallback>{{
+                  courseInfo.instructor.substring(0, 2)
+                }}</AvatarFallback>
               </Avatar>
               <div>
                 <p class="font-semibold">{{ courseInfo.instructor }}</p>
                 <!-- Add contact/office hours if available -->
-                <p class="text-sm text-muted-foreground">Experto en IA y Sistemas Inteligentes</p>
+                <p class="text-sm text-muted-foreground">
+                  Experto en IA y Sistemas Inteligentes
+                </p>
               </div>
             </div>
           </div>
@@ -251,7 +425,9 @@ const formatWeekNumber = (num) => {
               <li v-for="member in groupMembers" :key="member.code"
                 class="flex justify-between items-center p-2 rounded hover:bg-muted/50">
                 <span>{{ member.name }}</span>
-                <span class="text-xs text-muted-foreground font-mono">{{ member.code }}</span>
+                <span class="text-xs text-muted-foreground font-mono">{{
+                  member.code
+                }}</span>
               </li>
             </ul>
           </div>
@@ -260,7 +436,9 @@ const formatWeekNumber = (num) => {
 
       <!-- Syllabus / Weekly Content -->
       <section id="syllabus" class="mb-12">
-        <h2 class="text-3xl font-bold mb-8 text-center">Contenido Semanal del Curso</h2>
+        <h2 class="text-3xl font-bold mb-8 text-center">
+          Contenido Semanal del Curso
+        </h2>
 
         <div class="space-y-10 relative pl-6 border-l-2 border-primary/20">
           <!-- Timeline Indicator -->
@@ -275,7 +453,8 @@ const formatWeekNumber = (num) => {
                 formatWeekNumber(week.number) }}</span>
             </div>
 
-            <div class="ml-8"> <!-- Indent content to the right of the timeline -->
+            <div class="ml-8">
+              <!-- Indent content to the right of the timeline -->
               <header class="mb-4">
                 <h3 class="text-2xl font-semibold mb-1">
                   Semana {{ formatWeekNumber(week.number) }}: {{ week.title }}
@@ -297,36 +476,20 @@ const formatWeekNumber = (num) => {
                 </div>
 
                 <!-- Materials (Combined Classes, HW, Labs) -->
-                <div v-if="week.classes.length || week.homeworks.length || week.labs.length">
-                  <h4 class="font-medium mb-2 text-primary">Materiales y Actividades:</h4>
+                <div v-if="
+                  week.homework.length
+                ">
+                  <h4 class="font-medium mb-2 text-primary">
+                    Materiales y Actividades:
+                  </h4>
                   <div class="space-y-2">
                     <!-- Classes -->
-                    <a v-for="(item, idx) in week.classes" :key="`${week.number}-class-${idx}`" :href="item.url"
+                    <a v-for="(item, idx) in week.homework" :key="`${week.number}-class-${idx}`" :href="item.url"
                       target="_blank" rel="noopener noreferrer"
                       class="flex items-center gap-2 p-2 text-sm border rounded-md hover:bg-muted transition-colors group">
                       <component :is="getIconForType(item.type)"
                         class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                      <span>{{ item.name }} (Clase)</span>
-                      <ExternalLink
-                        class="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-muted-foreground transition-opacity opacity-0 group-hover:opacity-100" />
-                    </a>
-                    <!-- Homeworks -->
-                    <a v-for="(item, idx) in week.homeworks" :key="`${week.number}-hw-${idx}`" :href="item.url"
-                      target="_blank" rel="noopener noreferrer"
-                      class="flex items-center gap-2 p-2 text-sm border rounded-md hover:bg-muted transition-colors group">
-                      <component :is="getIconForType(item.type)"
-                        class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                      <span>{{ item.name }} (Tarea)</span>
-                      <ExternalLink
-                        class="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-muted-foreground transition-opacity opacity-0 group-hover:opacity-100" />
-                    </a>
-                    <!-- Labs -->
-                    <a v-for="(item, idx) in week.labs" :key="`${week.number}-lab-${idx}`" :href="item.url"
-                      target="_blank" rel="noopener noreferrer"
-                      class="flex items-center gap-2 p-2 text-sm border rounded-md hover:bg-muted transition-colors group">
-                      <component :is="getIconForType(item.type)"
-                        class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                      <span>{{ item.name }} (Lab)</span>
+                      <span>{{ item.name }}</span>
                       <ExternalLink
                         class="w-3 h-3 ml-auto text-muted-foreground/50 group-hover:text-muted-foreground transition-opacity opacity-0 group-hover:opacity-100" />
                     </a>
@@ -334,21 +497,17 @@ const formatWeekNumber = (num) => {
                 </div>
               </div>
             </div>
-
-            <!-- Separator removed, using timeline structure instead -->
-            <!-- <Separator v-if="index < weeks.length - 1" class="my-10" /> -->
           </article>
         </div>
       </section>
-
     </main>
 
     <footer class="border-t bg-muted/40">
       <div class="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-        © {{ new Date().getFullYear() }} Grupo 06 - FISI, UNMSM. Todos los derechos reservados.
+        © {{ new Date().getFullYear() }} Grupo 06 - FISI, UNMSM. Todos los
+        derechos reservados.
       </div>
     </footer>
-
   </div>
 </template>
 
