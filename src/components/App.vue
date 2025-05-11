@@ -147,6 +147,16 @@ const weeks: Week[] = [
         type: "slides",
         url: "https://www.canva.com/design/DAGlLnuKdY8/ZW8VXBr-uYrpE3hG1yiY9A/edit",
       },
+      {
+        name: "Random Forest",
+        type: "doc",
+        url: "https://drive.google.com/file/d/1qMvrvA0W4g6QwGeMQzr12u8heffOwEEZ/view?usp=drive_link",
+      },
+      {
+        name: "Random Forest- código fuente",
+        type: "doc",
+        url: "https://github.com/jazz-17/random-forest-app",
+      },
     ],
   },
   {
@@ -187,14 +197,14 @@ const weeks: Week[] = [
         url: "https://www.canva.com/design/DAGmOxnKQkI/H8yKUFlY8t_66LKxCFKm8Q/edit",
       },
       {
-        name: "Random Forest",
+        name: "Implementación Aprendizaje Supervisado",
         type: "doc",
-        url: "https://drive.google.com/file/d/1qMvrvA0W4g6QwGeMQzr12u8heffOwEEZ/view?usp=drive_link",
+        url: "https://colab.research.google.com/drive/1IuofstSudmztLOF_3aZle1Bva0obVId_?usp=sharing",
       },
       {
-        name: "Random Forest- código fuente",
+        name: "Implementación Aprendizaje no Supervisado",
         type: "doc",
-        url: "https://github.com/jazz-17/random-forest-app",
+        url: "https://colab.research.google.com/drive/1QGLaoB-dFCg37mnJ9w7vhHnpH9uTHFTS?usp=sharing",
       },
     ],
   },
@@ -376,7 +386,7 @@ const formatWeekNumber = (num: number) => {
         </div>
         <nav class="flex items-center gap-4">
           <Button size="sm" as-child>
-            <a href="Repositorio" download>
+            <a href="https://github.com/jazz-17/FISI-IA-2025-G6">
               <Github class="h-4 w-4 mr-2" /> Repositorio
             </a>
           </Button>
