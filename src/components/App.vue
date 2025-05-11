@@ -24,7 +24,7 @@ const courseInfo = {
   instructor: "Dr. Hugo Vega Huerta",
   semester: "Spring 2025",
   description:
-    "Este curso abarca los fundamentos de la Inteligencia Artificial (IA) para el desarrollo de sistemas informáticos inteligentes. Explora conceptos, paradigmas y aplicaciones de la IA, incluyendo la representación del conocimiento, los métodos de búsqueda, los sistemas expertos, los motores de inferencia y la ingeniería del conocimiento. También incluye juegos hombre-máquina, la metodología CommonKADS y la validación de sistemas expertos.",
+    "Esta asignatura corresponde al área de formación especializada, es de naturaleza teórico y práctico; tiene el propósito de desarrollar los fundamentos prácticos y teóricos para el desarrollo de sistemas de computación que presentan características inteligentes. Los contenidos principales son: La Inteligencia Artificial, conceptos, paradigmas y aplicaciones en la industria y servicios. Representación oel conocimiento. Representación de problemas de ÍA como búsqueda en el espacio de estado. Métodos de búsqueda ciegos e informados. juegos inteligentes hombre-máquina. Sistemas expertos, arquitectura, taxonomía y aplicaciones. Motor de inferencia. Ingeniería de conocimiento, conceptos, su evolución. Common KADS. Verificación y validación de sistemas expertos",
   objectives: [
     // Kept in data, though not displayed in this version
     "Understand modern web architecture and design patterns",
@@ -403,7 +403,7 @@ const formatWeekNumber = (num: number) => {
             <Info class="w-4 h-4" /> Grupo 06
           </span>
         </div>
-        <p class="text-lg text-muted-foreground max-w-3xl">
+        <p class="text-lg text-muted-foreground max-w-4xl">
           {{ courseInfo.description }}
         </p>
       </section>
