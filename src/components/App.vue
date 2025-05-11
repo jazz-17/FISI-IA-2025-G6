@@ -1,14 +1,6 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator"; // Import Separator
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar for professor
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"; // Import Avatar for professor
 import {
   Info,
   ExternalLink,
@@ -20,6 +12,7 @@ import {
   User,
   CalendarDays,
   BookOpen,
+  Github,
 } from "lucide-vue-next";
 import Logo from "@/assets/unmsm.png";
 import ProfesorPhoto from "@/assets/profesor.avif";
@@ -173,16 +166,6 @@ const weeks: Week[] = [
         type: "slides",
         url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit",
       },
-      {
-        name: "Implementación algoritmo supervisado (Random  Forest)",
-        type: "doc",
-        url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit",
-      },
-      {
-        name: "Implementación algoritmo no supervisado",
-        type: "doc",
-        url: "https://www.canva.com/design/DAGlk25Rnng/oPhTylDEh0AhbiKfZ_1NPg/edit",
-      },
     ],
   },
   {
@@ -202,11 +185,18 @@ const weeks: Week[] = [
         name: "Aprendizaje por Refuerzo",
         type: "slides",
         url: "https://www.canva.com/design/DAGmOxnKQkI/H8yKUFlY8t_66LKxCFKm8Q/edit",
-      }, {
+      },
+      {
         name: "Random Forest",
         type: "doc",
         url: "https://drive.google.com/file/d/1qMvrvA0W4g6QwGeMQzr12u8heffOwEEZ/view?usp=drive_link",
-      },],
+      },
+      {
+        name: "Random Forest- código fuente",
+        type: "doc",
+        url: "https://github.com/jazz-17/random-forest-app",
+      },
+    ],
   },
   {
     // Assuming week 8 is Exam Parcial or similar - skipped in original data
@@ -355,17 +345,17 @@ const formatWeekNumber = (num: number) => {
           </div>
         </div>
         <nav class="flex items-center gap-4">
-          <Button variant="ghost" size="sm" as-child>
-            <a href="#course-info">Info</a>
-          </Button>
-          <Button variant="ghost" size="sm" as-child>
-            <a href="#syllabus">Syllabus</a>
+          <Button size="sm" as-child>
+            <a href="Repositorio" download>
+              <Github class="h-4 w-4 mr-2" /> Repositorio
+            </a>
           </Button>
           <Button size="sm" as-child>
             <a href="syllabus.pdf" download>
               <Download class="h-4 w-4 mr-2" /> Syllabus PDF
             </a>
           </Button>
+
         </nav>
       </div>
     </header>
