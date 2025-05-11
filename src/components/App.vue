@@ -306,6 +306,36 @@ const groupMembers = [
   { name: "Contreras Auqui Erikson", code: "13200151" },
 ];
 
+const otherGroups = [
+  {
+    id: 1,
+    name: "Grupo 1",
+    url: "https://iagrupo1.wordpress.com/"
+  },
+  {
+    id: 2,
+    name: "Grupo 2",
+    url: "https://yonatanbartolo.wixsite.com/grupo02inteligenciaa"
+  },
+  {
+    id: 3,
+    name: "Grupo 3",
+    url: "https://grupo3ia.wordpress.com/"
+  },
+  {
+    id: 4,
+    name: "Grupo 4",
+    url: "https://inteligenciaartificial2025.wordpress.com"
+  },
+  {
+    id: 5,
+    name: "Grupo 5",
+    url: "https://michaelliza.wixsite.com/my-site "
+  },
+
+]
+
+
 // No longer need 'otherGroups' for this style
 // Helper function for icons (optional, but keeps template cleaner)
 const getIconForType = (type: string) => {
@@ -383,7 +413,7 @@ const formatWeekNumber = (num: number) => {
         <h2 class="text-2xl font-semibold mb-6">
           Información del Curso y Grupo
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-32">
           <!-- Professor Info -->
           <div class="md:col-span-1">
             <h3 class="font-medium mb-3 text-lg flex items-center gap-2">
@@ -407,7 +437,7 @@ const formatWeekNumber = (num: number) => {
           </div>
 
           <!-- Group Members -->
-          <div class="md:col-span-2">
+          <div class="md:col-span-1">
             <h3 class="font-medium mb-3 text-lg flex items-center gap-2">
               <Users class="w-5 h-5 text-primary" /> Integrantes (Grupo 06)
             </h3>
@@ -418,6 +448,22 @@ const formatWeekNumber = (num: number) => {
                 <span class="text-xs text-muted-foreground font-mono">{{
                   member.code
                 }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Other Groups -->
+          <div class="md:col-span-1">
+            <h3 class="font-medium mb-3 text-lg flex items-center gap-2">
+              <Users class="w-5 h-5 text-primary" /> Otros Grupos
+            </h3>
+            <ul class="space-y-2 text-sm">
+              <li v-for="group in otherGroups" :key="group.id"
+                class="flex justify-between items-center p-2 rounded hover:bg-muted/50">
+                <a :href="group.url" class="text-blue-800 underline underline-offset-1 w-full">
+                  <span>{{ group.name }}</span>
+
+                </a>
               </li>
             </ul>
           </div>
