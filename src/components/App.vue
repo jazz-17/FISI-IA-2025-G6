@@ -228,7 +228,11 @@ const weeks: Week[] = [
       "Redes neuronales artificiales",
       "Arquitectura de una red",
     ],
-    homework: [],
+    homework: [{
+      name: "Deep learning",
+      type: "slides",
+      url: "https://www.canva.com/design/DAGoCezYiEQ/acjvdSq53U2Ujwr31uS-Nw/edit?utm=",
+    },],
   },
   {
     number: 10,
