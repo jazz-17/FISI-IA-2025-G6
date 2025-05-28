@@ -239,7 +239,27 @@ const weeks: Week[] = [
     title: "Algoritmos de Entrenamiento en Deep Learning",
     description: "Mecanismos clave para entrenar redes neuronales.",
     topics: ["Forward & backward propagation", "TensorFlow, Keras"],
-    homework: [],
+    homework: [
+      {
+        name: "Algoritmos de entrenamiento",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGoxOgyLgU/jvbxpIl5dpnDcHriI2N3rw/edit",
+      },
+      {
+        name: "Árbol genealógico",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1SRCcRGPCkd5cmwIuJeqJ3XOMAx8aUq7_mY201ubVAGw/edit?tab=t.0",
+      },
+      {
+        name: "Sistema experto - Reino Fungi",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGox8cgOqE/ZgSJ4qhcsELHOk9BMoBReQ/edit",
+      },
+      {
+        name: "Código fuente - Reino Fungi",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1hpVIRV6PR16fyFdhFT7NZwxOiVsMNfrOurzvEVBz4fc/edit?tab=t.0",
+      }],
   },
   {
     number: 11,
