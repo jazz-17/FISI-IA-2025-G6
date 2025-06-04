@@ -215,8 +215,20 @@ const weeks: Week[] = [
     description:
       "Evaluación de los temas cubiertos en la primera mitad del curso.",
     topics: ["Repaso general", "Evaluación"],
-    homework: [],
+    homework: [
+      {
+        name: "Examen 1",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1B3T7lOn-JKTK-T6MB0aAONR3YuZnurgzJGcLIYGajzE/edit?usp=drivesdk",
+      },
+      {
+        name: "Examen 2",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1Wz_8nAPV700izQ2xX6_Y5_0CHctFwFCh/edit",
+      },
+    ],
   },
+  
   {
     number: 9,
     title: "Fundamentos del Deep Learning",
@@ -270,7 +282,11 @@ const weeks: Week[] = [
       "Redes recurrentes (RNNs, LSTM) para secuencias y texto.",
       "Overfitting y regularización: dropout, batch normalization",
     ],
-    homework: [],
+    homework: [{
+      name: "Arquitecturas de Redes Neuronales Avanzadas",
+      type: "slides",
+      url: "https://www.canva.com/design/DAGpZo0hDqs/FCOS6lInPyYCdiMgXDRFlA/edit",
+    },],
   },
   {
     number: 12,
