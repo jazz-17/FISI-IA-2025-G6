@@ -228,7 +228,7 @@ const weeks: Week[] = [
       },
     ],
   },
-  
+
   {
     number: 9,
     title: "Fundamentos del Deep Learning",
@@ -298,7 +298,11 @@ const weeks: Week[] = [
       "Fundamentos y aplicaciones.",
       "Transformers",
     ],
-    homework: [],
+    homework: [{
+      name: "Introducción a la IA Generativa",
+      type: "slides",
+      url: "https://www.canva.com/design/DAGp9HxtA-8/hpbirQ26dXCSU-AEYDXrSg/edit?ui=eyJEIjp7IlQiOnsiQSI6IlBCbUMzbkNQcVBiTGo2bFQifX19",
+    }],
   },
   {
     number: 13,
@@ -312,7 +316,11 @@ const weeks: Week[] = [
       "Traducción automática",
       "Generación de diálogos",
     ],
-    homework: [],
+    homework: [{
+      name: "Redes Generativas Adversarias",
+      type: "slides",
+      url: "https://www.canva.com/design/DAGqG0KSfhc/vCQYbb9O6th56slLc-AkGQ/edit",
+    }],
   },
   {
     number: 14,
@@ -326,7 +334,21 @@ const weeks: Week[] = [
       "Marco legal en IA",
       "Ética y futuro en la IA",
     ],
-    homework: [],
+    homework: [{
+      name: "IA Creativa, Ética y Futuro",
+      type: "slides",
+      url: "https://www.canva.com/design/DAGrN5liS80/G0DL8l_rbs_tH0LbtmI_gQ/edit?utm_content=DAGrN5liS80&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
+    },
+    {
+      name: "Sistema experto legal",
+      type: "slides",
+      url: "https://docs.google.com/document/d/1O-B_4iVZ5_lD3bLOzpsnrwmTl00aHYXa5Z8n_oekxVk/edit?pli=1&tab=t.0",
+    },
+    {
+      name: "Sistema experto combinado",
+      type: "slides",
+      url: "https://docs.google.com/document/d/1R0A5C33tvSqkOrB4kKIBcHgGBeQnThsLUtUkwxiqa6I/edit?tab=t.0",
+    }],
   },
   {
     // Assuming week 15 is Project presentations or similar
