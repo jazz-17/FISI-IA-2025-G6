@@ -1,0 +1,563 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/FISI-IA-2025-G6/favicon.svg"><meta name="generator" content="Astro v5.6.1"><title>IA 2025 | Grupo 6</title><link rel="stylesheet" href="/FISI-IA-2025-G6/_astro/index.luJzrvzR.css"></head> <body data-astro-cid-sckkx6r4>   <script src="/src/prolog/tau-prolog.js"></script> <script>
+    // Define missing tau_file_system if not present
+    if (typeof tau_file_system === "undefined") {
+      window.tau_file_system = {
+        files: {},
+        open: function (path, mode, callback) {
+          if (callback) callback(null, path);
+        },
+        read: function (path, callback) {
+          if (callback) callback(null, this.files[path] || "");
+        },
+        write: function (path, data, callback) {
+          this.files[path] = data;
+          if (callback) callback(null);
+        },
+      };
+    }
+  </script> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="Z1kWy1s" prefix="v0" component-url="/FISI-IA-2025-G6/_astro/PrologInterpreter.Dtq236UH.js" component-export="default" renderer-url="/FISI-IA-2025-G6/_astro/client.BXu-_hXn.js" props="{&quot;title&quot;:[0,&quot;Sistema Experto Legal&quot;],&quot;description&quot;:[0,&quot;&quot;],&quot;initialProgram&quot;:[0,&quot;\n% ================================================================\n% SISTEMA EXPERTO LEGAL AVANZADO% ================================================================\n:- dynamic(persona/4).\n:- dynamic(caso/6).\n:- dynamic(estadistica_cache/3).\n:- dynamic(log_evento/3).\n:- dynamic(alerta/3).\n:- use_module(library(date)).\n:- use_module(library(aggregate)).\n:- use_module(library(lists)).\n\n\n% ================================================================\n% BASE DE DATOS INICIAL\n% ================================================================\n\n\n% Base de datos inicial de personas\npersona(juana, 34, hombre, eeuu).\npersona(emily, 27, mujer, canada).\npersona(michael, 16, hombre, eeuu).\npersona(sophia, 45, mujer, canada).\npersona(daniel, 29, hombre, eeuu).\npersona(emma, 38, mujer, reino_unido).\npersona(oliver, 50, hombre, alemania).\npersona(isabella, 17, mujer, espana).\npersona(liam, 65, hombre, francia).\npersona(amelia, 40, mujer, italia).\npersona(santiago, 28, hombre, chile).\npersona(valentina, 22, mujer, colombia).\npersona(mateo, 15, hombre, peru).\npersona(maria, 55, mujer, argentina).\npersona(diego, 33, hombre, mexico).\npersona(akira, 31, hombre, japon).\npersona(ananya, 26, mujer, india).\npersona(wei, 19, hombre, china).\npersona(noah, 58, hombre, australia).\npersona(zara, 35, mujer, nueva_zelanda).\npersona(amina, 29, mujer, nigeria).\npersona(khalid, 41, hombre, emiratos_arabes).\npersona(fatima, 16, mujer, egipto).\npersona(samuel, 67, hombre, sudafrica).\npersona(layla, 30, mujer, arabia_saudita).\npersona(lucas, 24, hombre, brasil).\npersona(chloe, 20, mujer, canada).\npersona(jacob, 18, hombre, eeuu).\npersona(madison, 42, mujer, reino_unido).\npersona(elijah, 36, hombre, australia).\n\n\n% Casos legales\ncaso(juana, violencia_familiar, &#39;Violencia domestica reportada&#39;, alta, activo, fecha(2025,6,1)).\ncaso(emily, herencia, &#39;Disputa por herencia familiar&#39;, media, pendiente, fecha(2025,5,15)).\ncaso(michael, desalojo, &#39;Amenaza de desalojo por impago&#39;, alta, activo, fecha(2025,6,10)).\ncaso(sophia, pension_alimentos, &#39;Solicitud pension alimenticia&#39;, alta, activo, fecha(2025,5,20)).\ncaso(daniel, estafa, &#39;Fraude en compra online&#39;, media, investigacion, fecha(2025,6,5)).\ncaso(emma, violencia_familiar, &#39;Violencia psicologica&#39;, alta, activo, fecha(2025,5,25)).\ncaso(oliver, herencia, &#39;Testamento impugnado&#39;, media, pendiente, fecha(2025,6,2)).\ncaso(isabella, desalojo, &#39;Desalojo por fin de contrato&#39;, media, activo, fecha(2025,5,30)).\ncaso(liam, pension_alimentos, &#39;Reduccion pension por jubilacion&#39;, baja, pendiente, fecha(2025,5,10)).\ncaso(amelia, estafa, &#39;Estafa piramidal&#39;, alta, investigacion, fecha(2025,6,12)).\ncaso(santiago, violencia_familiar, &#39;Violencia fisica documentada&#39;, alta, activo, fecha(2025,6,8)).\ncaso(valentina, herencia, &#39;Herencia sin testamento&#39;, media, pendiente, fecha(2025,5,18)).\ncaso(mateo, desalojo, &#39;Familia en situacion vulnerable&#39;, alta, activo, fecha(2025,6,15)).\ncaso(maria, pension_alimentos, &#39;Incumplimiento de pago&#39;, alta, activo, fecha(2025,5,22)).\ncaso(diego, estafa, &#39;Fraude inmobiliario&#39;, alta, investigacion, fecha(2025,6,3)).\ncaso(akira, violencia_familiar, &#39;Violencia en el hogar&#39;, alta, activo, fecha(2025,5,28)).\ncaso(ananya, herencia, &#39;Disputa entre hermanos&#39;, media, pendiente, fecha(2025,6,7)).\ncaso(wei, desalojo, &#39;Estudiante sin recursos&#39;, media, activo, fecha(2025,5,14)).\ncaso(noah, pension_alimentos, &#39;Modificacion por nueva pareja&#39;, baja, pendiente, fecha(2025,6,9)).\ncaso(zara, estafa, &#39;Fraude bancario&#39;, alta, investigacion, fecha(2025,5,29)).\ncaso(amina, violencia_familiar, &#39;Violencia cultural/religiosa&#39;, alta, activo, fecha(2025,6,11)).\ncaso(khalid, herencia, &#39;Herencia internacional&#39;, media, pendiente, fecha(2025,5,17)).\ncaso(fatima, desalojo, &#39;Menor en riesgo de calle&#39;, alta, activo, fecha(2025,6,13)).\ncaso(samuel, pension_alimentos, &#39;Pension para nietos&#39;, baja, pendiente, fecha(2025,5,19)).\ncaso(layla, estafa, &#39;Estafa matrimonial&#39;, media, investigacion, fecha(2025,6,4)).\ncaso(lucas, violencia_familiar, &#39;Violencia bidireccional&#39;, alta, activo, fecha(2025,5,23)).\ncaso(chloe, herencia, &#39;Herencia de padres fallecidos&#39;, media, pendiente, fecha(2025,6,14)).\ncaso(jacob, desalojo, &#39;Joven emancipado&#39;, media, activo, fecha(2025,5,27)).\ncaso(madison, pension_alimentos, &#39;Pension tras divorcio&#39;, alta, activo, fecha(2025,6,6)).\ncaso(elijah, estafa, &#39;Fraude en inversiones&#39;, alta, investigacion, fecha(2025,5,24)).\n\n\n% Regiones geográficas\nregion(eeuu, norteamerica).\nregion(canada, norteamerica).\nregion(reino_unido, europa).\nregion(alemania, europa).\nregion(espana, europa).\nregion(francia, europa).\nregion(italia, europa).\nregion(chile, sudamerica).\nregion(colombia, sudamerica).\nregion(peru, sudamerica).\nregion(argentina, sudamerica).\nregion(mexico, norteamerica).\nregion(japon, asia).\nregion(india, asia).\nregion(china, asia).\nregion(australia, oceania).\nregion(nueva_zelanda, oceania).\nregion(nigeria, africa).\nregion(emiratos_arabes, medio_oriente).\nregion(egipto, africa).\nregion(sudafrica, africa).\nregion(arabia_saudita, medio_oriente).\nregion(brasil, sudamerica).\n\n\n% ================================================================\n% PREDICADOS DE CONSULTA SIMPLIFICADOS\n% ================================================================\n\n\n% Consulta 1: Porcentaje de género con casos\nporcentaje_genero_con_caso(Genero, Porcentaje) :-\n    findall(P, persona(P, _, Genero, _), TotalPersonas),\n    findall(P, (persona(P, _, Genero, _), caso(P, _, _, _, _, _)), PersonasConCaso),\n    length(TotalPersonas, Total),\n    length(PersonasConCaso, ConCaso),\n    Total &gt; 0,\n    Porcentaje is (ConCaso * 100) / Total.\n\n\n% Consulta 2: Distribución de tipos de caso por género\ndistribucion_tipos_por_genero(Genero, Distribucion) :-\n    findall(Tipo, (persona(P, _, Genero, _), caso(P, Tipo, _, _, _, _)), Tipos),\n    contar_ocurrencias(Tipos, Distribucion).\n\n\n% Consulta 3: Casos por país\ncasos_por_pais(Pais, Cantidad) :-\n    findall(P, (persona(P, _, _, Pais), caso(P, _, _, _, _, _)), Casos),\n    sort(Casos, CasosUnicos),\n    length(CasosUnicos, Cantidad).\n\n\n% Consulta 4: Personas con múltiples casos\npersonas_con_multiples_casos(Personas) :-\n    findall(P, (persona(P, _, _, _), findall(_, caso(P, _, _, _, _, _), Casos), length(Casos, N), N &gt; 1), Personas),\n    list_to_set(Personas, PersonasUnicas),\n    Personas = PersonasUnicas.\n\n\n% Consulta 5: Casos urgentes por región\ncasos_urgentes_por_region(Region, Cantidad) :-\n    findall(P, (persona(P, _, _, Pais), region(Pais, Region), caso(P, _, _, alta, _, _)), Casos),\n    sort(Casos, CasosUnicos),\n    length(CasosUnicos, Cantidad).\n\n\n% Consulta 6: Tiempo promedio de resolución\ntiempo_promedio_resolucion(Tipo, DiasPromedio) :-\n    findall(D, caso_resuelto(_, Tipo, _, D), Duraciones),\n    length(Duraciones, N), N &gt; 0,\n    sum_list(Duraciones, Suma),\n    DiasPromedio is Suma / N.\n\n\n% Consulta 7: Estadísticas de edad por tipo de caso\nestadisticas_edad_por_tipo(Tipo, Min, Max, Promedio) :-\n    findall(Edad, (persona(P, Edad, _, _), caso(P, Tipo, _, _, _, _)), Edades),\n    Edades = [],\n    min_list(Edades, Min),\n    max_list(Edades, Max),\n    sum_list(Edades, Suma),\n    length(Edades, Cantidad),\n    Promedio is Suma / Cantidad.\n\n\n% Consulta 8: Personas en riesgo (menores con casos urgentes)\npersonas_en_riesgo(Personas) :-\n    findall(P, (persona(P, Edad, _, _), Edad &lt; 18, caso(P, _, _, alta, _, _)), Personas).\n\n\n% Consulta 9: Casos por prioridad y género\ncasos_por_prioridad_genero(Prioridad, Genero, Cantidad) :-\n    findall(P, (persona(P, _, Genero, _), caso(P, _, _, Prioridad, _, _)), Casos),\n    sort(Casos, CasosUnicos),\n    length(CasosUnicos, Cantidad).\n\n\n% Consulta 10: Top países con más casos\ntop_paises_con_casos(N, Top) :-\n    findall(Pais-Cant, (region(Pais, _), casos_por_pais(Pais, Cant)), PaisesCant),\n    sort(2, @&gt;=, PaisesCant, Ordenados),\n    length(Ordenados, L),\n    (N &gt; L -&gt; N1 = L ; N1 = N),\n    primeros_n(N1, Ordenados, Top).\n\n\n% ================================================================\n% NUEVAS CONSULTAS INTUITIVAS (AGREGADAS)\n% ================================================================\n\n\n% 1. Consulta básica de personas con filtros\nconsultar_personas(Genero, RangoEdad, Pais, Personas) :-\n    (Genero == todos -&gt; true ; true),\n    (Pais == todos -&gt; true ; true),\n    rango_edad(RangoEdad, MinEdad, MaxEdad),\n    findall(P, (persona(P, Edad, Genero, Pais),\n                  Edad &gt;= MinEdad, Edad =&lt; MaxEdad), Personas).\n\n\n% Rangos de edad predefinidos\nrango_edad(menores, 0, 17).\nrango_edad(adultos_jovenes, 18, 35).\nrango_edad(adultos, 36, 65).\nrango_edad(mayores, 66, 120).\nrango_edad(todos, 0, 120).\n\n\n% 2. Consulta de casos con múltiples filtros\nconsultar_casos(Tipo, Prioridad, Estado, FechaInicio, FechaFin, Casos) :-\n    (Tipo == todos -&gt; true ; true),\n    (Prioridad == todas -&gt; true ; true),\n    (Estado == todos -&gt; true ; true),\n    findall([P, Tipo, Desc],\n            (caso(P, Tipo, Desc, Prioridad, Estado, Fecha),\n             entre_fechas(Fecha, FechaInicio, FechaFin)), Casos).\n\n\n% 3. Estadísticas demográficas básicas\nestadisticas_demograficas(Genero, Pais, Estadisticas) :-\n    findall(Edad, persona(_, Edad, Genero, Pais), Edades),\n    Edades = [],\n    length(Edades, Cantidad),\n    min_list(Edades, Min),\n    max_list(Edades, Max),\n    sum_list(Edades, Suma),\n    Promedio is Suma / Cantidad,\n    Estadisticas = [cantidad-Cantidad, min-Min, max-Max, promedio-Promedio].\n\n\n% 4. Búsqueda de patrones predefinidos\nbuscar_patrones(riesgo_familiar, Resultados) :-\n    findall(P, (persona(P, Edad, _, _), Edad &lt; 18,\n                  caso(P, violencia_familiar, _, alta, _, _)), Resultados).\n\n\nbuscar_patrones(estafas_vulnerables, Resultados) :-\n    findall(P, (persona(P, Edad, _, _), Edad &gt; 60,\n                  caso(P, estafa, _, alta, _, _)), Resultados).\n\n\nbuscar_patrones(multiples_problemas, Resultados) :-\n    findall(P, (persona(P, _, _, _),\n                  (caso(P, Tipo1, _, _, _, _),\n                   caso(P, Tipo2, _, _, _, _),\n                   Tipo1 = Tipo2)), Resultados).\n\n\n% 5. Distribución geográfica de casos\ndistribucion_geografica(TipoCaso, Distribucion) :-\n    findall(Region-Cantidad,\n            (region(Pais, Region),\n             findall(P, (persona(P, _, _, Pais),\n                               caso(P, TipoCaso, _, _, _, _)), Casos),\n             length(Casos, Cantidad)),\n            Distribucion).\n\n\n% 6. Evolución temporal de casos\n% 6. Evolución temporal de casos CORREGIDO\nevolucion_temporal(TipoCaso, Meses, Datos) :-\n    findall([Mes-Cantidad],\n            (between(1, Meses, Mes),\n             findall(P, caso(P, TipoCaso, _, _, _, fecha(_, Mes, _)), Casos),\n             length(Casos, Cantidad)),\n            Datos).\n\n\n\n\n% ================================================================\n% PREDICADOS AUXILIARES\n% ================================================================\n\n\n% Contar ocurrencias de elementos en una lista\ncontar_ocurrencias(Lista, Conteo) :-\n    msort(Lista, Ordenada),\n    contar_ocurrencias_aux(Ordenada, Conteo).\n\n\ncontar_ocurrencias_aux([], []).\ncontar_ocurrencias_aux([X|Xs], [[X, N]|Resto]) :-\n    contar_repeticiones(X, [X|Xs], N, Restantes),\n    contar_ocurrencias_aux(Restantes, Resto).\n\n\ncontar_repeticiones(_, [], 0, []).\ncontar_repeticiones(X, [X|Xs], N, Resto) :-\n    contar_repeticiones(X, Xs, N1, Resto),\n    N is N1 + 1.\ncontar_repeticiones(X, [Y|Xs], 0, [Y|Xs]) :-\n    X = Y.\n\n\n% Obtener los primeros N elementos\nprimeros_n(0, _, []) :- !.\nprimeros_n(N, [H|T], [H|R]) :- N &gt; 0, N1 is N-1, primeros_n(N1, T, R).\n\n\n% Predicado temporal para casos resueltos (deberías implementar tu lógica real)\ncaso_resuelto(Persona, Tipo, Prioridad, Dias) :-\n    caso(Persona, Tipo, _, Prioridad, resuelto, fecha(A1,M1,D1)),\n    fecha_resolucion(fecha(A2,M2,D2)), % Sin variables no usadas\n    dias_transcurridos(fecha(A1,M1,D1), fecha(A2,M2,D2), Dias).\nfecha_resolucion(fecha(2025, 12, 31)). % Fecha de resolución ficticia\n\n\n% Calcular días entre fechas\ndias_transcurridos(fecha(A1,M1,D1), fecha(A2,M2,D2), Dias) :-\n    date_time_stamp(date(A1,M1,D1,0,0,0,0,-,-), T1),\n    date_time_stamp(date(A2,M2,D2,0,0,0,0,-,-), T2),\n    Dias is round((T2-T1)/86400).\n\n\n% Manejo de fechas mejorado\nentre_fechas(Fecha, Ini, Fin) :-\n    Fecha = fecha(A,M,D),\n    Ini = fecha(Ai,Mi,Di),\n    Fin = fecha(Af,Mf,Df),\n    date_time_stamp(date(A,M,D,0,0,0,0,-,-), T),\n    date_time_stamp(date(Ai,Mi,Di,0,0,0,0,-,-), Ti),\n    date_time_stamp(date(Af,Mf,Df,0,0,0,0,-,-), Tf),\n    T &gt;= Ti, T =&lt; Tf.\n\n\n% ================================================================\n% MOSTRAR RESULTADOS (VERSIÓN OPTIMIZADA)\n% ================================================================\n\n\n% Consultas originales\nmostrar_resultado(porcentaje_genero_con_caso(Genero, P)) :-\n    format(&#39;Porcentaje de ~w con casos: ~2f%~n&#39;, [Genero, P]).\n\n\nmostrar_resultado(distribucion_tipos_por_genero(Genero, D)) :-\n    format(&#39;Distribución para ~w:~n&#39;, [Genero]),\n    forall(member([Tipo, N], D), format(&#39;- ~w: ~w casos~n&#39;, [Tipo, N])).\n\n\nmostrar_resultado(casos_por_pais(Pais, C)) :-\n    format(&#39;Casos en ~w: ~w~n&#39;, [Pais, C]).\n\n\nmostrar_resultado(personas_con_multiples_casos(P)) :-\n    format(&#39;Personas con múltiples casos (~w):~n&#39;, [length(P)]),\n    forall(member(Persona, P), (\n        persona(Persona, Edad, Genero, _),\n        format(&#39;- ~w (~w años, ~w)~n&#39;, [Persona, Edad, Genero])\n    )).\n\n\nmostrar_resultado(casos_urgentes_por_region(Region, C)) :-\n    format(&#39;Casos urgentes en ~w: ~w~n&#39;, [Region, C]).\n\n\nmostrar_resultado(tiempo_promedio_resolucion(Tipo, D)) :-\n    format(&#39;Tiempo promedio para resolver ~w: ~1f días~n&#39;, [Tipo, D]).\n\n\nmostrar_resultado(estadisticas_edad_por_tipo(Tipo, Min, Max, Prom)) :-\n    format(&#39;Estadísticas de edad para ~w:~n&#39;, [Tipo]),\n    format(&#39;- Mínima: ~w años~n&#39;, [Min]),\n    format(&#39;- Máxima: ~w años~n&#39;, [Max]),\n    format(&#39;- Promedio: ~1f años~n&#39;, [Prom]).\n\n\nmostrar_resultado(personas_en_riesgo(P)) :-\n    format(&#39;Personas en riesgo (~w):~n&#39;, [length(P)]),\n    forall(member(Persona, P), (\n        persona(Persona, Edad, _, Pais),\n        format(&#39;- ~w (~w años, ~w)~n&#39;, [Persona, Edad, Pais])\n    )).\n\n\nmostrar_resultado(casos_por_prioridad_genero(Prioridad, Genero, C)) :-\n    format(&#39;Casos ~w para ~w: ~w~n&#39;, [Prioridad, Genero, C]).\n\n\nmostrar_resultado(top_paises_con_casos(N, Top)) :-\n    format(&#39;Top ~w países con más casos:~n&#39;, [N]),\n    forall(member(Pais-Cant, Top), format(&#39;- ~w: ~w casos~n&#39;, [Pais, Cant])).\n\n\n% Consultas intuitivas\nmostrar_resultado(consultar_personas(Genero, Rango, Pais, Personas)) :-\n    format(&#39;Personas filtradas [Género: ~w, Edad: ~w, País: ~w]:~n&#39;, [Genero, Rango, Pais]),\n    (   Personas = [] -&gt;\n        write(&#39;  No se encontraron resultados.\n&#39;)\n    ;   length(Personas, Total),\n        format(&#39;  Total: ~w personas~n&#39;, [Total]),\n        forall(member(P, Personas), (\n            persona(P, Edad, Genero, Pais),\n            findall(T, caso(P, T, _, _, _, _), Casos),\n            length(Casos, NCasos),\n            format(&#39;  - ~w (~w años, ~w casos)~n&#39;, [P, Edad, NCasos])\n        ))\n    ).\n\n\n% Mostrar resultados CORREGIDO (una sola vez)\nmostrar_resultado(consultar_casos(Tipo, Prioridad, Estado, _, _, Casos)) :-\n    format(&#39;Casos filtrados [Tipo: ~w, Prioridad: ~w, Estado: ~w]:~n&#39;, [Tipo, Prioridad, Estado]),\n    (   Casos = [] -&gt;\n        write(&#39;  No se encontraron casos.\n&#39;)\n    ;   length(Casos, Total),\n        format(&#39;  Total: ~w casos~n&#39;, [Total]),\n        forall(member([P,_T,D], Casos), (\n            persona(P, Edad, Genero, _),\n            format(&#39;  - ~w (~w, ~w años): ~w~n&#39;, [P, Genero, Edad, D])\n        ))\n    ).\n\n\nmostrar_resultado(estadisticas_demograficas(Genero, Pais, Stats)) :-\n    format(&#39;Estadísticas demográficas [Género: ~w, País: ~w]:~n&#39;, [Genero, Pais]),\n    forall(member(Key-Value, Stats), (\n        format(&#39;  - ~|~w~t~20+: ~w~n&#39;, [Key, Value])\n    )).\n\n\nmostrar_resultado(buscar_patrones(Tipo, Resultados)) :-\n    format(&#39;Resultados del patrón \&quot;~w\&quot;:~n&#39;, [Tipo]),\n    (   Resultados = [] -&gt;\n        write(&#39;  No se encontraron coincidencias.\n&#39;)\n    ;   length(Resultados, Total),\n        format(&#39;  Total: ~w casos~n&#39;, [Total]),\n        forall(member(P, Resultados), (\n            persona(P, Edad, Genero, Pais),\n            findall(T, caso(P, T, _, _, _, _), Tipos),\n            atomic_list_concat(Tipos, &#39;, &#39;, TiposStr),\n            format(&#39;  - ~w (~w, ~w años, ~w): ~w~n&#39;, [P, Genero, Edad, Pais, TiposStr])\n        ))\n    ).\n\n\nmostrar_resultado(distribucion_geografica(Tipo, Distribucion)) :-\n    format(&#39;Distribución geográfica de casos de ~w:~n&#39;, [Tipo]),\n    (   Distribucion = [] -&gt;\n        write(&#39;  No hay datos disponibles.\n&#39;)\n    ;   forall(member(Region-Cant, Distribucion), (\n            Cant &gt; 0 -&gt;\n                format(&#39;  - ~w: ~w casos~n&#39;, [Region, Cant])\n            ; true\n        ))\n    ).\n\n\nmostrar_resultado(evolucion_temporal(Tipo, Meses, Datos)) :-\n    format(&#39;Evolución de casos de ~w (últimos ~w meses):~n&#39;, [Tipo, Meses]),\n    (   Datos = [] -&gt;\n        write(&#39;  No hay datos disponibles.\n&#39;)\n    ;   forall(member([Mes-Cant], Datos), (\n            format(&#39;  - Mes ~|~`0t~2+~w: ~t~w~5+ casos~n&#39;, [Mes, Cant])\n        ))\n    ).\n\n\nmostrar_resultado(_) :-\n    write(&#39;Consulta ejecutada correctamente.\n&#39;).\n\n\n% ================================================================\n% INICIO DEL SISTEMA\n% ================================================================\n:- write(&#39;Sistema Experto Legal v4.0 cargado correctamente.&#39;), nl,\n   write(&#39;Escriba \&quot;ayuda.\&quot; para ver las consultas disponibles.&#39;), nl,\n   write(&#39;Escriba \&quot;iniciar_sistema.\&quot; para comenzar.&#39;), nl.\n\n\n?- findall(P, caso(P, violencia_familiar, _, _, _, _), CasosTotales), \n   length(CasosTotales, Total), \n   findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), CasosMujeres), \n   length(CasosMujeres, Mujeres), \n   Total &gt; 0, \n   Porcentaje is (Mujeres * 100) / Total, \n   format(&#39;Porcentaje de mujeres en violencia familiar: ~2f%~n&#39;, [Porcentaje]).\n\n\n\n\n\n\n\n\nfindall([Nombre, Edad, Genero, Pais], \n        (persona(Nombre, Edad, Genero, Pais), \n         Edad &gt; 25, \n         caso(Nombre, violencia_familiar, _, _, _, _)), \n        Resultados).\n\n\n\n\nfindall(P, persona(P, _, mujer, _), MujeresTotales),\nfindall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresConViolencia),\nlength(MujeresTotales, Total),\nlength(MujeresConViolencia, ConCaso),\nTotal &gt; 0,  % Evitar división por cero\nPorcentaje is (ConCaso * 100) / Total,\nformat(&#39;Porcentaje de mujeres con violencia familiar: ~1f% (~w de ~w)~n&#39;, [Porcentaje, ConCaso, Total]).\n\n\n\n\n\n\n\n% Predicado principal\nporcentaje_mujeres_entre_violencia(Porcentaje) :-\n    findall(P, caso(P, violencia_familiar, _, _, _, _), TotalCasos),\n    findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresCasos),\n    length(TotalCasos, Total),\n    length(MujeresCasos, Mujeres),\n    Total &gt; 0,  % Evita división por cero\n    Porcentaje is (Mujeres * 100) / Total.\n\n% Predicado para mostrar el resultado\nmostrar_porcentaje_mujeres_violencia :-\n    porcentaje_mujeres_entre_violencia(Porcentaje),\n    findall(P, caso(P, violencia_familiar, _, _, _, _), TotalCasos),\n    findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresCasos),\n    length(TotalCasos, Total),\n    length(MujeresCasos, Mujeres),\n    format(&#39;Análisis de casos de violencia familiar:~n&#39;),\n    format(&#39;- Total de casos: ~w~n&#39;, [Total]),\n    format(&#39;- Casos que son mujeres: ~w~n&#39;, [Mujeres]),\n    format(&#39;- Porcentaje de mujeres: ~1f%~n&#39;, [Porcentaje]).\n\n\n      \n      \n      &quot;],&quot;sampleQueries&quot;:[1,[[0,&quot;aplicar_ley(robo, Ley).&quot;],[0,&quot;sancion(penal, Tipo).&quot;],[0,&quot;caso_tipo(contrato, TipoCaso).&quot;]]]}" ssr client="load" opts="{&quot;name&quot;:&quot;PrologInterpreter&quot;,&quot;value&quot;:true}" await-children><div class="min-h-screen bg-background flex flex-col grow"><header class="border-b bg-card"><div class="container mx-auto px-4 py-4"><div class="flex items-center gap-4"><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg> Volver al Curso <!--]--></button><div class="flex items-center gap-3"><img src="/src/assets/swi_logo.svg" alt="SWI Prolog" class="w-8 h-8"><div><h1 class="text-xl font-bold">Sistema Experto Legal</h1><!----></div></div></div></div></header><div class="px-4 py-6 grow flex"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 grow"><div class="space-y-4 min-h-full flex flex-col"><div class="bg-card border rounded-lg p-4 flex flex-col grow"><div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold">Editor Prolog</h2><div class="flex gap-2"><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg> Cargar Programa <!--]--></button></div></div><textarea class="p-3 bg-background border grow rounded-md font-mono text-sm resize-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Escribe tu programa Prolog aquí...">
+% ================================================================
+% SISTEMA EXPERTO LEGAL AVANZADO% ================================================================
+:- dynamic(persona/4).
+:- dynamic(caso/6).
+:- dynamic(estadistica_cache/3).
+:- dynamic(log_evento/3).
+:- dynamic(alerta/3).
+:- use_module(library(date)).
+:- use_module(library(aggregate)).
+:- use_module(library(lists)).
+
+
+% ================================================================
+% BASE DE DATOS INICIAL
+% ================================================================
+
+
+% Base de datos inicial de personas
+persona(juana, 34, hombre, eeuu).
+persona(emily, 27, mujer, canada).
+persona(michael, 16, hombre, eeuu).
+persona(sophia, 45, mujer, canada).
+persona(daniel, 29, hombre, eeuu).
+persona(emma, 38, mujer, reino_unido).
+persona(oliver, 50, hombre, alemania).
+persona(isabella, 17, mujer, espana).
+persona(liam, 65, hombre, francia).
+persona(amelia, 40, mujer, italia).
+persona(santiago, 28, hombre, chile).
+persona(valentina, 22, mujer, colombia).
+persona(mateo, 15, hombre, peru).
+persona(maria, 55, mujer, argentina).
+persona(diego, 33, hombre, mexico).
+persona(akira, 31, hombre, japon).
+persona(ananya, 26, mujer, india).
+persona(wei, 19, hombre, china).
+persona(noah, 58, hombre, australia).
+persona(zara, 35, mujer, nueva_zelanda).
+persona(amina, 29, mujer, nigeria).
+persona(khalid, 41, hombre, emiratos_arabes).
+persona(fatima, 16, mujer, egipto).
+persona(samuel, 67, hombre, sudafrica).
+persona(layla, 30, mujer, arabia_saudita).
+persona(lucas, 24, hombre, brasil).
+persona(chloe, 20, mujer, canada).
+persona(jacob, 18, hombre, eeuu).
+persona(madison, 42, mujer, reino_unido).
+persona(elijah, 36, hombre, australia).
+
+
+% Casos legales
+caso(juana, violencia_familiar, &#39;Violencia domestica reportada&#39;, alta, activo, fecha(2025,6,1)).
+caso(emily, herencia, &#39;Disputa por herencia familiar&#39;, media, pendiente, fecha(2025,5,15)).
+caso(michael, desalojo, &#39;Amenaza de desalojo por impago&#39;, alta, activo, fecha(2025,6,10)).
+caso(sophia, pension_alimentos, &#39;Solicitud pension alimenticia&#39;, alta, activo, fecha(2025,5,20)).
+caso(daniel, estafa, &#39;Fraude en compra online&#39;, media, investigacion, fecha(2025,6,5)).
+caso(emma, violencia_familiar, &#39;Violencia psicologica&#39;, alta, activo, fecha(2025,5,25)).
+caso(oliver, herencia, &#39;Testamento impugnado&#39;, media, pendiente, fecha(2025,6,2)).
+caso(isabella, desalojo, &#39;Desalojo por fin de contrato&#39;, media, activo, fecha(2025,5,30)).
+caso(liam, pension_alimentos, &#39;Reduccion pension por jubilacion&#39;, baja, pendiente, fecha(2025,5,10)).
+caso(amelia, estafa, &#39;Estafa piramidal&#39;, alta, investigacion, fecha(2025,6,12)).
+caso(santiago, violencia_familiar, &#39;Violencia fisica documentada&#39;, alta, activo, fecha(2025,6,8)).
+caso(valentina, herencia, &#39;Herencia sin testamento&#39;, media, pendiente, fecha(2025,5,18)).
+caso(mateo, desalojo, &#39;Familia en situacion vulnerable&#39;, alta, activo, fecha(2025,6,15)).
+caso(maria, pension_alimentos, &#39;Incumplimiento de pago&#39;, alta, activo, fecha(2025,5,22)).
+caso(diego, estafa, &#39;Fraude inmobiliario&#39;, alta, investigacion, fecha(2025,6,3)).
+caso(akira, violencia_familiar, &#39;Violencia en el hogar&#39;, alta, activo, fecha(2025,5,28)).
+caso(ananya, herencia, &#39;Disputa entre hermanos&#39;, media, pendiente, fecha(2025,6,7)).
+caso(wei, desalojo, &#39;Estudiante sin recursos&#39;, media, activo, fecha(2025,5,14)).
+caso(noah, pension_alimentos, &#39;Modificacion por nueva pareja&#39;, baja, pendiente, fecha(2025,6,9)).
+caso(zara, estafa, &#39;Fraude bancario&#39;, alta, investigacion, fecha(2025,5,29)).
+caso(amina, violencia_familiar, &#39;Violencia cultural/religiosa&#39;, alta, activo, fecha(2025,6,11)).
+caso(khalid, herencia, &#39;Herencia internacional&#39;, media, pendiente, fecha(2025,5,17)).
+caso(fatima, desalojo, &#39;Menor en riesgo de calle&#39;, alta, activo, fecha(2025,6,13)).
+caso(samuel, pension_alimentos, &#39;Pension para nietos&#39;, baja, pendiente, fecha(2025,5,19)).
+caso(layla, estafa, &#39;Estafa matrimonial&#39;, media, investigacion, fecha(2025,6,4)).
+caso(lucas, violencia_familiar, &#39;Violencia bidireccional&#39;, alta, activo, fecha(2025,5,23)).
+caso(chloe, herencia, &#39;Herencia de padres fallecidos&#39;, media, pendiente, fecha(2025,6,14)).
+caso(jacob, desalojo, &#39;Joven emancipado&#39;, media, activo, fecha(2025,5,27)).
+caso(madison, pension_alimentos, &#39;Pension tras divorcio&#39;, alta, activo, fecha(2025,6,6)).
+caso(elijah, estafa, &#39;Fraude en inversiones&#39;, alta, investigacion, fecha(2025,5,24)).
+
+
+% Regiones geográficas
+region(eeuu, norteamerica).
+region(canada, norteamerica).
+region(reino_unido, europa).
+region(alemania, europa).
+region(espana, europa).
+region(francia, europa).
+region(italia, europa).
+region(chile, sudamerica).
+region(colombia, sudamerica).
+region(peru, sudamerica).
+region(argentina, sudamerica).
+region(mexico, norteamerica).
+region(japon, asia).
+region(india, asia).
+region(china, asia).
+region(australia, oceania).
+region(nueva_zelanda, oceania).
+region(nigeria, africa).
+region(emiratos_arabes, medio_oriente).
+region(egipto, africa).
+region(sudafrica, africa).
+region(arabia_saudita, medio_oriente).
+region(brasil, sudamerica).
+
+
+% ================================================================
+% PREDICADOS DE CONSULTA SIMPLIFICADOS
+% ================================================================
+
+
+% Consulta 1: Porcentaje de género con casos
+porcentaje_genero_con_caso(Genero, Porcentaje) :-
+    findall(P, persona(P, _, Genero, _), TotalPersonas),
+    findall(P, (persona(P, _, Genero, _), caso(P, _, _, _, _, _)), PersonasConCaso),
+    length(TotalPersonas, Total),
+    length(PersonasConCaso, ConCaso),
+    Total &gt; 0,
+    Porcentaje is (ConCaso * 100) / Total.
+
+
+% Consulta 2: Distribución de tipos de caso por género
+distribucion_tipos_por_genero(Genero, Distribucion) :-
+    findall(Tipo, (persona(P, _, Genero, _), caso(P, Tipo, _, _, _, _)), Tipos),
+    contar_ocurrencias(Tipos, Distribucion).
+
+
+% Consulta 3: Casos por país
+casos_por_pais(Pais, Cantidad) :-
+    findall(P, (persona(P, _, _, Pais), caso(P, _, _, _, _, _)), Casos),
+    sort(Casos, CasosUnicos),
+    length(CasosUnicos, Cantidad).
+
+
+% Consulta 4: Personas con múltiples casos
+personas_con_multiples_casos(Personas) :-
+    findall(P, (persona(P, _, _, _), findall(_, caso(P, _, _, _, _, _), Casos), length(Casos, N), N &gt; 1), Personas),
+    list_to_set(Personas, PersonasUnicas),
+    Personas = PersonasUnicas.
+
+
+% Consulta 5: Casos urgentes por región
+casos_urgentes_por_region(Region, Cantidad) :-
+    findall(P, (persona(P, _, _, Pais), region(Pais, Region), caso(P, _, _, alta, _, _)), Casos),
+    sort(Casos, CasosUnicos),
+    length(CasosUnicos, Cantidad).
+
+
+% Consulta 6: Tiempo promedio de resolución
+tiempo_promedio_resolucion(Tipo, DiasPromedio) :-
+    findall(D, caso_resuelto(_, Tipo, _, D), Duraciones),
+    length(Duraciones, N), N &gt; 0,
+    sum_list(Duraciones, Suma),
+    DiasPromedio is Suma / N.
+
+
+% Consulta 7: Estadísticas de edad por tipo de caso
+estadisticas_edad_por_tipo(Tipo, Min, Max, Promedio) :-
+    findall(Edad, (persona(P, Edad, _, _), caso(P, Tipo, _, _, _, _)), Edades),
+    Edades = [],
+    min_list(Edades, Min),
+    max_list(Edades, Max),
+    sum_list(Edades, Suma),
+    length(Edades, Cantidad),
+    Promedio is Suma / Cantidad.
+
+
+% Consulta 8: Personas en riesgo (menores con casos urgentes)
+personas_en_riesgo(Personas) :-
+    findall(P, (persona(P, Edad, _, _), Edad &lt; 18, caso(P, _, _, alta, _, _)), Personas).
+
+
+% Consulta 9: Casos por prioridad y género
+casos_por_prioridad_genero(Prioridad, Genero, Cantidad) :-
+    findall(P, (persona(P, _, Genero, _), caso(P, _, _, Prioridad, _, _)), Casos),
+    sort(Casos, CasosUnicos),
+    length(CasosUnicos, Cantidad).
+
+
+% Consulta 10: Top países con más casos
+top_paises_con_casos(N, Top) :-
+    findall(Pais-Cant, (region(Pais, _), casos_por_pais(Pais, Cant)), PaisesCant),
+    sort(2, @&gt;=, PaisesCant, Ordenados),
+    length(Ordenados, L),
+    (N &gt; L -&gt; N1 = L ; N1 = N),
+    primeros_n(N1, Ordenados, Top).
+
+
+% ================================================================
+% NUEVAS CONSULTAS INTUITIVAS (AGREGADAS)
+% ================================================================
+
+
+% 1. Consulta básica de personas con filtros
+consultar_personas(Genero, RangoEdad, Pais, Personas) :-
+    (Genero == todos -&gt; true ; true),
+    (Pais == todos -&gt; true ; true),
+    rango_edad(RangoEdad, MinEdad, MaxEdad),
+    findall(P, (persona(P, Edad, Genero, Pais),
+                  Edad &gt;= MinEdad, Edad =&lt; MaxEdad), Personas).
+
+
+% Rangos de edad predefinidos
+rango_edad(menores, 0, 17).
+rango_edad(adultos_jovenes, 18, 35).
+rango_edad(adultos, 36, 65).
+rango_edad(mayores, 66, 120).
+rango_edad(todos, 0, 120).
+
+
+% 2. Consulta de casos con múltiples filtros
+consultar_casos(Tipo, Prioridad, Estado, FechaInicio, FechaFin, Casos) :-
+    (Tipo == todos -&gt; true ; true),
+    (Prioridad == todas -&gt; true ; true),
+    (Estado == todos -&gt; true ; true),
+    findall([P, Tipo, Desc],
+            (caso(P, Tipo, Desc, Prioridad, Estado, Fecha),
+             entre_fechas(Fecha, FechaInicio, FechaFin)), Casos).
+
+
+% 3. Estadísticas demográficas básicas
+estadisticas_demograficas(Genero, Pais, Estadisticas) :-
+    findall(Edad, persona(_, Edad, Genero, Pais), Edades),
+    Edades = [],
+    length(Edades, Cantidad),
+    min_list(Edades, Min),
+    max_list(Edades, Max),
+    sum_list(Edades, Suma),
+    Promedio is Suma / Cantidad,
+    Estadisticas = [cantidad-Cantidad, min-Min, max-Max, promedio-Promedio].
+
+
+% 4. Búsqueda de patrones predefinidos
+buscar_patrones(riesgo_familiar, Resultados) :-
+    findall(P, (persona(P, Edad, _, _), Edad &lt; 18,
+                  caso(P, violencia_familiar, _, alta, _, _)), Resultados).
+
+
+buscar_patrones(estafas_vulnerables, Resultados) :-
+    findall(P, (persona(P, Edad, _, _), Edad &gt; 60,
+                  caso(P, estafa, _, alta, _, _)), Resultados).
+
+
+buscar_patrones(multiples_problemas, Resultados) :-
+    findall(P, (persona(P, _, _, _),
+                  (caso(P, Tipo1, _, _, _, _),
+                   caso(P, Tipo2, _, _, _, _),
+                   Tipo1 = Tipo2)), Resultados).
+
+
+% 5. Distribución geográfica de casos
+distribucion_geografica(TipoCaso, Distribucion) :-
+    findall(Region-Cantidad,
+            (region(Pais, Region),
+             findall(P, (persona(P, _, _, Pais),
+                               caso(P, TipoCaso, _, _, _, _)), Casos),
+             length(Casos, Cantidad)),
+            Distribucion).
+
+
+% 6. Evolución temporal de casos
+% 6. Evolución temporal de casos CORREGIDO
+evolucion_temporal(TipoCaso, Meses, Datos) :-
+    findall([Mes-Cantidad],
+            (between(1, Meses, Mes),
+             findall(P, caso(P, TipoCaso, _, _, _, fecha(_, Mes, _)), Casos),
+             length(Casos, Cantidad)),
+            Datos).
+
+
+
+
+% ================================================================
+% PREDICADOS AUXILIARES
+% ================================================================
+
+
+% Contar ocurrencias de elementos en una lista
+contar_ocurrencias(Lista, Conteo) :-
+    msort(Lista, Ordenada),
+    contar_ocurrencias_aux(Ordenada, Conteo).
+
+
+contar_ocurrencias_aux([], []).
+contar_ocurrencias_aux([X|Xs], [[X, N]|Resto]) :-
+    contar_repeticiones(X, [X|Xs], N, Restantes),
+    contar_ocurrencias_aux(Restantes, Resto).
+
+
+contar_repeticiones(_, [], 0, []).
+contar_repeticiones(X, [X|Xs], N, Resto) :-
+    contar_repeticiones(X, Xs, N1, Resto),
+    N is N1 + 1.
+contar_repeticiones(X, [Y|Xs], 0, [Y|Xs]) :-
+    X = Y.
+
+
+% Obtener los primeros N elementos
+primeros_n(0, _, []) :- !.
+primeros_n(N, [H|T], [H|R]) :- N &gt; 0, N1 is N-1, primeros_n(N1, T, R).
+
+
+% Predicado temporal para casos resueltos (deberías implementar tu lógica real)
+caso_resuelto(Persona, Tipo, Prioridad, Dias) :-
+    caso(Persona, Tipo, _, Prioridad, resuelto, fecha(A1,M1,D1)),
+    fecha_resolucion(fecha(A2,M2,D2)), % Sin variables no usadas
+    dias_transcurridos(fecha(A1,M1,D1), fecha(A2,M2,D2), Dias).
+fecha_resolucion(fecha(2025, 12, 31)). % Fecha de resolución ficticia
+
+
+% Calcular días entre fechas
+dias_transcurridos(fecha(A1,M1,D1), fecha(A2,M2,D2), Dias) :-
+    date_time_stamp(date(A1,M1,D1,0,0,0,0,-,-), T1),
+    date_time_stamp(date(A2,M2,D2,0,0,0,0,-,-), T2),
+    Dias is round((T2-T1)/86400).
+
+
+% Manejo de fechas mejorado
+entre_fechas(Fecha, Ini, Fin) :-
+    Fecha = fecha(A,M,D),
+    Ini = fecha(Ai,Mi,Di),
+    Fin = fecha(Af,Mf,Df),
+    date_time_stamp(date(A,M,D,0,0,0,0,-,-), T),
+    date_time_stamp(date(Ai,Mi,Di,0,0,0,0,-,-), Ti),
+    date_time_stamp(date(Af,Mf,Df,0,0,0,0,-,-), Tf),
+    T &gt;= Ti, T =&lt; Tf.
+
+
+% ================================================================
+% MOSTRAR RESULTADOS (VERSIÓN OPTIMIZADA)
+% ================================================================
+
+
+% Consultas originales
+mostrar_resultado(porcentaje_genero_con_caso(Genero, P)) :-
+    format(&#39;Porcentaje de ~w con casos: ~2f%~n&#39;, [Genero, P]).
+
+
+mostrar_resultado(distribucion_tipos_por_genero(Genero, D)) :-
+    format(&#39;Distribución para ~w:~n&#39;, [Genero]),
+    forall(member([Tipo, N], D), format(&#39;- ~w: ~w casos~n&#39;, [Tipo, N])).
+
+
+mostrar_resultado(casos_por_pais(Pais, C)) :-
+    format(&#39;Casos en ~w: ~w~n&#39;, [Pais, C]).
+
+
+mostrar_resultado(personas_con_multiples_casos(P)) :-
+    format(&#39;Personas con múltiples casos (~w):~n&#39;, [length(P)]),
+    forall(member(Persona, P), (
+        persona(Persona, Edad, Genero, _),
+        format(&#39;- ~w (~w años, ~w)~n&#39;, [Persona, Edad, Genero])
+    )).
+
+
+mostrar_resultado(casos_urgentes_por_region(Region, C)) :-
+    format(&#39;Casos urgentes en ~w: ~w~n&#39;, [Region, C]).
+
+
+mostrar_resultado(tiempo_promedio_resolucion(Tipo, D)) :-
+    format(&#39;Tiempo promedio para resolver ~w: ~1f días~n&#39;, [Tipo, D]).
+
+
+mostrar_resultado(estadisticas_edad_por_tipo(Tipo, Min, Max, Prom)) :-
+    format(&#39;Estadísticas de edad para ~w:~n&#39;, [Tipo]),
+    format(&#39;- Mínima: ~w años~n&#39;, [Min]),
+    format(&#39;- Máxima: ~w años~n&#39;, [Max]),
+    format(&#39;- Promedio: ~1f años~n&#39;, [Prom]).
+
+
+mostrar_resultado(personas_en_riesgo(P)) :-
+    format(&#39;Personas en riesgo (~w):~n&#39;, [length(P)]),
+    forall(member(Persona, P), (
+        persona(Persona, Edad, _, Pais),
+        format(&#39;- ~w (~w años, ~w)~n&#39;, [Persona, Edad, Pais])
+    )).
+
+
+mostrar_resultado(casos_por_prioridad_genero(Prioridad, Genero, C)) :-
+    format(&#39;Casos ~w para ~w: ~w~n&#39;, [Prioridad, Genero, C]).
+
+
+mostrar_resultado(top_paises_con_casos(N, Top)) :-
+    format(&#39;Top ~w países con más casos:~n&#39;, [N]),
+    forall(member(Pais-Cant, Top), format(&#39;- ~w: ~w casos~n&#39;, [Pais, Cant])).
+
+
+% Consultas intuitivas
+mostrar_resultado(consultar_personas(Genero, Rango, Pais, Personas)) :-
+    format(&#39;Personas filtradas [Género: ~w, Edad: ~w, País: ~w]:~n&#39;, [Genero, Rango, Pais]),
+    (   Personas = [] -&gt;
+        write(&#39;  No se encontraron resultados.
+&#39;)
+    ;   length(Personas, Total),
+        format(&#39;  Total: ~w personas~n&#39;, [Total]),
+        forall(member(P, Personas), (
+            persona(P, Edad, Genero, Pais),
+            findall(T, caso(P, T, _, _, _, _), Casos),
+            length(Casos, NCasos),
+            format(&#39;  - ~w (~w años, ~w casos)~n&#39;, [P, Edad, NCasos])
+        ))
+    ).
+
+
+% Mostrar resultados CORREGIDO (una sola vez)
+mostrar_resultado(consultar_casos(Tipo, Prioridad, Estado, _, _, Casos)) :-
+    format(&#39;Casos filtrados [Tipo: ~w, Prioridad: ~w, Estado: ~w]:~n&#39;, [Tipo, Prioridad, Estado]),
+    (   Casos = [] -&gt;
+        write(&#39;  No se encontraron casos.
+&#39;)
+    ;   length(Casos, Total),
+        format(&#39;  Total: ~w casos~n&#39;, [Total]),
+        forall(member([P,_T,D], Casos), (
+            persona(P, Edad, Genero, _),
+            format(&#39;  - ~w (~w, ~w años): ~w~n&#39;, [P, Genero, Edad, D])
+        ))
+    ).
+
+
+mostrar_resultado(estadisticas_demograficas(Genero, Pais, Stats)) :-
+    format(&#39;Estadísticas demográficas [Género: ~w, País: ~w]:~n&#39;, [Genero, Pais]),
+    forall(member(Key-Value, Stats), (
+        format(&#39;  - ~|~w~t~20+: ~w~n&#39;, [Key, Value])
+    )).
+
+
+mostrar_resultado(buscar_patrones(Tipo, Resultados)) :-
+    format(&#39;Resultados del patrón &quot;~w&quot;:~n&#39;, [Tipo]),
+    (   Resultados = [] -&gt;
+        write(&#39;  No se encontraron coincidencias.
+&#39;)
+    ;   length(Resultados, Total),
+        format(&#39;  Total: ~w casos~n&#39;, [Total]),
+        forall(member(P, Resultados), (
+            persona(P, Edad, Genero, Pais),
+            findall(T, caso(P, T, _, _, _, _), Tipos),
+            atomic_list_concat(Tipos, &#39;, &#39;, TiposStr),
+            format(&#39;  - ~w (~w, ~w años, ~w): ~w~n&#39;, [P, Genero, Edad, Pais, TiposStr])
+        ))
+    ).
+
+
+mostrar_resultado(distribucion_geografica(Tipo, Distribucion)) :-
+    format(&#39;Distribución geográfica de casos de ~w:~n&#39;, [Tipo]),
+    (   Distribucion = [] -&gt;
+        write(&#39;  No hay datos disponibles.
+&#39;)
+    ;   forall(member(Region-Cant, Distribucion), (
+            Cant &gt; 0 -&gt;
+                format(&#39;  - ~w: ~w casos~n&#39;, [Region, Cant])
+            ; true
+        ))
+    ).
+
+
+mostrar_resultado(evolucion_temporal(Tipo, Meses, Datos)) :-
+    format(&#39;Evolución de casos de ~w (últimos ~w meses):~n&#39;, [Tipo, Meses]),
+    (   Datos = [] -&gt;
+        write(&#39;  No hay datos disponibles.
+&#39;)
+    ;   forall(member([Mes-Cant], Datos), (
+            format(&#39;  - Mes ~|~`0t~2+~w: ~t~w~5+ casos~n&#39;, [Mes, Cant])
+        ))
+    ).
+
+
+mostrar_resultado(_) :-
+    write(&#39;Consulta ejecutada correctamente.
+&#39;).
+
+
+% ================================================================
+% INICIO DEL SISTEMA
+% ================================================================
+:- write(&#39;Sistema Experto Legal v4.0 cargado correctamente.&#39;), nl,
+   write(&#39;Escriba &quot;ayuda.&quot; para ver las consultas disponibles.&#39;), nl,
+   write(&#39;Escriba &quot;iniciar_sistema.&quot; para comenzar.&#39;), nl.
+
+
+?- findall(P, caso(P, violencia_familiar, _, _, _, _), CasosTotales), 
+   length(CasosTotales, Total), 
+   findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), CasosMujeres), 
+   length(CasosMujeres, Mujeres), 
+   Total &gt; 0, 
+   Porcentaje is (Mujeres * 100) / Total, 
+   format(&#39;Porcentaje de mujeres en violencia familiar: ~2f%~n&#39;, [Porcentaje]).
+
+
+
+
+
+
+
+
+findall([Nombre, Edad, Genero, Pais], 
+        (persona(Nombre, Edad, Genero, Pais), 
+         Edad &gt; 25, 
+         caso(Nombre, violencia_familiar, _, _, _, _)), 
+        Resultados).
+
+
+
+
+findall(P, persona(P, _, mujer, _), MujeresTotales),
+findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresConViolencia),
+length(MujeresTotales, Total),
+length(MujeresConViolencia, ConCaso),
+Total &gt; 0,  % Evitar división por cero
+Porcentaje is (ConCaso * 100) / Total,
+format(&#39;Porcentaje de mujeres con violencia familiar: ~1f% (~w de ~w)~n&#39;, [Porcentaje, ConCaso, Total]).
+
+
+
+
+
+
+
+% Predicado principal
+porcentaje_mujeres_entre_violencia(Porcentaje) :-
+    findall(P, caso(P, violencia_familiar, _, _, _, _), TotalCasos),
+    findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresCasos),
+    length(TotalCasos, Total),
+    length(MujeresCasos, Mujeres),
+    Total &gt; 0,  % Evita división por cero
+    Porcentaje is (Mujeres * 100) / Total.
+
+% Predicado para mostrar el resultado
+mostrar_porcentaje_mujeres_violencia :-
+    porcentaje_mujeres_entre_violencia(Porcentaje),
+    findall(P, caso(P, violencia_familiar, _, _, _, _), TotalCasos),
+    findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresCasos),
+    length(TotalCasos, Total),
+    length(MujeresCasos, Mujeres),
+    format(&#39;Análisis de casos de violencia familiar:~n&#39;),
+    format(&#39;- Total de casos: ~w~n&#39;, [Total]),
+    format(&#39;- Casos que son mujeres: ~w~n&#39;, [Mujeres]),
+    format(&#39;- Porcentaje de mujeres: ~1f%~n&#39;, [Porcentaje]).
+
+
+      
+      
+      </textarea></div><div class="bg-card border rounded-lg p-4"><h3 class="text-lg font-semibold mb-4">Consultas</h3><div class="space-y-3"><div class="flex gap-2"><input value="likes(sam, X)." type="text" class="flex-1 p-2 bg-background border rounded-md font-mono text-sm focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="?- likes(sam, X)."><button data-slot="button" class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play w-4 h-4"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg> Ejecutar <!--]--></button></div><div><p class="text-sm text-muted-foreground mb-2"> Consultas de ejemplo: </p><div class="flex flex-wrap gap-2"><!--[--><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 font-mono text-xs"><!--[-->aplicar_ley(robo, Ley).<!--]--></button><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 font-mono text-xs"><!--[-->sancion(penal, Tipo).<!--]--></button><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 font-mono text-xs"><!--[-->caso_tipo(contrato, TipoCaso).<!--]--></button><!--]--></div></div></div></div></div><div class="bg-card border rounded-lg p-4 flex flex-col"><div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold">Consola de Salida</h2><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw w-4 h-4"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> Limpiar <!--]--></button></div><div class="bg-background border rounded-md p-4 grow overflow-y-auto"><pre class="font-mono text-sm whitespace-pre-wrap">Ejecuta una consulta para ver los resultados...</pre><!----></div></div></div></div></div><!--astro:end--></astro-island>  </body></html>
