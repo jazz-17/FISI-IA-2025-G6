@@ -100,17 +100,10 @@ export const weeks: Week[] = [
       },
       {
         name: "Implementación Minimax",
-        type: "doc",
+        type: "code",
         url: "/FISI-IA-2025-G6/tictactoe",
         description:
-          "Implementación práctica del algoritmo Minimax en Tic-Tac-Toe",
-      },
-      {
-        name: "Programa Prolog - Tres en Raya",
-        type: "prolog",
-        url: "#",
-        description:
-          "Implementación del juego Tres en Raya usando programación lógica en Prolog",
+          "Implementación práctica del algoritmo Minimax en Tic-Tac-Toe. Poda alfa-beta para optimizar el rendimiento.",
       },
     ],
   },
@@ -133,8 +126,10 @@ export const weeks: Week[] = [
       },
       {
         name: "Random Forest",
-        type: "doc",
+        type: "code",
         url: "https://drive.google.com/file/d/1qMvrvA0W4g6QwGeMQzr12u8heffOwEEZ/view?usp=drive_link",
+        description:
+          "Modelo de clasificación implementado en Python que utiliza el algoritmo Random Forest para predecir la presencia de enfermedad cardíaca",
       },
       {
         name: "Random Forest- código fuente",
@@ -182,13 +177,17 @@ export const weeks: Week[] = [
       },
       {
         name: "Implementación Aprendizaje Supervisado",
-        type: "doc",
+        type: "code",
         url: "https://colab.research.google.com/drive/1IuofstSudmztLOF_3aZle1Bva0obVId_?usp=sharing",
+        description:
+          "Análisis y clasificación del dataset Iris usando varios modelos de machine learning (KNN, Árboles, etc.).",
       },
       {
         name: "Implementación Aprendizaje no Supervisado",
-        type: "doc",
+        type: "code",
         url: "https://colab.research.google.com/drive/1QGLaoB-dFCg37mnJ9w7vhHnpH9uTHFTS?usp=sharing",
+        description:
+          "Análisis del dataset de vinos con PCA. Se normalizan los datos, se reduce la dimensionalidad a 2 componentes principales y se visualiza la distribución de clases.",
       },
     ],
   },
@@ -243,8 +242,8 @@ export const weeks: Week[] = [
       },
       {
         name: "Árbol genealógico",
-        type: "doc",
-        url: "https://docs.google.com/document/d/1SRCcRGPCkd5cmwIuJeqJ3XOMAx8aUq7_mY201ubVAGw/edit?tab=t.0",
+        type: "prolog",
+        id: "arbol-genealogico",
       },
       {
         name: "Sistema experto - Reino Fungi",
@@ -252,10 +251,10 @@ export const weeks: Week[] = [
         url: "https://www.canva.com/design/DAGox8cgOqE/ZgSJ4qhcsELHOk9BMoBReQ/edit",
       },
       {
-        name: "Código fuente - Reino Fungi",
-        type: "doc",
-        url: "https://docs.google.com/document/d/1hpVIRV6PR16fyFdhFT7NZwxOiVsMNfrOurzvEVBz4fc/edit?tab=t.0",
-      },
+        name: "Sistema experto - Reino Fungi",
+        type: "prolog",
+        id: "sistema-experto-reino-fungi",
+      }
     ],
   },
   {
@@ -311,11 +310,6 @@ export const weeks: Week[] = [
         type: "slides",
         url: "https://www.canva.com/design/DAGqG0KSfhc/vCQYbb9O6th56slLc-AkGQ/edit",
       },
-      {
-        name: "Prolog Assignment",
-        type: "prolog",
-        url: "...",
-      },
     ],
   },
   {
@@ -337,14 +331,9 @@ export const weeks: Week[] = [
         url: "https://www.canva.com/design/DAGrN5liS80/G0DL8l_rbs_tH0LbtmI_gQ/edit?utm_content=DAGrN5liS80&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
       },
       {
-        name: "Sistema experto legal",
-        type: "slides",
-        url: "https://docs.google.com/document/d/1O-B_4iVZ5_lD3bLOzpsnrwmTl00aHYXa5Z8n_oekxVk/edit?pli=1&tab=t.0",
-      },
-      {
+        id: "sistema-combinado",
         name: "Sistema experto combinado",
-        type: "slides",
-        url: "https://docs.google.com/document/d/1R0A5C33tvSqkOrB4kKIBcHgGBeQnThsLUtUkwxiqa6I/edit?tab=t.0",
+        type: "prolog",
       },
     ],
   },
@@ -362,6 +351,11 @@ export const weeks: Week[] = [
         name: "Inteligencia Artificial Generativa",
         description:
           "Presentación de las capacidades generativas de IA, incluyendo creación de historias y generación de imágenes, videos y música.",
+      },
+            {
+        id: "sistema-legal",
+        name: "Sistema experto legal",
+        type: "prolog",
       },
     ],
   },

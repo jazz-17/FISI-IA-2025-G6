@@ -7,6 +7,7 @@ import type { Week } from "@/types/course";
 import CanvaIcon from "@/assets/canva-icon.svg";
 import DocsIcon from "@/assets/Docs-icon.svg";
 import SwiLogo from "@/assets/swi_logo.svg";
+import VsCodeLogo from "@/assets/vscode.svg";
 
 const props = defineProps<{
   week: Week;
@@ -21,6 +22,8 @@ const getIconForType = (type: string) => {
       return DocsIcon;
     case "prolog":
       return SwiLogo;
+    case "code":
+      return VsCodeLogo;
     default:
       return DocsIcon;
   }
@@ -35,6 +38,8 @@ const getBackgroundForType = (type: string) => {
       return "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800";
     case "prolog":
       return "bg-orange-50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-800";
+    case "code":
+      return "bg-gray-50 dark:bg-gray-950/20 border-gray-200 dark:border-gray-800";
     default:
       return "bg-gray-50 dark:bg-gray-950/20 border-gray-200 dark:border-gray-800";
   }
@@ -57,9 +62,10 @@ const getTextColorForType = (type: string) => {
 // Handle homework item click
 const handleHomeworkClick = (item: any) => {
   if (item.type === "prolog") {
-    // Navigate to dedicated Prolog page with full interpreter
+    // Navigate to dedicated Prolog page with path-based routing
+    const homeworkId = item.id || "default";
     const basePath = import.meta.env.BASE_URL || "/";
-    window.location.href = `${basePath}prolog?week=${props.week.number}`;
+    window.location.href = `${basePath}prolog/${props.week.number}/${homeworkId}`;
   } else {
     // Open external link
     window.open(item.url, "_blank", "noopener,noreferrer");
@@ -101,7 +107,7 @@ const formatWeekNumber = (num: number) => {
 
       <div class="flex justify-between border-t p-6 gap-16 items-start">
         <!-- Left Column: Topics -->
-        <div class="min-w-[200px]  max-w-[200px]">
+        <div class="min-w-[200px] max-w-[200px]">
           <h4 class="font-medium mb-3 text-primary">Temas:</h4>
           <ul
             class="list-disc list-outside pl-5 space-y-2 text-muted-foreground"
@@ -186,7 +192,6 @@ const formatWeekNumber = (num: number) => {
                       : "Archivo"
                   }}
                 </span>
-
               </div>
             </div>
           </div>

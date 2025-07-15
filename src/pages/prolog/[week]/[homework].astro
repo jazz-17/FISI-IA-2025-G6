@@ -3,19 +3,33 @@ import "@/styles/global.css";
 import PrologInterpreter from "@/components/PrologInterpreter.vue";
 import Layout from "@/layouts/Layout.astro";
 import prologData from "@/data/prologData.ts";
-// Get week and homework parameters for dynamic content
-const week = Astro.url.searchParams.get("week") || "4";
-const homeworkId = Astro.url.searchParams.get("homework") || "default";
 
-console.log("Full URL:", Astro.url.href);
-console.log("Search params:", Astro.url.searchParams.toString());
-console.log("Week:", week);
-console.log("Homework ID:", homeworkId);
+// Generate all possible routes
+export function getStaticPaths() {
+  const paths = [];
+  
+  for (const week of Object.keys(prologData)) {
+    for (const homework of Object.keys(prologData[week])) {
+      paths.push({
+        params: { week, homework }
+      });
+    }
+  }
+  
+  return paths;
+}
+
+// Get week and homework parameters from the URL path
+const { week, homework } = Astro.params;
+
+console.log("Week from path:", week);
+console.log("Homework from path:", homework);
 console.log("Available weeks in prologData:", Object.keys(prologData));
 console.log("Available homework in week", week, ":", Object.keys(prologData[week] || {}));
-console.log("Prolog Data for", week, homeworkId, ":", prologData[week]?.[homeworkId]);
+console.log("Prolog Data for", week, homework, ":", prologData[week]?.[homework]);
+
 // Get the content for the current week and homework
-const currentContent = prologData[week]?.[homeworkId] || {
+const currentContent = prologData[week]?.[homework] || prologData[week]?.["default"] || {
   title: "Programación en Prolog",
   description: "Ejercicios de programación lógica",
   initialProgram: "% Escribe tu código Prolog aquí\n",

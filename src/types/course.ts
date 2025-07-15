@@ -13,9 +13,10 @@ export interface Week {
   description: string;
   topics: string[];
   homework: Array<{
+    id?: string;
     name: string;
     type: string;
-    url: string;
+    url?: string;
     description?: string;
   }>;
 }
