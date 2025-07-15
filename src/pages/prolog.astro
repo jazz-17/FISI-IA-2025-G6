@@ -1,0 +1,238 @@
+---
+import "@/styles/global.css";
+import PrologInterpreter from "@/components/PrologInterpreter.vue";
+import Layout from "@/layouts/Layout.astro";
+
+// Get week parameter for dynamic content
+const week = Astro.url.searchParams.get("week") || "4";
+interface PrologWeekContent {
+  title: string;
+  description: string;
+  initialProgram: string;
+  sampleQueries?: string[];
+}
+// Define content based on week
+const weekContent: Record<string, PrologWeekContent> = {
+  "4": {
+    title: "Semana 4 - Tres en Raya con Prolog",
+    description: "Implementación del juego Tres en Raya usando programación lógica en Prolog",
+    initialProgram: `% Tres en Raya (Tic-Tac-Toe) en Prolog
+% Representación del tablero: lista de 9 elementos
+% Posiciones: 1-9, valores: x, o, o vacío (representado como número)
+
+% Tablero inicial vacío
+tablero_inicial([1,2,3,4,5,6,7,8,9]).
+
+% Mostrar el tablero
+mostrar_tablero([A,B,C,D,E,F,G,H,I]) :-
+    format(' ~w | ~w | ~w ~n', [A,B,C]),
+    format('-----------~n'),
+    format(' ~w | ~w | ~w ~n', [D,E,F]),
+    format('-----------~n'),
+    format(' ~w | ~w | ~w ~n', [G,H,I]).
+
+% Hacer un movimiento
+movimiento(Pos, Jugador, TableroAntes, TableroDespues) :-
+    nth1(Pos, TableroAntes, Pos),  % La posición debe estar vacía
+    replace(TableroAntes, Pos, Pos, Jugador, TableroDespues).
+
+% Reemplazar elemento en lista
+replace([_|T], 1, _, X, [X|T]).
+replace([H|T], N, Old, X, [H|R]) :-
+    N > 1,
+    N1 is N - 1,
+    replace(T, N1, Old, X, R).
+
+% Verificar ganador
+ganador(Tablero, Jugador) :-
+    % Filas
+    (   nth1(1, Tablero, Jugador), nth1(2, Tablero, Jugador), nth1(3, Tablero, Jugador)
+    ;   nth1(4, Tablero, Jugador), nth1(5, Tablero, Jugador), nth1(6, Tablero, Jugador)
+    ;   nth1(7, Tablero, Jugador), nth1(8, Tablero, Jugador), nth1(9, Tablero, Jugador)
+    % Columnas
+    ;   nth1(1, Tablero, Jugador), nth1(4, Tablero, Jugador), nth1(7, Tablero, Jugador)
+    ;   nth1(2, Tablero, Jugador), nth1(5, Tablero, Jugador), nth1(8, Tablero, Jugador)
+    ;   nth1(3, Tablero, Jugador), nth1(6, Tablero, Jugador), nth1(9, Tablero, Jugador)
+    % Diagonales
+    ;   nth1(1, Tablero, Jugador), nth1(5, Tablero, Jugador), nth1(9, Tablero, Jugador)
+    ;   nth1(3, Tablero, Jugador), nth1(5, Tablero, Jugador), nth1(7, Tablero, Jugador)
+    ).
+
+% Verificar empate
+empate(Tablero) :-
+    \\+ member(1, Tablero),
+    \\+ member(2, Tablero),
+    \\+ member(3, Tablero),
+    \\+ member(4, Tablero),
+    \\+ member(5, Tablero),
+    \\+ member(6, Tablero),
+    \\+ member(7, Tablero),
+    \\+ member(8, Tablero),
+    \\+ member(9, Tablero).
+
+% Movimientos válidos
+movimientos_validos(Tablero, Movimientos) :-
+    findall(Pos, (member(Pos, Tablero), number(Pos)), Movimientos).
+
+% Ejemplo de juego
+juego_ejemplo :-
+    tablero_inicial(T0),
+    mostrar_tablero(T0),
+    movimiento(5, x, T0, T1),
+    mostrar_tablero(T1),
+    movimiento(1, o, T1, T2),
+    mostrar_tablero(T2).`,
+    sampleQueries: [
+      'tablero_inicial(X).',
+      'mostrar_tablero([x,o,3,4,x,6,7,8,o]).',
+      'ganador([x,x,x,4,5,6,7,8,9], x).',
+      'movimientos_validos([x,o,3,4,x,6,7,8,o], M).',
+      'juego_ejemplo.'
+    ]
+  },
+  "13": {
+    title: "Semana 13 - Asignación Prolog Avanzada",
+    description: "Programación lógica aplicada a redes generativas adversarias",
+    initialProgram: `% Prolog Assignment - Week 13
+% Sistemas de clasificación de datos generativos
+
+% Base de conocimiento sobre tipos de redes generativas
+red_generativa(gan, 'Generative Adversarial Network').
+red_generativa(vae, 'Variational Autoencoder').
+red_generativa(flow, 'Normalizing Flow').
+
+% Características de diferentes arquitecturas
+caracteristica(gan, adversarial_training).
+caracteristica(gan, discriminator).
+caracteristica(gan, generator).
+caracteristica(vae, latent_space).
+caracteristica(vae, encoder_decoder).
+caracteristica(flow, invertible_transformations).
+
+% Aplicaciones por tipo de red
+aplicacion(gan, generacion_imagenes).
+aplicacion(gan, transferencia_estilo).
+aplicacion(vae, compresion_datos).
+aplicacion(vae, generacion_variacional).
+aplicacion(flow, density_estimation).
+
+% Reglas para determinar la mejor arquitectura
+mejor_arquitectura_para(Aplicacion, Red) :-
+    aplicacion(Red, Aplicacion),
+    red_generativa(Red, _).
+
+% Predicado para listar todas las características de una red
+listar_caracteristicas(Red, Caracteristicas) :-
+    findall(C, caracteristica(Red, C), Caracteristicas).
+
+% Predicado para encontrar redes con una característica específica
+redes_con_caracteristica(Caracteristica, Redes) :-
+    findall(Red, caracteristica(Red, Caracteristica), Redes).`,
+    sampleQueries: [
+      'red_generativa(X, Y).',
+      'mejor_arquitectura_para(generacion_imagenes, X).',
+      'listar_caracteristicas(gan, C).',
+      'redes_con_caracteristica(adversarial_training, R).',
+      'aplicacion(X, transferencia_estilo).'
+    ]
+  },
+  "14": {
+    title: "Semana 14 - Sistema Experto Legal",
+    description: "Implementación de sistemas expertos para el dominio legal y ética en IA",
+    initialProgram: `% Sistema Experto Legal - Ética en IA
+% Base de conocimiento sobre normativas y principios éticos
+
+% Principios éticos fundamentales en IA
+principio_etico(transparencia).
+principio_etico(equidad).
+principio_etico(privacidad).
+principio_etico(responsabilidad).
+principio_etico(no_maleficencia).
+
+% Normativas legales por región
+normativa(gdpr, europa, proteccion_datos).
+normativa(ccpa, california, privacidad_consumidor).
+normativa(ai_act, europa, regulacion_ia).
+normativa(lei_lgpd, brasil, proteccion_datos).
+
+% Tipos de violaciones éticas
+violacion(sesgo_algoritmico, equidad).
+violacion(uso_indebido_datos, privacidad).
+violacion(falta_explicabilidad, transparencia).
+violacion(decision_automatizada_incorrecta, responsabilidad).
+
+% Consecuencias legales
+consecuencia(multa_economica).
+consecuencia(suspension_servicio).
+consecuencia(auditoria_obligatoria).
+consecuencia(demanda_civil).
+
+% Reglas para evaluar compliance
+cumple_normativa(Sistema, Normativa) :-
+    normativa(Normativa, Region, Tipo),
+    sistema_en_region(Sistema, Region),
+    implementa_controles(Sistema, Tipo).
+
+% Reglas para determinar violaciones
+es_violacion_etica(Accion, Principio) :-
+    violacion(Accion, Principio),
+    principio_etico(Principio).
+
+% Predicado para determinar riesgo legal
+riesgo_legal(Sistema, alto) :-
+    violacion_detectada(Sistema, _),
+    normativa_aplicable(Sistema, _).
+
+riesgo_legal(Sistema, medio) :-
+    normativa_aplicable(Sistema, _),
+    \\+ violacion_detectada(Sistema, _).
+
+riesgo_legal(Sistema, bajo) :-
+    \\+ normativa_aplicable(Sistema, _).
+
+% Hechos de ejemplo
+sistema_en_region(chatbot_medico, europa).
+implementa_controles(chatbot_medico, regulacion_ia).
+violacion_detectada(sistema_credito, sesgo_algoritmico).
+normativa_aplicable(sistema_credito, ai_act).`,
+    sampleQueries: [
+      'principio_etico(X).',
+      'es_violacion_etica(sesgo_algoritmico, X).',
+      'riesgo_legal(chatbot_medico, Nivel).',
+      'cumple_normativa(chatbot_medico, X).',
+      'normativa(X, europa, Y).'
+    ]
+  }
+};
+---
+
+<Layout>
+  <!-- Load Tau Prolog before the component -->
+  <script is:inline src="/src/prolog/tau-prolog.js"></script>
+  <script is:inline>
+    // Define missing tau_file_system if not present
+    if (typeof tau_file_system === "undefined") {
+      window.tau_file_system = {
+        files: {},
+        open: function (path, mode, callback) {
+          if (callback) callback(null, path);
+        },
+        read: function (path, callback) {
+          if (callback) callback(null, this.files[path] || "");
+        },
+        write: function (path, data, callback) {
+          this.files[path] = data;
+          if (callback) callback(null);
+        },
+      };
+    }
+  </script>
+
+  <PrologInterpreter
+    client:load
+    title={weekContent[week].title}
+    description={weekContent[week].description}
+    initialProgram={weekContent[week].initialProgram}
+    sampleQueries={weekContent[week].sampleQueries}
+  />
+</Layout>

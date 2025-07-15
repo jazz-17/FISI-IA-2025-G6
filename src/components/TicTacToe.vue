@@ -2,6 +2,7 @@
 import { ref, computed, watch } from "vue";
 import { Loader } from "lucide-vue-next";
 import { Switch } from "@/components/ui/switch"; // Import Switch
+import GoBack from '@/components/ui/utils/GoBack.vue';
 
 // --- Constants ---
 const PLAYER_X = "X"; // Human (MAX)
@@ -298,12 +299,12 @@ const minimaxAlphaBeta = (
 </script>
 <template>
   <div class="flex grow">
-    <div
-      class="grow flex flex-col justify-center p-6 text-center space-y-4 bg-stone-50 dark:bg-slate-900"
-    >
-      <h1
-        class="text-4xl font-bold tracking-tight text-foreground dark:text-slate-100"
-      >
+    <div class="absolute p-6">
+      <GoBack></GoBack>
+
+    </div>
+    <div class="grow flex flex-col justify-center p-6 text-center space-y-4 bg-stone-50 dark:bg-slate-900">
+      <h1 class="text-4xl font-bold tracking-tight text-foreground dark:text-slate-100">
         Tic-Tac-Toe
       </h1>
       <!-- Subtitle updated slightly -->
@@ -312,9 +313,7 @@ const minimaxAlphaBeta = (
       </h3>
 
       <!-- Status Message -->
-      <div
-        class="status text-lg block font-medium text-foreground dark:text-slate-200 min-h-[1.75rem]"
-      >
+      <div class="status text-lg block font-medium text-foreground dark:text-slate-200 min-h-[1.75rem]">
         <div class="flex justify-center items-center">
           {{ statusMessage }}
           <span v-show="isAiEvaluating" class="animate-spin ml-2">
@@ -329,71 +328,47 @@ const minimaxAlphaBeta = (
         :class="{
           'opacity-60': isGameOver,
           'cursor-default border-primary/50': isAiEvaluating,
-        }"
-      >
-        <div
-          v-for="(cell, index) in board"
-          :key="index"
+        }">
+        <div v-for="(cell, index) in board" :key="index"
           class="cell flex items-center justify-center aspect-square bg-background dark:bg-slate-800 border border-border dark:border-slate-700 rounded-md transition-colors duration-150 ease-in-out"
           :class="{
             'cursor-pointer hover:bg-muted/50 dark:hover:bg-slate-700/60':
               cell === '' && !isGameOver && !isAiEvaluating,
             'cursor-not-allowed': cell !== '' || isGameOver || isAiEvaluating,
-          }"
-          @click="makeMove(index)"
-        >
-          <span
-            v-if="isAiEvaluating && getEvaluationScore(index) !== null"
+          }" @click="makeMove(index)">
+          <span v-if="isAiEvaluating && getEvaluationScore(index) !== null"
             class="ai-score text-xs font-mono text-muted-foreground dark:text-slate-400 opacity-90"
-            :title="`Score: ${getEvaluationScore(index)}`"
-          >
+            :title="`Score: ${getEvaluationScore(index)}`">
             {{ getEvaluationScore(index) }}
           </span>
-          <span
-            v-else
-            class="marker text-5xl md:text-6xl font-bold select-none"
-            :class="[
-              cell === 'X' ? 'text-blue-600 dark:text-blue-400' : '',
-              cell === 'O' ? 'text-red-600 dark:text-red-400' : '',
-            ]"
-          >
+          <span v-else class="marker text-5xl md:text-6xl font-bold select-none" :class="[
+            cell === 'X' ? 'text-blue-600 dark:text-blue-400' : '',
+            cell === 'O' ? 'text-red-600 dark:text-red-400' : '',
+          ]">
             {{ cell }}
           </span>
         </div>
       </div>
 
       <!-- Algorithm Toggle Switch -->
-      <div
-        class="flex items-center justify-center space-x-2"
-        :class="{ 'opacity-50 cursor-not-allowed': isAiEvaluating }"
-      >
-        <Switch
-          id="alpha-beta-switch"
-          v-model="useAlphaBetaPruning"
-          :disabled="isAiEvaluating"
-          aria-label="Toggle Alpha-Beta Pruning"
-        />
-        <label
-          for="alpha-beta-switch"
-          class="text-sm text-muted-foreground dark:text-slate-400"
-          :class="{ 'cursor-not-allowed': isAiEvaluating }"
-        >
+      <div class="flex items-center justify-center space-x-2"
+        :class="{ 'opacity-50 cursor-not-allowed': isAiEvaluating }">
+        <Switch id="alpha-beta-switch" v-model="useAlphaBetaPruning" :disabled="isAiEvaluating"
+          aria-label="Toggle Alpha-Beta Pruning" />
+        <label for="alpha-beta-switch" class="text-sm text-muted-foreground dark:text-slate-400"
+          :class="{ 'cursor-not-allowed': isAiEvaluating }">
           Usar Optimización Alpha-Beta
         </label>
       </div>
-      <p
-        class="text-sm font-semibold text-muted-foreground dark:text-slate-500 mt-2"
-      >
+      <p class="text-sm font-semibold text-muted-foreground dark:text-slate-500 mt-2">
         Nodos evaluados (último movimiento AI):
         <span class="font-bold">{{ displayedNodesVisited }}</span>
       </p>
       <!-- Reset Button & Node Count -->
       <div>
-        <button
-          @click="resetGame"
+        <button @click="resetGame"
           class="reset-button inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background dark:ring-offset-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
-          :disabled="isAiEvaluating"
-        >
+          :disabled="isAiEvaluating">
           Reiniciar Juego
         </button>
       </div>
