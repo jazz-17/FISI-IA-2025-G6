@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árbol Genealógico de Carol</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            overflow-x: auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .generation {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-left: 5px solid #007bff;
+        }
+        
+        .generation-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .family-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .couple {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #dee2e6;
+            min-width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .couple:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .person {
+            padding: 8px 12px;
+            margin: 3px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9em;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .person:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .male {
+            background: linear-gradient(145deg, #4dabf7, #339af0);
+            color: white;
+            border: 2px solid #1c7ed6;
+        }
+        
+        .female {
+            background: linear-gradient(145deg, #f783ac, #e64980);
+            color: white;
+            border: 2px solid #c2185b;
+        }
+        
+        .carol {
+            background: linear-gradient(145deg, #ffd43b, #fab005) !important;
+            color: #495057 !important;
+            border: 3px solid #f08c00 !important;
+            font-weight: bold;
+            font-size: 1.1em;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(240, 140, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(240, 140, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(240, 140, 0, 0); }
+        }
+        
+        .children {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #6c757d;
+        }
+        
+        .children-title {
+            font-size: 0.8em;
+            color: #6c757d;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .nuclear-family {
+            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
+            border: 3px solid #f39c12;
+            position: relative;
+        }
+        
+        .nuclear-family::before {
+            content: "👑 FAMILIA PRINCIPAL";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f39c12;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin: 5px 10px;
+            font-size: 0.9em;
+        }
+        
+        .tree-lines {
+            position: relative;
+        }
+        
+        .connection-line {
+            position: absolute;
+            border-left: 2px solid #6c757d;
+            height: 30px;
+            left: 50%;
+            top: -30px;
+        }
+        
+        @media (max-width: 768px) {
+            .family-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .couple {
+                min-width: 280px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌳 Árbol Genealógico de Carol 🌳</h1>
+        
+        <!-- BISABUELOS -->
+        <div class="generation">
+            <div class="generation-title">Bisabuelos</div>
+            <div class="family-group">
+                <div class="couple">
+                    <div class="person male">Felipe</div>
+                    <div class="person female">Esperanza</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Eduardo</div>
+                        <div class="person female">Esperanza Jr.</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Ricardo</div>
+                    <div class="person female">Carmela</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Margarita</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Antonio</div>
+                    <div class="person female">Rosa</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Raúl</div>
+                        <div class="person male">Alberto</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Miguel</div>
+                    <div class="person female">Elena</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Olga</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABUELOS -->
+        <div class="generation">
+            <div class="generation-title">Abuelos</div>
+            <div class="family-group">
+                <div class="couple">
+                    <div class="person male">Eduardo</div>
+                    <div class="person female">Margarita</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Reyna</div>
+                        <div class="person female">Norma</div>
+                        <div class="person male">Roberto</div>
+                        <div class="person female">Patricia</div>
+                        <div class="person male">Sergio</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Raúl</div>
+                    <div class="person female">Olga</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Wilber Sr.</div>
+                        <div class="person male">Ernesto</div>
+                        <div class="person female">Claudia</div>
+                        <div class="person male">Mario</div>
+                        <div class="person female">Teresa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PADRES Y TÍOS -->
+        <div class="generation">
+            <div class="generation-title">Padres y Tíos</div>
+            <div class="family-group">
+                <div class="couple nuclear-family">
+                    <div class="person male">Wilber Sr.</div>
+                    <div class="person female">Reyna</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female carol">CAROL ⭐</div>
+                        <div class="person female">Lisbeth</div>
+                        <div class="person male">Wilber Jr.</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Carlos</div>
+                    <div class="person female">Norma</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Karla</div>
+                        <div class="person female">Valeria</div>
+                        <div class="person male">Daniel</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Roberto</div>
+                    <div class="person female">Ana</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Miguel Jr.</div>
+                        <div class="person female">Cristina</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Luis</div>
+                    <div class="person female">Patricia</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Laura</div>
+                        <div class="person male">Andrés</div>
+                        <div class="person female">Natalia</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Sergio</div>
+                    <div class="person female">Mónica</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Joaquín</div>
+                        <div class="person male">Sebastián</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Ernesto</div>
+                    <div class="person female">Silvia</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Diego</div>
+                        <div class="person male">Fabián</div>
+                        <div class="person female">Camila</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Pedro</div>
+                    <div class="person female">Claudia</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Alejandra</div>
+                        <div class="person male">Ricardo Jr.</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Mario</div>
+                    <div class="person female">Gloria</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person male">Emilio</div>
+                        <div class="person female">Sofía</div>
+                        <div class="person male">Mateo</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Fernando</div>
+                    <div class="person female">Teresa</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Isabella</div>
+                        <div class="person female">Gabriela</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Alberto</div>
+                    <div class="person female">Inés</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Jennifer</div>
+                        <div class="person male">Alexis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TERCERA GENERACIÓN (NIETOS) -->
+        <div class="generation">
+            <div class="generation-title">Tercera Generación</div>
+            <div class="family-group">
+                <div class="couple">
+                    <div class="person female">Karla</div>
+                    <div class="children">
+                        <div class="children-title">Hijo:</div>
+                        <div class="person male">Nicolás</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Miguel Jr.</div>
+                    <div class="children">
+                        <div class="children-title">Hija:</div>
+                        <div class="person female">Valentina</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person female">Laura</div>
+                    <div class="children">
+                        <div class="children-title">Hijo:</div>
+                        <div class="person male">Santiago</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Diego</div>
+                    <div class="children">
+                        <div class="children-title">Hija:</div>
+                        <div class="person female">Amanda</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person female">Alejandra</div>
+                    <div class="children">
+                        <div class="children-title">Hijo:</div>
+                        <div class="person male">Leonardo</div>
+                    </div>
+                </div>
+                <div class="couple">
+                    <div class="person male">Arturo</div>
+                    <div class="person female">Esperanza Jr.</div>
+                    <div class="children">
+                        <div class="children-title">Hijos:</div>
+                        <div class="person female">Susana</div>
+                        <div class="person male">Kevin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-title">Leyenda:</div>
+            <div class="legend-item"><span class="person male">Hombre</span></div>
+            <div class="legend-item"><span class="person female">Mujer</span></div>
+            <div class="legend-item"><span class="person carol">Carol (Persona Principal)</span></div>
+        </div>
+    </div>
+</body>
+</html>

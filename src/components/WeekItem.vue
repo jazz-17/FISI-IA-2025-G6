@@ -8,7 +8,7 @@ import CanvaIcon from "@/assets/canva-icon.svg";
 import DocsIcon from "@/assets/Docs-icon.svg";
 import SwiLogo from "@/assets/swi_logo.svg";
 import VsCodeLogo from "@/assets/vscode.svg";
-
+import GraphIcon from "@/assets/graph.svg";
 const props = defineProps<{
   week: Week;
 }>();
@@ -24,6 +24,8 @@ const getIconForType = (type: string) => {
       return SwiLogo;
     case "code":
       return VsCodeLogo;
+    case "graph":
+      return GraphIcon;
     default:
       return DocsIcon;
   }
@@ -40,6 +42,8 @@ const getBackgroundForType = (type: string) => {
       return "bg-orange-50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-800";
     case "code":
       return "bg-gray-50 dark:bg-gray-950/20 border-gray-200 dark:border-gray-800";
+    case "graph":
+      return "bg-purple-50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-800";
     default:
       return "bg-gray-50 dark:bg-gray-950/20 border-gray-200 dark:border-gray-800";
   }
@@ -179,6 +183,8 @@ const formatWeekNumber = (num: number) => {
                       ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
                       : item.type === 'prolog'
                       ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400'
+                      : item.type === 'graph'
+                      ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'
                       : 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400',
                   ]"
                 >
@@ -189,6 +195,8 @@ const formatWeekNumber = (num: number) => {
                       ? "Documento"
                       : item.type === "prolog"
                       ? "Programa Prolog"
+                      : item.type === "graph"
+                      ? "Gráfico"
                       : "Archivo"
                   }}
                 </span>

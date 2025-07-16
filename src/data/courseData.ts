@@ -246,6 +246,11 @@ export const weeks: Week[] = [
         id: "arbol-genealogico",
       },
       {
+        name: "Árbol genealógico",
+        type: "graph",
+        url: "/FISI-IA-2025-G6/arbol_genealogico_carol.html",
+      },
+      {
         name: "Sistema experto - Reino Fungi",
         type: "slides",
         url: "https://www.canva.com/design/DAGox8cgOqE/ZgSJ4qhcsELHOk9BMoBReQ/edit",
@@ -254,7 +259,12 @@ export const weeks: Week[] = [
         name: "Sistema experto - Reino Fungi",
         type: "prolog",
         id: "sistema-experto-reino-fungi",
-        description:"Modela la clasificación científica (taxonomía) de los hongos. Permite identificar especies según sus características y consultar sus propiedades, como si son comestibles, tóxicas o tienen usos medicinales."
+        description:"Modela la clasificación científica de los hongos. Permite identificar especies según sus características y consultar sus propiedades."
+      },
+      {
+        name: "Reino Fungi",
+        type: "graph",
+        url: "/FISI-IA-2025-G6/fungi_taxonomy_chart.html",
       },
     ],
   },
@@ -338,6 +348,11 @@ export const weeks: Week[] = [
         description:
           "Sistema que combina un árbol genealógico y un sistema experto de paraderos de transporte público. Permite consultar relaciones familiares y ubicaciones de paraderos.",
       },
+      {
+        name: "Sistema de Paraderos",
+        type: "graph",
+        url: "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
+      }
     ],
   },
   {
@@ -362,6 +377,11 @@ export const weeks: Week[] = [
         description:
           "Sistema que analiza casos legales para descubrir estadísticas, identificar patrones y marcar a individuos de alto riesgo según factores como la edad y  el tipo de caso.",
       },
+      {
+        name: "Sistema experto legal",
+        type: "graph",
+        url: "https://www.canva.com/design/DAGtNJJcCh4/euqDKpy_08GvLZmpFVpxOg/edit",
+      }
     ],
   },
   {
