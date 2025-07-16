@@ -19,7 +19,7 @@ const homeworkContent: Record<string, Record<string, PrologContent>> = {
 % SISTEMA EXPERTO DEL REINO FUNGI
 % ===============================================
 
-
+:- use_module(library(lists)).
 % DIRECTIVAS PARA EVITAR WARNINGS
 :- discontiguous(filum/1).
 :- discontiguous(clase/1).
@@ -601,7 +601,7 @@ buscar_por_filum(Filum, Clases) :-
 % ÁRBOL GENEALÓGICO DE CAROL
 % ===============================================
 
-
+:- use_module(library(lists)).
 % DIRECTIVAS PARA EVITAR WARNINGS
 :- discontiguous(varon/1).
 :- discontiguous(mujer/1).
@@ -965,8 +965,8 @@ total_primas(N,Y) :- findall(X, prima(X,Y), Lista), length(Lista,N).
   },
   "14": {
     "sistema-combinado": {
-      title: "Sistema Experto Combinado",
-      description: "Arbol genealogico y buses",
+      title: "Sistema Experto de Paraderos y Árbol Genealógico",
+      description: "Arbol genealogico y paraderos de transporte público",
       imageUrl:
         "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
       initialProgram: `
@@ -974,7 +974,7 @@ total_primas(N,Y) :- findall(X, prima(X,Y), Lista), length(Lista,N).
 % SISTEMA EXPERTO DE PARADEROS - TRANSPORTE PÚBLICO (VERSIÓN MEJORADA)
 % ===============================================
 
-
+:- use_module(library(lists)).
 % HECHOS BASE: Definición de paraderos y sus posiciones
 paradero(ventanilla, 1).
 paradero(marquez, 2).
@@ -2432,6 +2432,9 @@ descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDesce
       initialProgram: `
 % ================================================================
 % SISTEMA EXPERTO LEGAL AVANZADO% ================================================================
+:- use_module(library(date)).
+:- use_module(library(aggregate)).
+:- use_module(library(lists)).
 :- dynamic(persona/4).
 :- dynamic(caso/6).
 :- dynamic(estadistica_cache/3).

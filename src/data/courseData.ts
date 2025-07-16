@@ -333,8 +333,10 @@ export const weeks: Week[] = [
       },
       {
         id: "sistema-combinado",
-        name: "Sistema experto combinado",
+        name: "Sistema Experto de Paraderos y Árbol Genealógico",
         type: "prolog",
+        description:
+          "Sistema que combina un árbol genealógico y un sistema experto de paraderos de transporte público. Permite consultar relaciones familiares y ubicaciones de paraderos.",
       },
     ],
   },
