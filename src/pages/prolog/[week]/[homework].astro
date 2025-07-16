@@ -7,7 +7,6 @@ import prologData from "@/data/prologData.ts";
 // Generate all possible routes
 export function getStaticPaths() {
   const paths = [];
-  
   for (const week of Object.keys(prologData)) {
     for (const homework of Object.keys(prologData[week])) {
       paths.push({
@@ -22,12 +21,6 @@ export function getStaticPaths() {
 // Get week and homework parameters from the URL path
 const { week, homework } = Astro.params;
 
-console.log("Week from path:", week);
-console.log("Homework from path:", homework);
-console.log("Available weeks in prologData:", Object.keys(prologData));
-console.log("Available homework in week", week, ":", Object.keys(prologData[week] || {}));
-console.log("Prolog Data for", week, homework, ":", prologData[week]?.[homework]);
-
 // Get the content for the current week and homework
 const currentContent = prologData[week]?.[homework] || prologData[week]?.["default"] || {
   title: "Programación en Prolog",
@@ -39,7 +32,7 @@ const currentContent = prologData[week]?.[homework] || prologData[week]?.["defau
 
 <Layout>
   <!-- Load Tau Prolog before the component -->
-  <script is:inline src="/src/prolog/tau-prolog.js"></script>
+  <script is:inline src="/FISI-IA-2025-G6/tau-prolog.js"></script>
   <script is:inline>
     // Define missing tau_file_system if not present
     if (typeof tau_file_system === "undefined") {
@@ -65,5 +58,7 @@ const currentContent = prologData[week]?.[homework] || prologData[week]?.["defau
     description={currentContent.description}
     initialProgram={currentContent.initialProgram}
     sampleQueries={currentContent.sampleQueries}
+    sourceCodeUrl={currentContent.sourceCodeUrl}
+    imageUrl={currentContent.imageUrl}
   />
 </Layout>

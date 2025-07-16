@@ -254,7 +254,8 @@ export const weeks: Week[] = [
         name: "Sistema experto - Reino Fungi",
         type: "prolog",
         id: "sistema-experto-reino-fungi",
-      }
+        description:"Modela la clasificación científica (taxonomía) de los hongos. Permite identificar especies según sus características y consultar sus propiedades, como si son comestibles, tóxicas o tienen usos medicinales."
+      },
     ],
   },
   {
@@ -352,10 +353,12 @@ export const weeks: Week[] = [
         description:
           "Presentación de las capacidades generativas de IA, incluyendo creación de historias y generación de imágenes, videos y música.",
       },
-            {
+      {
         id: "sistema-legal",
         name: "Sistema experto legal",
         type: "prolog",
+        description:
+          "Sistema que analiza casos legales para descubrir estadísticas, identificar patrones y marcar a individuos de alto riesgo según factores como la edad y  el tipo de caso.",
       },
     ],
   },

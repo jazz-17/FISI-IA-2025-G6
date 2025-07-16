@@ -7,95 +7,6 @@ interface PrologContent {
   imageUrl?: string;
 }
 const homeworkContent: Record<string, Record<string, PrologContent>> = {
-  "4": {
-    "tres-en-raya": {
-      title: "Tres en Raya con Prolog",
-      description:
-        "Implementación del juego Tres en Raya usando programación lógica",
-      initialProgram: `% Tres en Raya - Tablero y movimientos
-% Representación del tablero como lista de 9 posiciones
-% 1-9 para posiciones vacías, x/o para jugadores
-
-% Ejemplo de tablero inicial
-tablero_inicial([1,2,3,4,5,6,7,8,9]).
-
-% Mostrar tablero con write()
-mostrar_tablero([A,B,C,D,E,F,G,H,I]) :-
-    write('Tablero actual:'), nl,
-    write(' '), write(A), write(' | '), write(B), write(' | '), write(C), nl,
-    write('-----------'), nl,
-    write(' '), write(D), write(' | '), write(E), write(' | '), write(F), nl,
-    write('-----------'), nl,
-    write(' '), write(G), write(' | '), write(H), write(' | '), write(I), nl.
-
-% Hacer un movimiento
-hacer_movimiento(Pos, Jugador, TableroAntes, TableroDespues) :-
-    nth1(Pos, TableroAntes, Pos),  % Posición debe estar vacía
-    nth1(Pos, TableroDespues, Jugador),  % Colocar jugador
-    replace_nth1(Pos, TableroAntes, Jugador, TableroDespues).
-
-% Verificar victoria
-ganar([X,X,X,_,_,_,_,_,_], X) :- X \\= '_'.
-ganar([_,_,_,X,X,X,_,_,_], X) :- X \\= '_'.
-ganar([_,_,_,_,_,_,X,X,X], X) :- X \\= '_'.
-
-% Mensaje de victoria
-anunciar_victoria(Jugador) :-
-    write('¡Felicidades! El jugador '), 
-    write(Jugador), 
-    write(' ha ganado!'), nl.`,
-      sampleQueries: [
-        "tablero_inicial(T).",
-        "mostrar_tablero([x,o,3,4,x,6,7,8,o]).",
-        "ganar([x,x,x,4,5,6,7,8,9], Ganador).",
-        "anunciar_victoria(x).",
-        "hacer_movimiento(1, x, [1,2,3,4,5,6,7,8,9], Nuevo).",
-      ],
-    },
-    "minimax-prolog": {
-      title: "Algoritmo Minimax en Prolog",
-      description:
-        "Implementación del algoritmo Minimax para juegos de estrategia",
-      initialProgram: `% Algoritmo Minimax en Prolog
-% Evaluación de posiciones de juego
-
-% Evaluar posición final
-evaluar_posicion(Tablero, 100) :- ganar(Tablero, x).
-evaluar_posicion(Tablero, -100) :- ganar(Tablero, o).
-evaluar_posicion(Tablero, 0) :- tablero_lleno(Tablero).
-
-% Minimax para jugador maximizador
-minimax(Tablero, Profundidad, true, Valor) :-
-    (evaluar_posicion(Tablero, Valor) ; Profundidad = 0), !.
-
-minimax(Tablero, Profundidad, true, MejorValor) :-
-    Profundidad > 0,
-    obtener_movimientos(Tablero, Movimientos),
-    evaluar_movimientos(Movimientos, Tablero, Profundidad, true, -1000, MejorValor).
-
-% Obtener movimientos posibles
-obtener_movimientos(Tablero, Movimientos) :-
-    findall(Pos, (nth1(Pos, Tablero, Pos), integer(Pos)), Movimientos).`,
-      sampleQueries: [
-        "evaluar_posicion([x,x,x,4,5,6,7,8,9], Valor).",
-        "obtener_movimientos([x,2,3,o,5,6,7,8,9], Movs).",
-        "minimax([x,2,3,4,5,6,7,8,9], 2, true, Valor).",
-      ],
-    },
-    default: {
-      title: "Programación Lógica con Prolog",
-      description: "Ejercicios básicos de programación lógica",
-      initialProgram: `% Ejemplo básico de hechos y reglas
-likes(sam, salad).
-likes(dean, pie).
-likes(sam, apples).
-
-% Reglas
-healthy_choice(Person) :-
-    likes(Person, salad).`,
-      sampleQueries: ["likes(sam, X).", "healthy_choice(sam)."],
-    },
-  },
   "10": {
     "sistema-experto-reino-fungi": {
       title: "Sistema Experto - Reino Fungi",
@@ -1052,65 +963,1463 @@ total_primas(N,Y) :- findall(X, prima(X,Y), Lista), length(Lista,N).
       ],
     },
   },
-  "13": {
-    "gans-classification": {
-      title: "Clasificación con GANs en Prolog",
-      description:
-        "Sistema de clasificación usando lógica para redes generativas",
-      initialProgram: `% Sistema de clasificación para GANs
-% Clasificación de imágenes generadas
-
-imagen_tipo(real, natural).
-imagen_tipo(generada, artificial).
-
-% Calidad de imagen
-calidad_imagen(alta) :- resolucion(X), X > 512.
-calidad_imagen(media) :- resolucion(X), X >= 256, X =< 512.
-calidad_imagen(baja) :- resolucion(X), X < 256.
-
-% Clasificador
-clasificar_imagen(Tipo, Calidad) :-
-    imagen_tipo(Origen, Tipo),
-    calidad_imagen(Calidad).`,
-      sampleQueries: [
-        "imagen_tipo(real, X).",
-        "calidad_imagen(alta).",
-        "clasificar_imagen(artificial, Calidad).",
-      ],
-    },
-  },
   "14": {
     "sistema-combinado": {
       title: "Sistema Experto Combinado",
-      description: "Sistema que combina múltiples dominios de conocimiento",
-      initialProgram: `% Sistema Experto Combinado
-% Combinación de dominios: legal, médico, financiero
+      description: "Arbol genealogico y buses",
+      imageUrl:
+        "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
+      initialProgram: `
+% ===============================================
+% SISTEMA EXPERTO DE PARADEROS - TRANSPORTE PÚBLICO (VERSIÓN MEJORADA)
+% ===============================================
 
-% Dominio legal
-responsabilidad_legal(persona, acto_negligente).
-responsabilidad_legal(empresa, acto_corporativo).
 
-% Dominio médico  
-diagnostico(sintoma_fiebre, gripe).
-diagnostico(sintoma_dolor_cabeza, migrana).
+% HECHOS BASE: Definición de paraderos y sus posiciones
+paradero(ventanilla, 1).
+paradero(marquez, 2).
+paradero(urb_industrial_oquendo, 3).
+paradero(carmen_de_la_legua_reynoso, 4).
+paradero(puente_colonial, 5).
+paradero(san_jose, 6).
+paradero(unmsm, 7).
+paradero(universitaria, 8).
 
-% Dominio financiero
-riesgo_crediticio(alto, ingresos_bajos).
-riesgo_crediticio(bajo, ingresos_altos).
 
-% Reglas combinadas
-evaluacion_integral(Persona, Resultado) :-
-    responsabilidad_legal(Persona, Legal),
-    riesgo_crediticio(Riesgo, _),
-    combinar_factores(Legal, Riesgo, Resultado).
+% ===============================================
+% HECHOS: GENEALOGÍA
+% Formato: progenitor(Progenitor, Hijo).
+% ===============================================
 
-combinar_factores(acto_negligente, alto, riesgo_total).
-combinar_factores(acto_corporativo, bajo, riesgo_moderado).`,
+progenitor(felix, axel).
+progenitor(aurora, axel).
+progenitor(felix, hugo).
+progenitor(aurora, hugo).
+progenitor(indira, bianca).
+progenitor(isaac, bianca).
+progenitor(hugo, marilu).
+progenitor(hugo, renzo).
+progenitor(hugo, lia).
+progenitor(bianca, marilu).
+progenitor(bianca, renzo).
+progenitor(bianca, lia).
+progenitor(lia, melany).
+progenitor(alex, melany).
+progenitor(emir, ana).
+progenitor(ana, alex).
+progenitor(ana, joel).
+progenitor(joel, vania).
+progenitor(giselle, vania).
+progenitor(dafne, giselle).
+progenitor(dafne, carmen).
+progenitor(dafne, karina).
+progenitor(karina, nayeli).
+progenitor(alonso, nayeli).
+progenitor(mateo, samuel).
+progenitor(araceli, samuel).
+progenitor(evelyn, noelia).
+progenitor(evelyn, luna).
+progenitor(leandro, noelia).
+progenitor(leandro, luna).
+progenitor(samuel, alonso).
+progenitor(noelia, alonso).
+progenitor(alejandro, lucio).
+progenitor(alejandro, jesus).
+progenitor(marilu, lucio).
+progenitor(marilu, jesus).
+
+
+
+% HECHOS: Pasajeros que suben en cada paradero
+% Formato: sube(Nombre, Paradero, Tipo, Genero)
+% Tipo: estudiante/externo, Genero: mujer/varon
+
+
+% VENTANILLA
+sube(ana, ventanilla, externo, mujer).
+sube(marilu, ventanilla, externo, mujer).
+sube(nayeli, ventanilla, externo, mujer).
+sube(mateo, ventanilla, externo, varon).
+sube(isaac, ventanilla, estudiante, varon).
+sube(aurora, ventanilla, estudiante, mujer).
+sube(bianca, ventanilla, estudiante, mujer).
+sube(alejandro, ventanilla, externo, varon).
+
+
+% MARQUEZ
+sube(samuel, marquez, externo, varon).
+sube(manuel, marquez, externo, varon).
+sube(luna, marquez, externo, mujer).
+sube(noelia, marquez, estudiante, mujer).
+sube(alonso, marquez, estudiante, varon).
+
+
+% URB INDUSTRIAL OQUENDO
+sube(leandro, urb_industrial_oquendo, externo, varon).
+sube(dafne, urb_industrial_oquendo, externo, mujer).
+sube(araceli, urb_industrial_oquendo, estudiante, mujer).
+sube(indira, urb_industrial_oquendo, estudiante, mujer).
+sube(axel, urb_industrial_oquendo, estudiante, varon).
+sube(jesus, urb_industrial_oquendo, externo, varon).
+sube(lucio, urb_industrial_oquendo, estudiante, varon).
+
+
+
+% CARMEN DE LA LEGUA REYNOSO
+sube(joel, carmen_de_la_legua_reynoso, externo, varon).
+sube(emir, carmen_de_la_legua_reynoso, externo, varon).
+sube(carmen, carmen_de_la_legua_reynoso, externo, mujer).
+sube(karina, carmen_de_la_legua_reynoso, externo, mujer).
+sube(giselle, carmen_de_la_legua_reynoso, estudiante, mujer).
+sube(alex, carmen_de_la_legua_reynoso, estudiante, varon).
+sube(felix, carmen_de_la_legua_reynoso, estudiante, varon).
+
+
+% PUENTE COLONIAL
+sube(lia, puente_colonial, externo, mujer).
+sube(melany, puente_colonial, externo, mujer).
+sube(vania, puente_colonial, estudiante, mujer).
+sube(dilan, puente_colonial, estudiante, varon).
+
+
+% SAN JOSÉ
+sube(hugo, san_jose, externo, varon).
+sube(renzo, san_jose, externo, varon).
+sube(evelyn, san_jose, estudiante, mujer).
+sube(derek, san_jose, estudiante, varon).
+
+
+% HECHOS: Pasajeros que bajan en cada paradero
+% Formato: baja(Nombre, Paradero)
+
+
+% MARQUEZ
+baja(ana, marquez).
+baja(mateo, marquez).
+baja(alejandro, marquez).
+
+
+% URB INDUSTRIAL OQUENDO
+baja(nayeli, urb_industrial_oquendo).
+baja(samuel, urb_industrial_oquendo).
+
+
+% CARMEN DE LA LEGUA REYNOSO
+baja(marilu, carmen_de_la_legua_reynoso).
+baja(leandro, carmen_de_la_legua_reynoso).
+
+
+% PUENTE COLONIAL
+baja(dafne, puente_colonial).
+baja(lucio, puente_colonial).
+baja(jesus, puente_colonial).
+
+
+% SAN JOSÉ
+baja(luna, san_jose).
+baja(alex, san_jose).
+
+
+% UNMSM (Todos los estudiantes bajan aquí)
+baja(evelyn, unmsm).
+baja(derek, unmsm).
+baja(vania, unmsm).
+baja(dilan, unmsm).
+baja(giselle, unmsm).
+baja(felix, unmsm).
+baja(araceli, unmsm).
+baja(indira, unmsm).
+baja(axel, unmsm).
+baja(noelia, unmsm).
+baja(alonso, unmsm).
+baja(isaac, unmsm).
+baja(aurora, unmsm).
+baja(bianca, unmsm).
+
+
+% UNIVERSITARIA (Los externos restantes)
+baja(manuel, universitaria).
+baja(joel, universitaria).
+baja(emir, universitaria).
+baja(carmen, universitaria).
+baja(karina, universitaria).
+baja(lia, universitaria).
+baja(melany, universitaria).
+baja(hugo, universitaria).
+baja(renzo, universitaria).
+
+
+% Regla para determinar si una persona es descendiente de un ancestro.
+es_descendiente(Ancestro, Descendiente) :-
+    progenitor(Ancestro, Descendiente). % Caso base: es un hijo directo.
+
+
+es_descendiente(Ancestro, Descendiente) :-
+    progenitor(Ancestro, Intermedio), % Existe un hijo intermedio
+    es_descendiente(Intermedio, Descendiente). % y el Descendiente es descendiente de ese hijo.
+
+% ===============================================
+% NUEVAS REGLAS DE GENEALOGÍA
+% ===============================================
+
+% madre(Madre, Hijo) es verdadero si Madre es progenitor de Hijo y su género es mujer.
+madre(Madre, Hijo) :-
+    progenitor(Madre, Hijo),
+    sube(Madre, _, _, mujer).
+
+% padre(Padre, Hijo) es verdadero si Padre es progenitor de Hijo y su género es varon.
+padre(Padre, Hijo) :-
+    progenitor(Padre, Hijo),
+    sube(Padre, _, _, varon).
+
+% hermanos(Persona1, Persona2) es verdadero si ambas personas comparten el mismo progenitor
+% y no son la misma persona.
+hermanos(Persona1, Persona2) :-
+    progenitor(Progenitor, Persona1),
+    progenitor(Progenitor, Persona2),
+    Persona1 \= Persona2.
+    
+hermano(Hermano, Persona) :-
+    hermanos(Hermano, Persona),
+    sube(Hermano, _, _, varon).
+
+hermana(Hermana, Persona) :-
+    hermanos(Hermana, Persona),
+    sube(Hermana, _, _, mujer).
+
+% --- Tíos y Tías ---
+tio(Tio, Sobrino) :-
+    progenitor(Progenitor, Sobrino),
+    hermano(Tio, Progenitor).
+
+tia(Tia, Sobrino) :-
+    progenitor(Progenitor, Sobrino),
+    hermana(Tia, Progenitor).
+
+% --- Tíos Abuelos y Tías Abuelas ---
+tio_abuelo(TioAbuelo, SobrinoNieto) :-
+    (abuelo(Abuelo, SobrinoNieto) ; abuela(Abuelo, SobrinoNieto)),
+    hermano(TioAbuelo, Abuelo).
+
+tia_abuela(TiaAbuela, SobrinoNieto) :-
+    (abuelo(Abuelo, SobrinoNieto) ; abuela(Abuelo, SobrinoNieto)),
+    hermana(TiaAbuela, Abuelo).
+
+sube_despues_de(Persona, ParaderoInicio) :-
+    sube(Persona, ParaderoSube,_,_),
+    paradero(ParaderoInicio, PosInicio),
+    paradero(ParaderoSube, PosSube),
+    PosSube > PosInicio.
+   
+% Verdadero si Persona baja en un paradero posterior a ParaderoInicio.
+baja_despues_de(Persona, ParaderoInicio) :-
+    baja(Persona, ParaderoBaja),               % Dónde baja la persona
+    paradero(ParaderoInicio, PosInicio),       % Obtiene la posición del paradero de inicio
+    paradero(ParaderoBaja, PosBaja),           % Obtiene la posición del paradero de bajada
+    PosBaja > PosInicio.                     % Compara las posiciones.
+% Cuenta la cantidad de descendientes de un Ancestro que bajaron después de ParaderoInicio.
+cantidad_descendientes_bajan_despues_de(Ancestro, ParaderoInicio, Cantidad) :-
+    findall(Descendiente,
+           (es_descendiente(Ancestro, Descendiente),
+            baja_despues_de(Descendiente, ParaderoInicio)),
+           ListaDescendientes),
+    length(ListaDescendientes, Cantidad).
+
+
+cantidad_descendientes_suben_despues_de(Ancestro, ParaderoInicio, Cantidad) :-
+    findall(Descendiente,
+           (es_descendiente(Ancestro, Descendiente),
+            sube_despues_de(Descendiente, ParaderoInicio)),
+            ListaDescendientes),
+    length(ListaDescendientes, Cantidad).
+% Verdadero si Persona sube en un paradero anterior a ParaderoFin.
+sube_antes_de(Persona, ParaderoFin) :-
+    sube(Persona, ParaderoSube, _, _),
+    paradero(ParaderoSube, PosSube),
+    paradero(ParaderoFin, PosFin),
+    PosSube < PosFin.
+
+% Verdadero si Persona baja en un paradero anterior a ParaderoFin.
+baja_antes_de(Persona, ParaderoFin) :-
+    baja(Persona, ParaderoBaja),
+    paradero(ParaderoBaja, PosBaja),
+    paradero(ParaderoFin, PosFin),
+    PosBaja < PosFin.
+% Lista los descendientes que suben en un paradero anterior a ParaderoFin.
+listar_descendientes_suben_antes_de(Ancestro, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+           (es_descendiente(Ancestro, Descendiente),
+            sube_antes_de(Descendiente, ParaderoFin)),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes). % Elimina duplicados para una lista limpia
+
+% Lista los descendientes que bajan en un paradero anterior a ParaderoFin.
+listar_descendientes_bajan_antes_de(Ancestro, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+           (es_descendiente(Ancestro, Descendiente),
+            baja_antes_de(Descendiente, ParaderoFin)),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes). % Elimina duplicados para una lista limpia
+% Cantidad de descendientes que suben antes de un paradero.
+cantidad_descendientes_suben_antes_de(Ancestro, ParaderoFin, Cantidad) :-
+    findall(Descendiente,
+           (es_descendiente(Ancestro, Descendiente),
+            sube_antes_de(Descendiente, ParaderoFin)),
+            ListaDescendientes),
+    length(ListaDescendientes, Cantidad).
+
+% Cantidad de descendientes que bajan antes de un paradero.
+cantidad_descendientes_bajan_antes_de(Ancestro, ParaderoFin, Cantidad) :-
+    findall(Descendiente,
+           (es_descendiente(Ancestro, Descendiente),
+            baja_antes_de(Descendiente, ParaderoFin)),
+            ListaDescendientes),
+    length(ListaDescendientes, Cantidad).
+
+% Regla que encuentra en qué paradero sube un descendiente de una persona.
+% paradero_sube_descendiente(Ancestro, Descendiente, Paradero)
+paradero_sube_descendiente(Ancestro, Descendiente, Paradero) :-
+    es_descendiente(Ancestro, Descendiente),
+    sube(Descendiente, Paradero, _, _).
+
+% descendientes_suben_entre_paraderos(Ancestro, Inicio, Fin, Lista)
+% Encuentra la lista de descendientes de un Ancestro que suben al bus
+% en un paradero que está entre Inicio y Fin (ambos inclusive).
+descendientes_suben_entre_paraderos(Ancestro, ParaderoInicio, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sube(Descendiente, ParaderoDeSubida, _, _),
+              en_rango_inclusivo(ParaderoDeSubida, ParaderoInicio, ParaderoFin)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes). % Elimina duplicados para una lista limpia
+
+
+% descendientes_bajan_entre_paraderos(Ancestro, Inicio, Fin, Lista)
+% Encuentra la lista de descendientes de un Ancestro que bajan del bus
+% en un paradero que está entre Inicio y Fin (ambos inclusive).
+descendientes_bajan_entre_paraderos(Ancestro, ParaderoInicio, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              baja(Descendiente, ParaderoDeBajada),
+              en_rango_inclusivo(ParaderoDeBajada, ParaderoInicio, ParaderoFin)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+
+% ===============================================
+% REGLAS DE CONSULTA BÁSICAS
+% ===============================================
+
+
+% Contar pasajeros por tipo y género en un paradero
+contar_pasajeros_tipo_genero(Paradero, Tipo, Genero, Cantidad) :-
+    findall(Nombre, sube(Nombre, Paradero, Tipo, Genero), Lista),
+    length(Lista, Cantidad).
+
+
+% Listar pasajeros por tipo y género en un paradero
+listar_pasajeros_tipo_genero(Paradero, Tipo, Genero, Lista) :-
+    findall(Nombre, sube(Nombre, Paradero, Tipo, Genero), Lista).
+
+
+% Total de pasajeros que suben en un paradero
+total_suben_paradero(Paradero, Total) :-
+    findall(Nombre, sube(Nombre, Paradero, _, _), Lista),
+    length(Lista, Total).
+
+
+% Total de pasajeros que bajan en un paradero
+total_bajan_paradero(Paradero, Total) :-
+    findall(Nombre, baja(Nombre, Paradero), Lista),
+    length(Lista, Total).
+
+
+% ===============================================
+% REGLAS AUXILIARES NUEVAS
+% ===============================================
+
+
+% Predicado para verificar si un pasajero es mujer
+es_mujer(Nombre) :-
+    sube(Nombre, _, _, mujer).
+
+
+% Predicado para verificar si un pasajero es varón
+es_varon(Nombre) :-
+    sube(Nombre, _, _, varon).
+
+
+% Predicado para contar elementos en una lista
+count(_, [], 0).
+count(X, [X|T], N) :-
+    count(X, T, N1),
+    N is N1 + 1.
+count(X, [H|T], N) :-
+    X \= H,
+    count(X, T, N).
+
+
+% Encontrar el máximo en una lista de pares Valor-Clave
+max_pair_value(Lista, MaxValor-MaxClave) :-
+    Lista = [Primer|Resto],
+    max_pair_helper(Resto, Primer, MaxValor-MaxClave).
+
+
+max_pair_helper([], MaxActual, MaxActual).
+max_pair_helper([Valor-Clave|Resto], ValorActual-ClaveActual, MaxFinal) :-
+    (Valor > ValorActual ->
+        max_pair_helper(Resto, Valor-Clave, MaxFinal)
+    ;   max_pair_helper(Resto, ValorActual-ClaveActual, MaxFinal)
+    ).
+
+
+% Encontrar el mínimo en una lista de pares Valor-Clave
+min_pair_value(Lista, MinValor-MinClave) :-
+    Lista = [Primer|Resto],
+    min_pair_helper(Resto, Primer, MinValor-MinClave).
+
+
+min_pair_helper([], MinActual, MinActual).
+min_pair_helper([Valor-Clave|Resto], ValorActual-ClaveActual, MinFinal) :-
+    (Valor < ValorActual ->
+        min_pair_helper(Resto, Valor-Clave, MinFinal)
+    ;   min_pair_helper(Resto, ValorActual-ClaveActual, MinFinal)
+    ).
+
+
+% ===============================================
+% REGLAS DE PORCENTAJES
+% ===============================================
+
+
+% Porcentaje de mujeres universitarias en un paradero
+porcentaje_mujeres_universitarias(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, mujer, MujeresUniv),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (MujeresUniv * 100) / Total.
+
+
+% Porcentaje de varones universitarios en un paradero
+porcentaje_varones_universitarios(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, varon, VaronesUniv),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (VaronesUniv * 100) / Total.
+
+
+% Porcentaje de mujeres no universitarias en un paradero
+porcentaje_mujeres_no_universitarias(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, externo, mujer, MujeresExt),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (MujeresExt * 100) / Total.
+
+
+% Porcentaje de varones no universitarios en un paradero
+porcentaje_varones_no_universitarios(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, externo, varon, VaronesExt),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (VaronesExt * 100) / Total.
+
+
+% Porcentaje total de mujeres en un paradero
+porcentaje_total_mujeres(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, mujer, MujeresUniv),
+    contar_pasajeros_tipo_genero(Paradero, externo, mujer, MujeresExt),
+    TotalMujeres is MujeresUniv + MujeresExt,
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (TotalMujeres * 100) / Total.
+
+
+% Porcentaje total de varones en un paradero
+porcentaje_total_varones(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, varon, VaronesUniv),
+    contar_pasajeros_tipo_genero(Paradero, externo, varon, VaronesExt),
+    TotalVarones is VaronesUniv + VaronesExt,
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (TotalVarones * 100) / Total.
+
+
+% Regla genérica para calcular porcentaje que cumple una condición en una lista
+porcentaje_en_lista(Lista, Condicion, Porcentaje) :-
+    include(Condicion, Lista, Filtrados),
+    length(Filtrados, CantFiltrados),
+    length(Lista, Total),
+    Total > 0,
+    Porcentaje is (CantFiltrados * 100) / Total.
+
+
+% ===============================================
+% REGLAS DE TRAMOS (EXCLUSIVOS E INCLUSIVOS)
+% ===============================================
+
+
+% Verificar si un paradero está en un rango (inclusivo)
+en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin) :-
+    paradero(ParaderoInicio, PosInicio),
+    paradero(ParaderoFin, PosFin),
+    paradero(Paradero, Pos),
+    Pos >= PosInicio,
+    Pos =< PosFin.
+
+
+% Verificar si un paradero está en un rango (exclusivo)
+en_rango_exclusivo(Paradero, ParaderoInicio, ParaderoFin) :-
+    paradero(ParaderoInicio, PosInicio),
+    paradero(ParaderoFin, PosFin),
+    paradero(Paradero, Pos),
+    Pos >= PosInicio,
+    Pos < PosFin.
+
+
+% Listar pasajeros que subieron en un tramo (inclusivo)
+pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, Tipo, Genero, Lista) :-
+    findall(Nombre,
+           (sube(Nombre, Paradero, Tipo, Genero),
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin)),
+           Lista).
+
+
+% Listar pasajeros que subieron en un tramo (exclusivo)
+pasajeros_tramo_exclusivo(ParaderoInicio, ParaderoFin, Tipo, Genero, Lista) :-
+    findall(Nombre,
+           (sube(Nombre, Paradero, Tipo, Genero),
+            en_rango_exclusivo(Paradero, ParaderoInicio, ParaderoFin)),
+           Lista).
+
+
+% Listar todos los pasajeros en un tramo (sin filtro de tipo/género)
+todos_pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, Lista) :-
+    findall(Nombre,
+           (sube(Nombre, Paradero, _, _),
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin)),
+           Lista).
+
+
+todos_pasajeros_tramo_exclusivo(ParaderoInicio, ParaderoFin, Lista) :-
+    findall(Nombre,
+           (sube(Nombre, Paradero, _, _),
+            en_rango_exclusivo(Paradero, ParaderoInicio, ParaderoFin)),
+           Lista).
+% Contar cuántos pasajeros de un género subieron en un tramo exclusivo
+% (después de ParaderoInicio y antes de ParaderoFin)
+contar_pasajeros_suben_tramo_genero(ParaderoInicio, ParaderoFin, Genero, Cantidad) :-
+    pasajeros_tramo_exclusivo(ParaderoInicio, ParaderoFin, _, Genero, Lista),
+    length(Lista, Cantidad).
+
+
+% Listar pasajeros de un género que bajaron en un tramo inclusivo
+pasajeros_bajan_tramo_genero(ParaderoInicio, ParaderoFin, Genero, Lista) :-
+    findall(Nombre,
+           (baja(Nombre, Paradero),
+            sube(Nombre, _, _, Genero), % Se verifica el género del pasajero
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin)),
+           Lista).
+
+
+% Contar cuántos pasajeros de un género bajaron en un tramo inclusivo
+contar_pasajeros_bajan_tramo_genero(ParaderoInicio, ParaderoFin, Genero, Cantidad) :-
+    pasajeros_bajan_tramo_genero(ParaderoInicio, ParaderoFin, Genero, Lista),
+    length(Lista, Cantidad).
+
+
+% Contar pasajeros de un tipo (estudiante/externo) que subieron
+% desde un paradero de inicio hasta el final de la ruta.
+contar_pasajeros_suben_despues_de_tipo(ParaderoInicio, Tipo, Cantidad) :-
+    % Usamos 'universitaria' como el fin de la ruta para subidas.
+    pasajeros_tramo_inclusivo(ParaderoInicio, universitaria, Tipo, _, Lista),
+    length(Lista, Cantidad).
+
+
+% Listar pasajeros de un tipo que bajan después de un paradero de inicio.
+pasajeros_bajan_despues_de_tipo(ParaderoInicio, Tipo, Lista) :-
+    paradero(ParaderoInicio, PosInicio),
+    findall(Nombre,
+           (baja(Nombre, ParaderoBaja),
+            paradero(ParaderoBaja, PosBaja),
+            PosBaja > PosInicio, % Asegura que el paradero de bajada sea posterior
+            sube(Nombre, _, Tipo, _)), % Verifica el tipo del pasajero
+           Lista).
+
+
+% Contar pasajeros de un tipo que bajan después de un paradero de inicio.
+contar_pasajeros_bajan_despues_de_tipo(ParaderoInicio, Tipo, Cantidad) :-
+    pasajeros_bajan_despues_de_tipo(ParaderoInicio, Tipo, Lista),
+    length(Lista, Cantidad).
+
+
+% ===============================================
+% REGLAS DE CÁLCULOS MONETARIOS
+% ===============================================
+
+
+% Calcular monto de un pasajero específico
+% monto_pasajero(Nombre, Monto) :-
+%    sube(Nombre, Paradero, estudiante, _),
+%    costo_estudiante(Paradero, Monto).
+
+
+% monto_pasajero(Nombre, Monto) :-
+%    sube(Nombre, Paradero, externo, _),
+%    costo_general(Paradero, Monto).
+
+
+% Monto total recaudado de estudiantes en un paradero
+monto_estudiantes_paradero(Paradero, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, estudiante, _),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+
+% Monto total recaudado de externos en un paradero
+monto_externos_paradero(Paradero, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, externo, _),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+
+% Monto total recaudado en un paradero (estudiantes + externos)
+monto_total_paradero(Paradero, MontoTotal) :-
+    monto_estudiantes_paradero(Paradero, MontoEst),
+    monto_externos_paradero(Paradero, MontoExt),
+    MontoTotal is MontoEst + MontoExt.
+
+
+% Monto recaudado en un tramo
+monto_tramo_inclusivo(ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, _, _),
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+
+% ===============================================
+% REGLAS DE ANÁLISIS AVANZADO MEJORADAS
+% ===============================================
+
+
+% Paradero con mayor cantidad de mujeres estudiantes
+paradero_mas_mujeres_estudiantes(Paradero, Cantidad) :-
+    findall(Cant-Par,
+           (paradero(Par, _),
+            contar_pasajeros_tipo_genero(Par, estudiante, mujer, Cant)),
+           Lista),
+    max_pair_value(Lista, Cantidad-Paradero).
+
+
+% Paradero con mayor pérdida por cobros escolares
+paradero_mayor_perdida_escolar(Paradero, MaxPerdida) :-
+    findall(Perdida-Par,
+           (paradero(Par, _),
+            perdida_cobros_escolares(Par, Perdida)),
+           Lista),
+    max_pair_value(Lista, MaxPerdida-Paradero).
+
+
+% Calcular total hipotético si todos los estudiantes pagaran tarifa completa
+total_hipotetico_estudiantes(Total) :-
+    findall(Costo,
+           (sube(_, Par, estudiante, _),
+            costo_general(Par, Costo)),
+           Costos),
+    sum_list(Costos, Total).
+
+
+% Pasajeros que suben en ventanilla pero no bajan en universitaria
+pasajeros_ventanilla_no_universitaria(Lista) :-
+    findall(Nombre,
+           (sube(Nombre, ventanilla, _, _),
+            \+ baja(Nombre, universitaria)),
+           Lista).
+
+
+% Paradero con mayor ganancia
+paradero_mayor_ganancia(Paradero, MaxMonto) :-
+    findall(Monto-Par,
+           (paradero(Par, _),
+            Par \= unmsm,
+            Par \= universitaria,
+            monto_total_paradero(Par, Monto)),
+           Pares),
+    max_pair_value(Pares, MaxMonto-Paradero).
+
+
+% Pérdida por cobros escolares (diferencia entre tarifa completa y estudiantil)
+perdida_cobros_escolares(Paradero, Perdida) :-
+    findall(Diferencia,
+           (sube(_, Paradero, estudiante, _),
+            costo_general(Paradero, CostoCompleto),
+            costo_estudiante(Paradero, CostoEstudiante),
+            Diferencia is CostoCompleto - CostoEstudiante),
+           Diferencias),
+    sum_list(Diferencias, Perdida).
+
+
+% Paradero con mejor ratio suben/bajan
+paradero_mejor_ratio(Paradero, MaxRatio) :-
+    findall(Ratio-Par,
+           (paradero(Par, _),
+            total_suben_paradero(Par, Suben),
+            total_bajan_paradero(Par, Bajan),
+            Bajan > 0,
+            Ratio is Suben / Bajan),
+           Lista),
+    max_pair_value(Lista, MaxRatio-Paradero).
+
+
+% Paradero con menor promedio de pago por pasajero
+paradero_menor_promedio_pago(Paradero, MinProm) :-
+    findall(Prom-Par,
+           (paradero(Par, _),
+            monto_total_paradero(Par, Monto),
+            total_suben_paradero(Par, Suben),
+            Suben > 0,
+            Prom is Monto / Suben),
+           Lista),
+    min_pair_value(Lista, MinProm-Paradero).
+
+
+% Paradero que más externos lleva a universitaria
+paradero_mas_externos_universitaria(Paradero, Cantidad) :-
+    findall(Cant-Par,
+           (paradero(Par, _),
+            findall(Nombre,
+                   (sube(Nombre, Par, externo, _),
+                    baja(Nombre, universitaria)),
+                   L),
+            length(L, Cant)),
+           Lista),
+    max_pair_value(Lista, Cantidad-Paradero).
+
+
+% Porcentaje de mujeres en un tramo
+porcentaje_mujeres_tramo(ParaderoInicio, ParaderoFin, Porcentaje) :-
+    todos_pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, TodosLista),
+    include(es_mujer, TodosLista, MujeresList),
+    length(MujeresList, CantMujeres),
+    length(TodosLista, Total),
+    Total > 0,
+    Porcentaje is (CantMujeres * 100) / Total.
+
+
+% Pasajeros con nombre que coincide parcialmente con su paradero
+pasajeros_nombre_coincide_paradero(Lista) :-
+    findall(Nombre-Par,
+           (sube(Nombre, Par, _, _),
+            atom_chars(Nombre, CharsNombre),
+            atom_chars(Par, CharsPar),
+            intersection(CharsNombre, CharsPar, Comunes),
+            length(Comunes, LenComunes),
+            LenComunes >= 3),
+           Lista).
+
+
+% Estudiante que no baja en UNMSM (caso especial)
+estudiante_no_baja_unmsm(Nombre) :-
+    sube(Nombre, _, estudiante, _),
+    \+ baja(Nombre, unmsm).
+
+
+% Historial completo de un pasajero (dónde sube y baja)
+historial_pasajero(Nombre, sube_en(ParaderoSube), baja_en(ParaderoBaja)) :-
+    sube(Nombre, ParaderoSube, _, _),
+    baja(Nombre, ParaderoBaja).
+
+
+% Predicados compuestos para consultas frecuentes
+es_mujer_estudiante(Nombre) :-
+    es_mujer(Nombre),
+    sube(Nombre, _, estudiante, _).
+
+
+es_varon_externo(Nombre) :-
+    es_varon(Nombre),
+    sube(Nombre, _, externo, _).
+
+
+% Consulta genérica para cualquier tramo y condición
+consulta_tramo(ParaderoInicio, ParaderoFin, Condicion, Porcentaje) :-
+    todos_pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, L),
+    porcentaje_en_lista(L, Condicion, Porcentaje).
+
+
+
+
+% ===============================================
+% IDIOMA NATAL Y IDIOMAS APRENDIDOS
+% ===============================================
+
+
+% País de nacimiento de cada persona
+pais(ana, alemania).
+pais(joel, francia).
+pais(vania, peru).
+pais(hugo, chile).
+pais(renzo, chile).
+pais(lia, japon).
+pais(melany, chile).
+pais(mateo, espana).
+pais(samuel, espana).
+pais(alonso, espana).
+pais(aurora, peru).
+pais(bianca, peru).
+pais(isaac, peru).
+pais(axel, chile).
+pais(araceli, chile).
+pais(indira, chile).
+pais(noelia, chile).
+pais(alex, francia).
+pais(felix, francia).
+pais(giselle, francia).
+pais(evelyn, chile).
+pais(dilan, peru).
+pais(carmen, peru).
+pais(karina, alemania).
+pais(manuel, alemania).
+pais(emir, peru).
+pais(leandro, chile).
+pais(dafne, chile).
+pais(nayeli, peru).
+pais(marilu, peru).
+pais(luna, chile).
+pais(alejandro, francia).
+pais(lucio, alemania).
+pais(jesus, japon).
+
+
+% Idioma nativo por país
+idioma_nativo(peru, espanol).
+idioma_nativo(chile, espanol).
+idioma_nativo(espana, espanol).
+idioma_nativo(usa, ingles).
+idioma_nativo(francia, frances).
+idioma_nativo(alemania, aleman).
+idioma_nativo(japon, japones).
+
+
+% Idioma nativo de una persona
+idioma_natal(Persona, Idioma) :-
+    pais(Persona, Pais),
+    idioma_nativo(Pais, Idioma).
+
+
+% Idiomas aprendidos
+habla(ana, quechua).
+habla(joel, ingles).
+habla(vania, ingles).
+habla(vania, italiano).
+habla(hugo, aleman).
+habla(lia, frances).
+habla(melany, ingles).
+habla(mateo, portugues).
+habla(samuel, ingles).
+habla(alonso, italiano).
+habla(araceli, ingles).
+habla(axel, portugues).
+habla(felix, frances).
+habla(giselle, quechua).
+habla(carmen, ingles).
+habla(karina, quechua).
+habla(noelia, portugues).
+habla(evelyn, ingles).
+habla(dilan, ingles).
+habla(dafne, frances).
+habla(indira, italiano).
+habla(aurora, aleman).
+habla(bianca, ingles).
+habla(nayeli, frances).
+habla(lucio, ingles).
+habla(jesus, ingles).
+habla(jesus, japones).
+
+
+% Idiomas que domina (nativo + aprendidos)
+idiomas_totales(Persona, [IdiomaNatal|OtrosIdiomas]) :-
+    idioma_natal(Persona, IdiomaNatal),
+    findall(Idioma, habla(Persona, Idioma), OtrosIdiomas).
+
+
+% Persona bilingüe: habla exactamente 2 idiomas (nativo + 1 adicional)
+es_bilingue(Persona) :-
+    idiomas_totales(Persona, Idiomas),
+    length(Idiomas, 2).
+
+
+% Persona trilingüe: habla exactamente 3 idiomas (nativo + 2 adicionales)
+es_trilingue(Persona) :-
+    idiomas_totales(Persona, Idiomas),
+    length(Idiomas, 3).
+% ===============================================
+% REGLA DE HERENCIA DE IDIOMA NATAL
+% ===============================================
+
+% Determina que un hijo sabe un idioma si ese idioma es el natal de su progenitor.
+hereda_idioma_natal(Hijo, Idioma) :-
+    progenitor(Progenitor, Hijo),
+    idioma_natal(Progenitor, Idioma).
+    
+% ===============================================
+% REGLA MEJORADA DE IDIOMAS TOTALES (INCLUYE HERENCIA)
+% ===============================================
+
+% Idiomas que domina una persona (nativo + aprendidos + heredados de padres)
+idiomas_totales_mejorado(Persona, IdiomasFinales) :-
+    % 1. Obtiene el idioma natal de la persona.
+    idioma_natal(Persona, IdiomaNatal),
+
+    % 2. Encuentra todos los idiomas que la persona ha aprendido.
+    findall(IdiomaAprendido, habla(Persona, IdiomaAprendido), IdiomasAprendidos),
+
+    % 3. Encuentra todos los idiomas natales heredados de sus progenitores.
+    findall(IdiomaHeredado, hereda_idioma_natal(Persona, IdiomaHeredado), IdiomasHeredados),
+
+    % 4. Une las listas de idiomas aprendidos y heredados.
+    append(IdiomasAprendidos, IdiomasHeredados, OtrosIdiomas),
+
+    % 5. Crea una lista completa (con posibles duplicados).
+    ListaConDuplicados = [IdiomaNatal | OtrosIdiomas],
+
+    % 6. Elimina los duplicados para obtener la lista final.
+    list_to_set(ListaConDuplicados, IdiomasFinales).
+
+% ===============================================
+% REGLAS DE VIAJEROS POR IDIOMA Y TRAMO
+% ===============================================
+
+% sabe_idioma(Persona, Idioma)
+% Es verdadero si el Idioma está en la lista de idiomas que domina la Persona.
+% Utiliza la regla mejorada que incluye idiomas natales, aprendidos y heredados.
+sabe_idioma(Persona, Idioma) :-
+    idiomas_totales_mejorado(Persona, ListaDeIdiomas),
+    member(Idioma, ListaDeIdiomas).
+    
+% sabe_algun_idioma(Persona, ListaIdiomas)
+% Verdadero si una Persona sabe al menos uno de los idiomas en la lista.
+sabe_algun_idioma(Persona, [Idioma|_]) :-
+    sabe_idioma(Persona, Idioma), !.
+sabe_algun_idioma(Persona, [_|Resto]) :-
+    sabe_algun_idioma(Persona, Resto).
+
+% sabe_todos_los_idiomas(Persona, ListaIdiomas)
+% Verdadero si una Persona sabe TODOS los idiomas en la lista (conjunción, AND).
+sabe_todos_los_idiomas(_, []).
+sabe_todos_los_idiomas(Persona, [Idioma|Resto]) :-
+    sabe_idioma(Persona, Idioma),
+    sabe_todos_los_idiomas(Persona, Resto).
+
+
+% hablantes_suben_entre_paraderos(Idioma, Inicio, Fin, Lista)
+% Encuentra la lista de personas que saben un Idioma y suben al bus
+% en un paradero que está entre Inicio y Fin (ambos inclusive).
+hablantes_suben_entre_paraderos(Idioma, ParaderoInicio, ParaderoFin, ListaHablantes) :-
+    findall(Persona,
+            ( sube(Persona, ParaderoDeSubida, _, _),
+              en_rango_inclusivo(ParaderoDeSubida, ParaderoInicio, ParaderoFin),
+              sabe_idioma(Persona, Idioma)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaHablantes).
+
+% hablantes_bajan_entre_paraderos(Idioma, Inicio, Fin, Lista)
+% Encuentra la lista de personas que saben un Idioma y bajan del bus
+% en un paradero que está entre Inicio y Fin (ambos inclusive).
+hablantes_bajan_entre_paraderos(Idioma, ParaderoInicio, ParaderoFin, ListaHablantes) :-
+    findall(Persona,
+            ( baja(Persona, ParaderoDeBajada),
+              en_rango_inclusivo(ParaderoDeBajada, ParaderoInicio, ParaderoFin),
+              sabe_idioma(Persona, Idioma) % Verificamos si la persona sabe el idioma
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaHablantes).
+
+% ===============================================
+% REGLA DE DESCENDIENTES POR IDIOMA
+% ===============================================
+
+% descendientes_que_hablan_idioma(Ancestro, Idioma, Lista)
+% Encuentra la lista de descendientes de un Ancestro que saben un Idioma específico.
+descendientes_que_hablan_idioma(Ancestro, Idioma, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+% descendientes_hablan_idioma_bajan_antes_de(Ancestro, Idioma, ParaderoFin, ListaDescendientes)
+% Encuentra la lista de descendientes de un Ancestro que saben un Idioma específico
+% y bajan del bus en un paradero ANTES de ParaderoFin (exclusivo).
+
+% =======================================================================
+% REGLA DE DESCENDIENTES POR LISTA DE IDIOMAS (CONJUNCIÓN) (NUEVO)
+% =======================================================================
+
+% descendientes_que_hablan_todos_los_idiomas(Ancestro, ListaIdiomas, ListaDescendientes)
+% Encuentra la lista de descendientes de un Ancestro que saben TODOS los idiomas de una lista.
+descendientes_que_hablan_todos_los_idiomas(Ancestro, ListaIdiomas, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+descendientes_hablan_idioma_bajan_antes_de(Ancestro, Idioma, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),     % Es un descendiente del Ancestro
+              sabe_idioma(Descendiente, Idioma),            % Sabe el idioma especificado
+              baja_antes_de(Descendiente, ParaderoFin)      % Baja antes del ParaderoFin
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes). % Elimina duplicados
+
+% ===============================================
+% REGLAS DE CÁLCULOS MONETARIOS
+% ===============================================
+
+% --- REGLAS DE MONTO ORIGINALES (COMENTADAS) ---
+% monto_pasajero(Nombre, Monto) :-
+%     sube(Nombre, Paradero, estudiante, _),
+%     costo_estudiante(Paradero, Monto).
+%
+% monto_pasajero(Nombre, Monto) :-
+%     sube(Nombre, Paradero, externo, _),
+%     costo_general(Paradero, Monto).
+
+% --- NUEVAS REGLAS DE MONTO POR GÉNERO ---
+% Calcula el monto a pagar por un pasajero basado en su género.
+% Varones pagan 2.0 y mujeres pagan 3.0.
+monto_pasajero(Nombre, 2.0) :-
+    sube(Nombre, _, _, varon).
+
+monto_pasajero(Nombre, 3.0) :-
+    sube(Nombre, _, _, mujer).
+
+
+% Monto total recaudado de estudiantes en un paradero
+monto_estudiantes_paradero(Paradero, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, estudiante, _),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+
+% Monto total recaudado de externos en un paradero
+monto_externos_paradero(Paradero, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, externo, _),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+
+% Monto total recaudado en un paradero (estudiantes + externos)
+monto_total_paradero(Paradero, MontoTotal) :-
+    monto_estudiantes_paradero(Paradero, MontoEst),
+    monto_externos_paradero(Paradero, MontoExt),
+    MontoTotal is MontoEst + MontoExt.
+
+
+% Monto recaudado en un tramo
+monto_tramo_inclusivo(ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, _, _),
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+% Caso base: si la lista está vacía, el monto total es 0.
+sumar_montos_pasajeros([], 0).
+
+% Caso recursivo:
+sumar_montos_pasajeros([Pasajero|Resto], MontoTotal) :-
+    monto_pasajero(Pasajero, MontoPasajero),      % Obtiene el monto del pasajero actual.
+    sumar_montos_pasajeros(Resto, MontoResto),    % Llama recursivamente para el resto de la lista.
+    MontoTotal is MontoPasajero + MontoResto.     % Suma el monto actual con el del resto.
+
+% ===============================================
+% REGLAS DE PAGO POR DESCENDIENTES, IDIOMA Y PARADERO (NUEVO)
+% ===============================================
+
+% --- REGLAS DE BAJADA ---
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y BAJARON EN un Paradero específico.
+pago_descendientes_idioma_bajan_en(Ancestro, Idioma, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              baja(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y BAJARON ENTRE dos Paraderos (inclusivo).
+pago_descendientes_idioma_bajan_entre(Ancestro, Idioma, ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              baja(Descendiente, ParaderoBaja),
+              en_rango_inclusivo(ParaderoBaja, ParaderoInicio, ParaderoFin),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y BAJARON ANTES de un Paradero específico.
+pago_descendientes_idioma_bajan_antes(Ancestro, Idioma, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              baja_antes_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y BAJARON DESPUÉS de un Paradero específico.
+pago_descendientes_idioma_bajan_despues(Ancestro, Idioma, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              baja_despues_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+
+% --- REGLAS DE SUBIDA ---
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y SUBIERON EN un Paradero específico.
+pago_descendientes_idioma_suben_en(Ancestro, Idioma, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              sube(Descendiente, Paradero, _, _),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y SUBIERON ENTRE dos Paraderos (inclusivo).
+pago_descendientes_idioma_suben_entre(Ancestro, Idioma, ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              sube(Descendiente, ParaderoSube, _, _),
+              en_rango_inclusivo(ParaderoSube, ParaderoInicio, ParaderoFin),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y SUBIERON ANTES de un Paradero específico.
+pago_descendientes_idioma_suben_antes(Ancestro, Idioma, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              sube_antes_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% Calcula el monto total pagado por los descendientes de un Ancestro que hablan un Idioma
+% y SUBIERON DESPUÉS de un Paradero específico.
+pago_descendientes_idioma_suben_despues(Ancestro, Idioma, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_idioma(Descendiente, Idioma),
+              sube_despues_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% =======================================================================
+% REGLAS DE PAGO POR DESCENDIENTES, LISTA DE IDIOMAS (DISYUNCIÓN) Y PARADERO
+% =======================================================================
+
+% --- REGLAS DE BAJADA CON LISTA DE IDIOMAS (OR) ---
+
+pago_descendientes_idiomas_bajan_en(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              baja(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_idiomas_bajan_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              baja(Descendiente, ParaderoBaja),
+              en_rango_inclusivo(ParaderoBaja, ParaderoInicio, ParaderoFin),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_idiomas_bajan_antes(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              baja_antes_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_idiomas_bajan_despues(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              baja_despues_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+
+% --- REGLAS DE SUBIDA CON LISTA DE IDIOMAS (OR) ---
+
+pago_descendientes_idiomas_suben_en(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              sube(Descendiente, Paradero, _, _),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_idiomas_suben_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              sube(Descendiente, ParaderoSube, _, _),
+              en_rango_inclusivo(ParaderoSube, ParaderoInicio, ParaderoFin),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_idiomas_suben_antes(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              sube_antes_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_algun_idioma(Descendiente, ListaIdiomas),
+              sube_despues_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+% =======================================================================
+% REGLAS DE PAGO POR DESCENDIENTES, LISTA DE IDIOMAS (CONJUNCIÓN) Y PARADERO
+% =======================================================================
+
+% --- REGLAS DE BAJADA CON LISTA DE IDIOMAS (AND) ---
+
+pago_descendientes_todos_idiomas_bajan_en(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    descendientes_idiomas_bajan_en(Ancestro, ListaIdiomas, Paradero, ListaDescendientesUnicos),
+    sumar_montos_pasajeros(ListaDescendientesUnicos, MontoTotal).
+
+pago_descendientes_todos_idiomas_bajan_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, MontoTotal) :-
+    descendientes_idiomas_bajan_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, ListaDescendientesUnicos),
+    sumar_montos_pasajeros(ListaDescendientesUnicos, MontoTotal).
+
+pago_descendientes_todos_idiomas_bajan_antes(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    descendientes_idiomas_bajan_antes(Ancestro, ListaIdiomas, Paradero, ListaDescendientesUnicos),
+    sumar_montos_pasajeros(ListaDescendientesUnicos, MontoTotal).
+
+pago_descendientes_todos_idiomas_bajan_despues(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    % 1. Obtenemos la lista de descendientes SIN duplicados.
+    %    Reutilizamos la regla que ya habías creado para esto.
+    descendientes_idiomas_bajan_despues(Ancestro, ListaIdiomas, Paradero, ListaDescendientesUnicos),
+
+    % 2. Usamos el predicado auxiliar para sumar los montos de la lista única.
+    sumar_montos_pasajeros(ListaDescendientesUnicos, MontoTotal).
+
+% REGLA CORREGIDA
+% Esta versión primero obtiene una lista ÚNICA de descendientes y luego
+% suma sus montos, evitando el conteo doble.
+% pago_descendientes_corregido(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    % 1. Obtenemos la lista de descendientes SIN duplicados.
+    %    Reutilizamos la regla que ya habías creado para esto.
+    % descendientes_idiomas_bajan_despues(Ancestro, ListaIdiomas, Paradero, ListaDescendientesUnicos),
+
+    % 2. Usamos el predicado auxiliar para sumar los montos de la lista única.
+    % sumar_montos_pasajeros(ListaDescendientesUnicos, MontoTotal).
+
+
+
+% --- REGLAS DE SUBIDA CON LISTA DE IDIOMAS (AND) ---
+
+pago_descendientes_todos_idiomas_suben_en(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube(Descendiente, Paradero, _, _),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_todos_idiomas_suben_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube(Descendiente, ParaderoSube, _, _),
+              en_rango_inclusivo(ParaderoSube, ParaderoInicio, ParaderoFin),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_todos_idiomas_suben_antes(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    findall(Monto,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube_antes_de(Descendiente, Paradero),
+              monto_pasajero(Descendiente, Monto)
+            ),
+            ListaMontos),
+    sum_list(ListaMontos, MontoTotal).
+
+pago_descendientes_todos_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, MontoTotal) :-
+    descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDescendientesUnicos),
+    sumar_montos_pasajeros(ListaDescendientesUnicos, MontoTotal).
+    
+% =======================================================================
+% REGLAS DE BÚSQUEDA DE DESCENDIENTES POR IDIOMAS Y VIAJE (NUEVO)
+% =======================================================================
+
+% --- BÚSQUEDA POR BAJADA ---
+% Lista de descendientes que hablan ciertos idiomas y BAJARON EN un paradero.
+descendientes_idiomas_bajan_en(Ancestro, ListaIdiomas, Paradero, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              baja(Descendiente, Paradero)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% Lista de descendientes que hablan ciertos idiomas y BAJARON ENTRE paraderos.
+descendientes_idiomas_bajan_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              baja(Descendiente, ParaderoBaja),
+              en_rango_inclusivo(ParaderoBaja, ParaderoInicio, ParaderoFin)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% Lista de descendientes que hablan ciertos idiomas y BAJARON ANTES de un paradero.
+descendientes_idiomas_bajan_antes(Ancestro, ListaIdiomas, Paradero, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              baja_antes_de(Descendiente, Paradero)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% Lista de descendientes que hablan ciertos idiomas y BAJARON DESPUÉS de un paradero.
+descendientes_idiomas_bajan_despues(Ancestro, ListaIdiomas, Paradero, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              baja_despues_de(Descendiente, Paradero)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% --- BÚSQUEDA POR SUBIDA ---
+% Lista de descendientes que hablan ciertos idiomas y SUBIERON EN un paradero.
+descendientes_idiomas_suben_en(Ancestro, ListaIdiomas, Paradero, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube(Descendiente, Paradero, _, _)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% Lista de descendientes que hablan ciertos idiomas y SUBIERON ENTRE paraderos.
+descendientes_idiomas_suben_entre(Ancestro, ListaIdiomas, ParaderoInicio, ParaderoFin, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube(Descendiente, ParaderoSube, _, _),
+              en_rango_inclusivo(ParaderoSube, ParaderoInicio, ParaderoFin)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% Lista de descendientes que hablan ciertos idiomas y SUBIERON ANTES de un paradero.
+descendientes_idiomas_suben_antes(Ancestro, ListaIdiomas, Paradero, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube_antes_de(Descendiente, Paradero)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% Lista de descendientes que hablan ciertos idiomas y SUBIERON DESPUÉS de un paradero.
+descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDescendientes) :-
+    findall(Descendiente,
+            ( es_descendiente(Ancestro, Descendiente),
+              sabe_todos_los_idiomas(Descendiente, ListaIdiomas),
+              sube_despues_de(Descendiente, Paradero)
+            ),
+            ListaConDuplicados),
+    list_to_set(ListaConDuplicados, ListaDescendientes).
+
+% --- FIN DEL ARCHIVO ---
+
+      
+      `,
       sampleQueries: [
-        "porcentaje_genero_con_caso(mujer, P).",
-        "distribucion_tipos_por_genero(hombre, D).",
-        "casos_por_pais(canada, C).",
-        "personas_con_multiples_casos(P).",
+        "descendientes_que_hablan_todos_los_idiomas(felix, [espanol, frances], Descendientes).",
+        "pago_descendientes_idiomas_bajan_despues(dafne, [ingles, quechua], puente_colonial, MontoTotal).",
+        "paradero_mejor_ratio(Paradero, MaxRatio).",
       ],
     },
   },
@@ -1118,6 +2427,8 @@ combinar_factores(acto_corporativo, bajo, riesgo_moderado).`,
     "sistema-legal": {
       title: "Sistema Experto Legal",
       description: "",
+      imageUrl:
+        "https://www.canva.com/design/DAGtNJJcCh4/euqDKpy_08GvLZmpFVpxOg/edit",
       initialProgram: `
 % ================================================================
 % SISTEMA EXPERTO LEGAL AVANZADO% ================================================================
