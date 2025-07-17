@@ -318,23 +318,23 @@ export const weeks: Week[] = [
     ],
     homework: [
       {
-        id: "sistema-combinado",
-        name: "Sistema Experto de Paraderos y Árbol Genealógico",
+        name: "Redes Generativas Adversarias",
+        type: "slides",
+        url: "https://www.canva.com/design/DAGqG0KSfhc/vCQYbb9O6th56slLc-AkGQ/edit",
+      },
+      {
+        id: "sistema-paraderos",
+        name: "Sistema Experto de Paraderos",
         type: "prolog",
         description:
-          "Sistema que combina un árbol genealógico y un sistema experto de paraderos de transporte público. Permite consultar relaciones familiares y ubicaciones de paraderos.",
+          "Sistema sistema experto de paraderos de transporte público.",
       },
       {
         name: "Sistema de Paraderos",
         type: "graph",
-        url: "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
+        url: "https://www.canva.com/design/DAGqpKeH7Ig/GnmAzrLaIZCMlkn0kxGtuA/edit",
         description:
           "Visualización del los hechos base del  sistema experto de paraderos de transporte público.",
-      },
-      {
-        name: "Redes Generativas Adversarias",
-        type: "slides",
-        url: "https://www.canva.com/design/DAGqG0KSfhc/vCQYbb9O6th56slLc-AkGQ/edit",
       },
     ],
   },
@@ -364,6 +364,20 @@ export const weeks: Week[] = [
         url: "/FISI-IA-2025-G6/mina_familiar_updated.html",
         description:
           "Visualización del los hechos base del sistema experto de minas.",
+      },
+      {
+        id: "sistema-combinado",
+        name: "Sistema Experto de Paraderos con Árbol Genealógico",
+        type: "prolog",
+        description:
+          "Sistema que combina un árbol genealógico y un sistema experto de paraderos de transporte público. Permite consultar relaciones familiares y ubicaciones de paraderos.",
+      },
+      {
+        name: "Sistema de Paraderos con Árbol Genealógico",
+        type: "graph",
+        url: "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
+        description:
+          "Visualización del los hechos base del  sistema experto de paraderos de transporte público.",
       },
       {
         name: "IA Creativa, Ética y Futuro",
@@ -397,7 +411,7 @@ export const weeks: Week[] = [
       {
         name: "Sistema experto legal",
         type: "graph",
-        url: "https://www.canva.com/design/DAGtNJJcCh4/euqDKpy_08GvLZmpFVpxOg/edit",
+        url: "/FISI-IA-2025-G6/sistema_experto_legal.html",
       },
     ],
   },
@@ -417,23 +431,20 @@ export const weeks: Week[] = [
         name: "Examen Final",
         type: "doc",
         url: "https://docs.google.com/document/d/1Z5pNOi__ouWnE90LrX7atnZLLBiLcnAMYcdDhhY3wfo/edit?usp=drivesdk",
-        description:
-          "Titto Carhuas Carolhay",
+        description: "Titto Carhuas Carolhay",
       },
       {
         name: "Examen Final",
         type: "doc",
         url: "https://docs.google.com/document/d/1rpguf7w2Sv8sjfqjaBtW7dlK2Bv3w1upFOuh3WqJG3c/edit?usp=sharing",
-        description:
-          "Contreras Auqui Erikson",
+        description: "Contreras Auqui Erikson",
       },
       {
         name: "Examen Final",
         type: "doc",
         url: "https://docs.google.com/document/d/15-HDt94bbv0bR5axw-hu2-T_AE7ONoLWBDxCwY1tYqw/edit?tab=t.0",
-        description:
-          "Quispe Carbajal Kevin, Tantahuillca Navarro Alexander",
-      }
+        description: "Quispe Carbajal Kevin, Tantahuillca Navarro Alexander",
+      },
     ],
   },
 ];

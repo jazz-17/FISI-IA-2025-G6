@@ -964,6 +964,1035 @@ total_primas(N,Y) :- findall(X, prima(X,Y), Lista), length(Lista,N).
     },
   },
   "13": {
+    "sistema-paraderos": {
+      title: "Sistema de Paraderos",
+      description:
+        "Sistema experto para identificar paraderos de transporte público y sus características.",
+      initialProgram: `
+% ===============================================
+% SISTEMA EXPERTO DE PARADEROS - TRANSPORTE PÚBLICO (VERSIÓN MEJORADA)
+% ===============================================
+:- use_module(library(lists)).
+:- use_module(library(apply)).
+% HECHOS BASE: Definición de paraderos y sus posiciones
+paradero(ventanilla, 1).
+paradero(marquez, 2).
+paradero(urb_industrial_oquendo, 3).
+paradero(carmen_de_la_legua_reynoso, 4).
+paradero(puente_colonial, 5).
+paradero(san_jose, 6).
+paradero(unmsm, 7).
+paradero(universitaria, 8).
+
+% HECHOS: Costos por paradero (hasta universitaria)
+costo_general(ventanilla, 6.0).
+costo_general(marquez, 5.0).
+costo_general(urb_industrial_oquendo, 4.0).
+costo_general(carmen_de_la_legua_reynoso, 3.0).
+costo_general(puente_colonial, 2.5).
+costo_general(san_jose, 2.0).
+
+% Los estudiantes pagan 50% hasta UNMSM
+costo_estudiante(Paradero, CostoEstudiante) :-
+    costo_general(Paradero, CostoGeneral),
+    CostoEstudiante is CostoGeneral * 0.5.
+
+% HECHOS: Pasajeros que suben en cada paradero
+% Formato: sube(Nombre, Paradero, Tipo, Genero)
+% Tipo: estudiante/externo, Genero: mujer/varon
+
+% VENTANILLA
+sube(ana, ventanilla, externo, mujer).
+sube(marilu, ventanilla, externo, mujer).
+sube(nayeli, ventanilla, externo, mujer).
+sube(mateo, ventanilla, externo, varon).
+sube(isaac, ventanilla, estudiante, varon).
+sube(aurora, ventanilla, estudiante, mujer).
+sube(bianca, ventanilla, estudiante, mujer).
+
+% MARQUEZ
+sube(samuel, marquez, externo, varon).
+sube(manuel, marquez, externo, varon).
+sube(luna, marquez, externo, mujer).
+sube(noelia, marquez, estudiante, mujer).
+sube(alonso, marquez, estudiante, varon).
+
+% URB INDUSTRIAL OQUENDO
+sube(leandro, urb_industrial_oquendo, externo, varon).
+sube(dafne, urb_industrial_oquendo, externo, mujer).
+sube(araceli, urb_industrial_oquendo, estudiante, mujer).
+sube(indira, urb_industrial_oquendo, estudiante, mujer).
+sube(axel, urb_industrial_oquendo, estudiante, varon).
+
+% CARMEN DE LA LEGUA REYNOSO
+sube(joel, carmen_de_la_legua_reynoso, externo, varon).
+sube(emir, carmen_de_la_legua_reynoso, externo, varon).
+sube(carmen, carmen_de_la_legua_reynoso, externo, mujer).
+sube(karina, carmen_de_la_legua_reynoso, externo, mujer).
+sube(giselle, carmen_de_la_legua_reynoso, estudiante, mujer).
+sube(alex, carmen_de_la_legua_reynoso, estudiante, varon).
+sube(felix, carmen_de_la_legua_reynoso, estudiante, varon).
+
+% PUENTE COLONIAL
+sube(lia, puente_colonial, externo, mujer).
+sube(melany, puente_colonial, externo, mujer).
+sube(vania, puente_colonial, estudiante, mujer).
+sube(dilan, puente_colonial, estudiante, varon).
+
+% SAN JOSÉ
+sube(hugo, san_jose, externo, varon).
+sube(renzo, san_jose, externo, varon).
+sube(evelyn, san_jose, estudiante, mujer).
+sube(derek, san_jose, estudiante, varon).
+
+% HECHOS: Pasajeros que bajan en cada paradero
+% Formato: baja(Nombre, Paradero)
+
+% MARQUEZ
+baja(ana, marquez).
+baja(mateo, marquez).
+
+% URB INDUSTRIAL OQUENDO
+baja(nayeli, urb_industrial_oquendo).
+baja(samuel, urb_industrial_oquendo).
+
+% CARMEN DE LA LEGUA REYNOSO
+baja(marilu, carmen_de_la_legua_reynoso).
+baja(leandro, carmen_de_la_legua_reynoso).
+
+% PUENTE COLONIAL
+baja(dafne, puente_colonial).
+
+% SAN JOSÉ
+baja(luna, san_jose).
+baja(alex, san_jose).
+
+% UNMSM (Todos los estudiantes bajan aquí)
+baja(evelyn, unmsm).
+baja(derek, unmsm).
+baja(vania, unmsm).
+baja(dilan, unmsm).
+baja(giselle, unmsm).
+baja(felix, unmsm).
+baja(araceli, unmsm).
+baja(indira, unmsm).
+baja(axel, unmsm).
+baja(noelia, unmsm).
+baja(alonso, unmsm).
+baja(isaac, unmsm).
+baja(aurora, unmsm).
+baja(bianca, unmsm).
+
+% UNIVERSITARIA (Los externos restantes)
+baja(manuel, universitaria).
+baja(joel, universitaria).
+baja(emir, universitaria).
+baja(carmen, universitaria).
+baja(karina, universitaria).
+baja(lia, universitaria).
+baja(melany, universitaria).
+baja(hugo, universitaria).
+baja(renzo, universitaria).
+
+% ===============================================
+% REGLAS DE CONSULTA BÁSICAS
+% ===============================================
+
+% Contar pasajeros por tipo y género en un paradero
+contar_pasajeros_tipo_genero(Paradero, Tipo, Genero, Cantidad) :-
+    findall(Nombre, sube(Nombre, Paradero, Tipo, Genero), Lista),
+    length(Lista, Cantidad).
+
+% Listar pasajeros por tipo y género en un paradero
+listar_pasajeros_tipo_genero(Paradero, Tipo, Genero, Lista) :-
+    findall(Nombre, sube(Nombre, Paradero, Tipo, Genero), Lista).
+
+% Total de pasajeros que suben en un paradero
+total_suben_paradero(Paradero, Total) :-
+    findall(Nombre, sube(Nombre, Paradero, _, _), Lista),
+    length(Lista, Total).
+
+% Total de pasajeros que bajan en un paradero
+total_bajan_paradero(Paradero, Total) :-
+    findall(Nombre, baja(Nombre, Paradero), Lista),
+    length(Lista, Total).
+
+% ===============================================
+% REGLAS AUXILIARES NUEVAS
+% ===============================================
+
+% Predicado para verificar si un pasajero es mujer
+es_mujer(Nombre) :- 
+    sube(Nombre, _, _, mujer).
+
+% Predicado para verificar si un pasajero es varón
+es_varon(Nombre) :- 
+    sube(Nombre, _, _, varon).
+
+% Predicado para contar elementos en una lista
+count(_, [], 0).
+count(X, [X|T], N) :- 
+    count(X, T, N1), 
+    N is N1 + 1.
+count(X, [H|T], N) :- 
+    X \= H, 
+    count(X, T, N).
+
+% Encontrar el máximo en una lista de pares Valor-Clave
+max_pair_value(Lista, MaxValor-MaxClave) :-
+    Lista = [Primer|Resto],
+    max_pair_helper(Resto, Primer, MaxValor-MaxClave).
+
+max_pair_helper([], MaxActual, MaxActual).
+max_pair_helper([Valor-Clave|Resto], ValorActual-ClaveActual, MaxFinal) :-
+    (Valor > ValorActual ->
+        max_pair_helper(Resto, Valor-Clave, MaxFinal)
+    ;   max_pair_helper(Resto, ValorActual-ClaveActual, MaxFinal)
+    ).
+
+% Encontrar el mínimo en una lista de pares Valor-Clave
+min_pair_value(Lista, MinValor-MinClave) :-
+    Lista = [Primer|Resto],
+    min_pair_helper(Resto, Primer, MinValor-MinClave).
+
+min_pair_helper([], MinActual, MinActual).
+min_pair_helper([Valor-Clave|Resto], ValorActual-ClaveActual, MinFinal) :-
+    (Valor < ValorActual ->
+        min_pair_helper(Resto, Valor-Clave, MinFinal)
+    ;   min_pair_helper(Resto, ValorActual-ClaveActual, MinFinal)
+    ).
+
+% ===============================================
+% REGLAS DE PORCENTAJES
+% ===============================================
+
+% Porcentaje de mujeres universitarias en un paradero
+porcentaje_mujeres_universitarias(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, mujer, MujeresUniv),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (MujeresUniv * 100) / Total.
+
+% Porcentaje de varones universitarios en un paradero
+porcentaje_varones_universitarios(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, varon, VaronesUniv),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (VaronesUniv * 100) / Total.
+
+% Porcentaje de mujeres no universitarias en un paradero
+porcentaje_mujeres_no_universitarias(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, externo, mujer, MujeresExt),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (MujeresExt * 100) / Total.
+
+% Porcentaje de varones no universitarios en un paradero
+porcentaje_varones_no_universitarios(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, externo, varon, VaronesExt),
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (VaronesExt * 100) / Total.
+
+% Porcentaje total de mujeres en un paradero
+porcentaje_total_mujeres(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, mujer, MujeresUniv),
+    contar_pasajeros_tipo_genero(Paradero, externo, mujer, MujeresExt),
+    TotalMujeres is MujeresUniv + MujeresExt,
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (TotalMujeres * 100) / Total.
+
+% Porcentaje total de varones en un paradero
+porcentaje_total_varones(Paradero, Porcentaje) :-
+    contar_pasajeros_tipo_genero(Paradero, estudiante, varon, VaronesUniv),
+    contar_pasajeros_tipo_genero(Paradero, externo, varon, VaronesExt),
+    TotalVarones is VaronesUniv + VaronesExt,
+    total_suben_paradero(Paradero, Total),
+    Total > 0,
+    Porcentaje is (TotalVarones * 100) / Total.
+
+% Regla genérica para calcular porcentaje que cumple una condición en una lista
+porcentaje_en_lista(Lista, Condicion, Porcentaje) :-
+    include(Condicion, Lista, Filtrados),
+    length(Filtrados, CantFiltrados),
+    length(Lista, Total),
+    Total > 0,
+    Porcentaje is (CantFiltrados * 100) / Total.
+
+% ===============================================
+% REGLAS DE TRAMOS (EXCLUSIVOS E INCLUSIVOS)
+% ===============================================
+
+% Verificar si un paradero está en un rango (inclusivo)
+en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin) :-
+    paradero(ParaderoInicio, PosInicio),
+    paradero(ParaderoFin, PosFin),
+    paradero(Paradero, Pos),
+    Pos >= PosInicio,
+    Pos =< PosFin.
+
+% Verificar si un paradero está en un rango (exclusivo)
+en_rango_exclusivo(Paradero, ParaderoInicio, ParaderoFin) :-
+    paradero(ParaderoInicio, PosInicio),
+    paradero(ParaderoFin, PosFin),
+    paradero(Paradero, Pos),
+    Pos >= PosInicio,
+    Pos < PosFin.
+
+% Listar pasajeros que subieron en un tramo (inclusivo)
+pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, Tipo, Genero, Lista) :-
+    findall(Nombre, 
+           (sube(Nombre, Paradero, Tipo, Genero), 
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin)), 
+           Lista).
+
+% Listar pasajeros que subieron en un tramo (exclusivo)
+pasajeros_tramo_exclusivo(ParaderoInicio, ParaderoFin, Tipo, Genero, Lista) :-
+    findall(Nombre, 
+           (sube(Nombre, Paradero, Tipo, Genero), 
+            en_rango_exclusivo(Paradero, ParaderoInicio, ParaderoFin)), 
+           Lista).
+
+% Listar todos los pasajeros en un tramo (sin filtro de tipo/género)
+todos_pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, Lista) :-
+    findall(Nombre, 
+           (sube(Nombre, Paradero, _, _), 
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin)), 
+           Lista).
+
+todos_pasajeros_tramo_exclusivo(ParaderoInicio, ParaderoFin, Lista) :-
+    findall(Nombre, 
+           (sube(Nombre, Paradero, _, _), 
+            en_rango_exclusivo(Paradero, ParaderoInicio, ParaderoFin)), 
+           Lista).
+
+% ===============================================
+% REGLAS DE CÁLCULOS MONETARIOS
+% ===============================================
+
+% Calcular monto de un pasajero específico
+monto_pasajero(Nombre, Monto) :-
+    sube(Nombre, Paradero, estudiante, _),
+    costo_estudiante(Paradero, Monto).
+
+monto_pasajero(Nombre, Monto) :-
+    sube(Nombre, Paradero, externo, _),
+    costo_general(Paradero, Monto).
+
+% Monto total recaudado de estudiantes en un paradero
+monto_estudiantes_paradero(Paradero, MontoTotal) :-
+    findall(Monto, 
+           (sube(Nombre, Paradero, estudiante, _), 
+            monto_pasajero(Nombre, Monto)), 
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+% Monto total recaudado de externos en un paradero
+monto_externos_paradero(Paradero, MontoTotal) :-
+    findall(Monto, 
+           (sube(Nombre, Paradero, externo, _), 
+            monto_pasajero(Nombre, Monto)), 
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+% Monto total recaudado en un paradero (estudiantes + externos)
+monto_total_paradero(Paradero, MontoTotal) :-
+    monto_estudiantes_paradero(Paradero, MontoEst),
+    monto_externos_paradero(Paradero, MontoExt),
+    MontoTotal is MontoEst + MontoExt.
+
+% Monto recaudado en un tramo
+monto_tramo_inclusivo(ParaderoInicio, ParaderoFin, MontoTotal) :-
+    findall(Monto,
+           (sube(Nombre, Paradero, _, _),
+            en_rango_inclusivo(Paradero, ParaderoInicio, ParaderoFin),
+            monto_pasajero(Nombre, Monto)),
+           Montos),
+    sum_list(Montos, MontoTotal).
+
+% ===============================================
+% REGLAS DE ANÁLISIS AVANZADO MEJORADAS
+% ===============================================
+
+% Paradero con mayor cantidad de mujeres estudiantes
+paradero_mas_mujeres_estudiantes(Paradero, Cantidad) :-
+    findall(Cant-Par, 
+           (paradero(Par, _), 
+            contar_pasajeros_tipo_genero(Par, estudiante, mujer, Cant)), 
+           Lista),
+    max_pair_value(Lista, Cantidad-Paradero).
+
+% Paradero con mayor pérdida por cobros escolares
+paradero_mayor_perdida_escolar(Paradero, MaxPerdida) :-
+    findall(Perdida-Par, 
+           (paradero(Par, _), 
+            perdida_cobros_escolares(Par, Perdida)), 
+           Lista),
+    max_pair_value(Lista, MaxPerdida-Paradero).
+
+% Calcular total hipotético si todos los estudiantes pagaran tarifa completa
+total_hipotetico_estudiantes(Total) :-
+    findall(Costo, 
+           (sube(_, Par, estudiante, _), 
+            costo_general(Par, Costo)), 
+           Costos),
+    sum_list(Costos, Total).
+
+% Pasajeros que suben en ventanilla pero no bajan en universitaria
+pasajeros_ventanilla_no_universitaria(Lista) :-
+    findall(Nombre, 
+           (sube(Nombre, ventanilla, _, _), 
+            \+ baja(Nombre, universitaria)), 
+           Lista).
+
+% Paradero con mayor ganancia
+paradero_mayor_ganancia(Paradero, MaxMonto) :-
+    findall(Monto-Par, 
+           (paradero(Par, _), 
+            Par \= unmsm, 
+            Par \= universitaria,
+            monto_total_paradero(Par, Monto)), 
+           Pares),
+    max_pair_value(Pares, MaxMonto-Paradero).
+
+% Pérdida por cobros escolares (diferencia entre tarifa completa y estudiantil)
+perdida_cobros_escolares(Paradero, Perdida) :-
+    findall(Diferencia,
+           (sube(_, Paradero, estudiante, _),
+            costo_general(Paradero, CostoCompleto),
+            costo_estudiante(Paradero, CostoEstudiante),
+            Diferencia is CostoCompleto - CostoEstudiante),
+           Diferencias),
+    sum_list(Diferencias, Perdida).
+
+% Paradero con mejor ratio suben/bajan
+paradero_mejor_ratio(Paradero, MaxRatio) :-
+    findall(Ratio-Par, 
+           (paradero(Par, _), 
+            total_suben_paradero(Par, Suben), 
+            total_bajan_paradero(Par, Bajan), 
+            Bajan > 0, 
+            Ratio is Suben / Bajan), 
+           Lista),
+    max_pair_value(Lista, MaxRatio-Paradero).
+
+% Paradero con menor promedio de pago por pasajero
+paradero_menor_promedio_pago(Paradero, MinProm) :-
+    findall(Prom-Par, 
+           (paradero(Par, _), 
+            monto_total_paradero(Par, Monto), 
+            total_suben_paradero(Par, Suben), 
+            Suben > 0, 
+            Prom is Monto / Suben), 
+           Lista),
+    min_pair_value(Lista, MinProm-Paradero).
+
+% Paradero que más externos lleva a universitaria
+paradero_mas_externos_universitaria(Paradero, Cantidad) :-
+    findall(Cant-Par, 
+           (paradero(Par, _), 
+            findall(Nombre, 
+                   (sube(Nombre, Par, externo, _), 
+                    baja(Nombre, universitaria)), 
+                   L), 
+            length(L, Cant)), 
+           Lista),
+    max_pair_value(Lista, Cantidad-Paradero).
+
+% Porcentaje de mujeres en un tramo
+porcentaje_mujeres_tramo(ParaderoInicio, ParaderoFin, Porcentaje) :-
+    todos_pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, TodosLista),
+    include(es_mujer, TodosLista, MujeresList),
+    length(MujeresList, CantMujeres),
+    length(TodosLista, Total),
+    Total > 0,
+    Porcentaje is (CantMujeres * 100) / Total.
+
+% Pasajeros con nombre que coincide parcialmente con su paradero
+pasajeros_nombre_coincide_paradero(Lista) :-
+    findall(Nombre-Par, 
+           (sube(Nombre, Par, _, _), 
+            atom_chars(Nombre, CharsNombre),
+            atom_chars(Par, CharsPar),
+            intersection(CharsNombre, CharsPar, Comunes),
+            length(Comunes, LenComunes),
+            LenComunes >= 3), 
+           Lista).
+
+% Estudiante que no baja en UNMSM (caso especial)
+estudiante_no_baja_unmsm(Nombre) :-
+    sube(Nombre, _, estudiante, _),
+    \+ baja(Nombre, unmsm).
+
+% Historial completo de un pasajero (dónde sube y baja)
+historial_pasajero(Nombre, sube_en(ParaderoSube), baja_en(ParaderoBaja)) :-
+    sube(Nombre, ParaderoSube, _, _),
+    baja(Nombre, ParaderoBaja).
+
+% Predicados compuestos para consultas frecuentes
+es_mujer_estudiante(Nombre) :-
+    es_mujer(Nombre),
+    sube(Nombre, _, estudiante, _).
+
+es_varon_externo(Nombre) :-
+    es_varon(Nombre),
+    sube(Nombre, _, externo, _).
+
+% Consulta genérica para cualquier tramo y condición
+consulta_tramo(ParaderoInicio, ParaderoFin, Condicion, Porcentaje) :-
+    todos_pasajeros_tramo_inclusivo(ParaderoInicio, ParaderoFin, L),
+    porcentaje_en_lista(L, Condicion, Porcentaje).
+
+% ===============================================
+% CONSULTAS DE EJEMPLO Y UTILIDADES
+% ===============================================
+
+% Mostrar información completa de un paradero
+info_paradero(Paradero) :-
+    write('=== INFORMACIÓN DEL PARADERO: '), write(Paradero), nl,
+    total_suben_paradero(Paradero, TotalSuben),
+    total_bajan_paradero(Paradero, TotalBajan),
+    monto_total_paradero(Paradero, MontoTotal),
+    write('Total que suben: '), write(TotalSuben), nl,
+    write('Total que bajan: '), write(TotalBajan), nl,
+    write('Monto total recaudado: S/'), write(MontoTotal), nl,
+    porcentaje_mujeres_universitarias(Paradero, PorcMujUniv),
+    write('% Mujeres universitarias: '), write(PorcMujUniv), write('%'), nl,
+    porcentaje_varones_universitarios(Paradero, PorcVarUniv),
+    write('% Varones universitarios: '), write(PorcVarUniv), write('%'), nl.
+
+% Ayuda con ejemplos de consultas (actualizada)
+ayuda :-
+    nl,
+    write('=== SISTEMA EXPERTO DE PARADEROS (VERSIÓN MEJORADA) ==='), nl,
+    write('Ejemplos de consultas:'), nl, nl,
+    write('1. Análisis avanzado:'), nl,
+    write('   ?- paradero_mas_mujeres_estudiantes(P, C).'), nl,
+    write('   ?- paradero_mayor_perdida_escolar(P, M).'), nl,
+    write('   ?- paradero_mejor_ratio(P, R).'), nl,
+    write('   ?- paradero_menor_promedio_pago(P, Prom).'), nl, nl,
+    write('2. Consultas especiales:'), nl,
+    write('   ?- total_hipotetico_estudiantes(T).'), nl,
+    write('   ?- pasajeros_ventanilla_no_universitaria(L).'), nl,
+    write('   ?- estudiante_no_baja_unmsm(N).'), nl,
+    write('   ?- porcentaje_mujeres_tramo(ventanilla, carmen_de_la_legua_reynoso, P).'), nl, nl,
+    write('3. Búsquedas específicas:'), nl,
+    write('   ?- pasajeros_nombre_coincide_paradero(L).'), nl,
+    write('   ?- paradero_mas_externos_universitaria(P, C).'), nl.      
+      
+      `,
+      sampleQueries: [
+        "total_suben_paradero(ventanilla, Total).",
+        "porcentaje_mujeres_universitarias(san_jose, Porcentaje).",
+        "monto_total_paradero(urb_industrial_oquendo, MontoTotal).",
+      ],
+    },
+  },
+  "14": {
+    "sistema-minas": {
+      title: "Sistema de Minas",
+      description:
+        "Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.",
+      initialProgram: `
+% --------------
+% CLAN FAMILIAR
+% --------------
+      
+:- use_module(library(lists)).
+
+    
+% Padres
+padre(ludwig, gretel).
+padre(ludwig, hans).
+padre(ludwig, katerina).
+padre(ludwig, erik).
+padre(ludwig, elsa).
+
+padre(albrecht, bruno).
+padre(albrecht, monika).
+
+padre(wilhelm, julian).
+padre(wilhelm, felix).
+padre(wilhelm, isabella).
+
+padre(bruno, leon).
+padre(bruno, sofia).
+padre(bruno, maximilian).
+padre(bruno, elena).
+
+padre(leon, lara).
+
+% Madres
+madre(helga, gretel).
+madre(helga, hans).
+madre(helga, katerina).
+madre(helga, erik).
+madre(helga, elsa).
+
+madre(frieda, bruno).
+madre(frieda, monika).
+
+madre(elsa, leon).
+madre(elsa, sofia).
+madre(elsa, maximilian).
+madre(elsa, elena).
+
+madre(sofia, julian).
+madre(sofia, felix).
+madre(sofia, isabella).
+
+madre(amelia, lara).
+
+% Género
+sexo(ludwig, hombre).
+sexo(helga, mujer).
+sexo(albrecht, hombre).
+sexo(frieda, mujer).
+sexo(gretel, mujer).
+sexo(hans, hombre).
+sexo(katerina, mujer).
+sexo(erik, hombre).
+sexo(elsa, mujer).
+sexo(bruno, hombre).
+sexo(monika, mujer).
+sexo(amelia, mujer).
+sexo(wilhelm, hombre).
+sexo(julian, hombre).
+sexo(felix, hombre).
+sexo(isabella, mujer).
+sexo(leon, hombre).
+sexo(sofia, mujer).
+sexo(maximilian, hombre).
+sexo(elena, mujer).
+sexo(lara, mujer).
+
+% -------------------------------------
+% SECCIONES DE LA MINA Y ZONAS
+% -------------------------------------
+
+% seccion(Seccion, Zona)
+seccion(extraccion, 1).
+seccion(ventilacion, 1).
+seccion(geologia, 2).
+seccion(ingenieria, 2).
+seccion(supervision, 3).
+seccion(transporte, 3).
+seccion(mantenimiento, 3).
+seccion(clasificacion, 3).
+seccion(tallado, 4).
+seccion(joyeria, 4).
+seccion(seguridad, 4).
+seccion(logistica, 5).
+seccion(administracion, 6).
+seccion(ventas, 5).
+
+% -------------------------------------
+% PUESTOS DE CADA PERSONA
+% -------------------------------------
+
+% puesto(Persona, Seccion)
+puesto(elsa, extraccion).
+puesto(gretel, extraccion).
+puesto(felix, ventilacion).
+puesto(lara, geologia).
+puesto(monika, geologia).
+puesto(leon, ingenieria).
+puesto(isabella, supervision).
+puesto(amelia, supervision).
+puesto(sofia, supervision).
+puesto(albrecht, transporte).
+puesto(katerina, clasificacion).
+puesto(hans, clasificacion).
+puesto(wilhelm, mantenimiento).
+puesto(julian, tallado).
+puesto(erik, joyeria).
+puesto(bruno, logistica).
+puesto(maximilian, logistica).
+puesto(katerina, administracion).
+puesto(frieda, administracion).
+puesto(ludwig, ventas).
+puesto(helga, ventas).
+puesto(elena, seguridad).
+
+% -------------------------------------
+% REGLAS AUXILIARES
+% -------------------------------------
+
+% Progenitor (padre o madre)
+progenitor(P, Hijo) :- padre(P, Hijo).
+progenitor(P, Hijo) :- madre(P, Hijo).
+
+% Descendiente
+descendiente(X, Y) :- progenitor(Y, X).
+descendiente(X, Y) :- progenitor(P, X), descendiente(P, Y).
+
+% Saber en qué zona trabaja una persona
+trabaja_en_zona(Persona, Zona) :-
+    puesto(Persona, Seccion),
+    seccion(Seccion, Zona).
+
+% Obtener personas que trabajan en una zona
+personas_en_zona(Zona, Persona) :-
+    seccion(Seccion, Zona),
+    puesto(Persona, Seccion).
+
+% Hermanos (comparten un progenitor)
+hermano(X, Y) :-
+    padre(P, X), padre(P, Y),
+    madre(M, X), madre(M, Y),
+    X \= Y.
+
+% Abuelos
+abuelo(A, N) :- padre(A, P), progenitor(P, N).
+abuela(A, N) :- madre(A, P), progenitor(P, N).
+
+% Reglas para nieto y bisnieto
+nieto(Nieto, Abuelo) :- progenitor(Abuelo, Padre), progenitor(Padre, Nieto).
+bisnieto(BisNieto, BisAbuelo) :- progenitor(BisAbuelo, Abuelo), progenitor(Abuelo, Padre), progenitor(Padre, BisNieto).
+
+% ------------------------------------------
+% Personas que trabajan después de una zona
+% ------------------------------------------
+personas_despues(Zona, Lista) :-
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, ZonaS), ZonaS > Zona),
+            Lista).
+
+personas_despues_inmediato(Zona, Lista) :-
+    SiguienteZona is Zona + 1,
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, SiguienteZona)),
+            Lista).
+
+% ------------------------------------------
+% Personas que trabajan entre dos zonas
+% ------------------------------------------
+personas_entre_exclusivo(Z1, Z2, Lista) :-
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, Zona),
+             Zona > Z1, Zona < Z2),
+            Lista).
+
+personas_entre_inclusivo(Z1, Z2, Lista) :-
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, Zona),
+             Zona >= Z1, Zona =< Z2),
+            Lista).
+
+% --------------------------------------------
+% Secciones que están después de una zona
+% --------------------------------------------
+secciones_despues(Zona, Lista) :-
+    findall(S,
+            (seccion(S, ZonaS), ZonaS > Zona),
+            Lista).
+
+secciones_despues_inmediato(Zona, Lista) :-
+    SiguienteZona is Zona + 1,
+    findall(S,
+            seccion(S, SiguienteZona),
+            Lista).
+
+% ----------------------------------------
+% Secciones que están entre dos zonas
+% ----------------------------------------
+secciones_entre_exclusivo(Z1, Z2, Lista) :-
+    findall(S,
+            (seccion(S, Zona), Zona > Z1, Zona < Z2),
+            Lista).
+
+secciones_entre_inclusivo(Z1, Z2, Lista) :-
+    findall(S,
+            (seccion(S, Zona), Zona >= Z1, Zona =< Z2),
+            Lista).
+
+% Hermano con su puesto y zona
+hermanos_y_sus_puestos(Persona, Hermano, Seccion, Zona) :-
+    hermano(Persona, Hermano),
+    puesto(Hermano, Seccion),
+    seccion(Seccion, Zona).
+
+% -----------------------
+% Descendientes en la mina
+% -----------------------
+descendientes_despues_zona(Ancestro, Zona, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Z),
+         Z > Zona),
+    Lista).
+
+descendientes_despues_inmediato(Ancestro, Zona, Lista) :-
+    Siguiente is Zona + 1,
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Siguiente)),
+    Lista).
+
+descendientes_en_zona(Ancestro, Zona, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+descendientes_entre_exclusivo(Ancestro, Zona1, Zona2, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona > Zona1,
+         Zona < Zona2),
+    Lista).
+
+descendientes_entre_inclusivo(Ancestro, Zona1, Zona2, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona >= Zona1,
+         Zona =< Zona2),
+    Lista).
+
+% Descendientes con filtro de género
+descendientes_por_genero_despues_zona(Ancestro, Zona, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Z),
+         Z > Zona),
+    Lista).
+
+descendientes_por_genero_despues_inmediato(Ancestro, Zona, Genero, Lista) :-
+    ZonaSig is Zona + 1,
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, ZonaSig)),
+    Lista).
+
+descendientes_por_genero_en_zona(Ancestro, Zona, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+descendientes_por_genero_entre_exclusivo(Ancestro, Zona1, Zona2, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona > Zona1,
+         Zona < Zona2),
+    Lista).
+
+descendientes_por_genero_entre_inclusivo(Ancestro, Zona1, Zona2, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona >= Zona1,
+         Zona =< Zona2),
+    Lista).
+
+descendientes_en_zona_y_seccion(Ancestro, Zona, Seccion, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Seccion),
+         seccion(Seccion, Zona)),
+    Lista).
+
+descendientes_en_zona_y_seccion_genero(Ancestro, Zona, Seccion, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Seccion),
+         seccion(Seccion, Zona)),
+    Lista).
+
+% Nietos
+nietos_en_zona(Persona, Zona, Lista) :-
+    findall(N,
+        (nieto(N, Persona),
+         puesto(N, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+nietos_despues_zona(Abuelo, Zona, Lista) :-
+    findall(N,
+        (nieto(N, Abuelo),
+         puesto(N, Sect),
+         seccion(Sect, Z),
+         Z > Zona),
+    Lista).
+
+% Bisnietos
+bisnietos_en_zona(Persona, Zona, Lista) :-
+    findall(BN,
+        (bisnieto(BN, Persona),
+         puesto(BN, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+bisnietos_despues_zona(Abuelo, Zona, Lista) :-
+    findall(BN,
+        (bisnieto(BN, Abuelo),
+         puesto(BN, Sect),
+         seccion(Sect, Z),
+         Z > Zona),
+    Lista).
+
+% ----------- MÓDULO DE CONTEO -------------
+
+contar_lista(Lista, Total) :- length(Lista, Total).
+
+% Descendientes
+cantidad_descendientes_despues(Ancestro, Zona, Total) :-
+    descendientes_despues_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+cantidad_descendientes_en_zona(Ancestro, Zona, Total) :-
+    descendientes_en_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+% Nietos
+cantidad_nietos_despues(Ancestro, Zona, Total) :-
+    nietos_despues_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+% Bisnietos
+cantidad_bisnietos_despues(Ancestro, Zona, Total) :-
+    bisnietos_despues_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+% Consultas de conteo adicionales
+cantidad_personas_en_seccion(Seccion, Total) :-
+    findall(P, puesto(P, Seccion), Lista),
+    contar_lista(Lista, Total).
+
+cantidad_personas_por_genero_en_zona(Zona, Genero, Total) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, Genero)), Lista),
+    contar_lista(Lista, Total).
+
+% --------------------------------
+% VALOR DE PRODUCCIÓN POR SECCIÓN
+% --------------------------------
+
+costo_seccion(extraccion, 1000).
+costo_seccion(ventilacion, 500).
+costo_seccion(geologia, 1200).
+costo_seccion(ingenieria, 1500).
+costo_seccion(supervision, 800).
+costo_seccion(transporte, 750).
+costo_seccion(mantenimiento, 600).
+costo_seccion(clasificacion, 2000).
+costo_seccion(tallado, 3000).
+costo_seccion(joyeria, 5000).
+costo_seccion(seguridad, 400).
+costo_seccion(logistica, 900).
+costo_seccion(administracion, 1100).
+costo_seccion(ventas, 2500).
+
+valor_produccion_persona(Persona, Valor) :-
+    puesto(Persona, Seccion),
+    costo_seccion(Seccion, Valor).
+
+% Valor total de producción
+valor_total_produccion(ListaPersonas, Total) :-
+    findall(V,
+        (member(Persona, ListaPersonas),
+         valor_produccion_persona(Persona, V)),
+        Valores),
+    sumlist(Valores, Total).
+
+% Valor de producción por género
+valor_produccion_hombres(ListaPersonas, Total) :-
+    findall(V,
+        (member(Persona, ListaPersonas),
+         sexo(Persona, hombre),
+         valor_produccion_persona(Persona, V)),
+        Valores),
+    sumlist(Valores, Total).
+
+valor_produccion_mujeres(ListaPersonas, Total) :-
+    findall(V,
+        (member(Persona, ListaPersonas),
+         sexo(Persona, mujer),
+         valor_produccion_persona(Persona, V)),
+        Valores),
+    sumlist(Valores, Total).
+
+% Valor de producción por zona
+valor_produccion_por_zona(Zona, Total) :-
+    findall(V,
+        (puesto(Persona, Seccion),
+         seccion(Seccion, Zona),
+         valor_produccion_persona(Persona, V)),
+    Valores),
+    sumlist(Valores, Total).
+
+% Valor de producción por sección
+valor_produccion_total_seccion(Seccion, Total) :-
+    findall(V,
+        (puesto(Persona, Seccion),
+         valor_produccion_persona(Persona, V)),
+    Valores),
+    sumlist(Valores, Total).
+
+% Reporte de valor de producción por sección
+reporte_valor_produccion_secciones(Lista) :-
+    findall((Seccion, Total),
+        (seccion(Seccion, _), valor_produccion_total_seccion(Seccion, Total)),
+    Lista).
+
+% Consultas de valor de producción adicionales
+valor_produccion_mujeres_en_zona(Zona, Total) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, mujer)), Mujeres),
+    valor_total_produccion(Mujeres, Total).
+
+valor_produccion_hombres_en_zona(Zona, Total) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, hombre)), Hombres),
+    valor_total_produccion(Hombres, Total).
+
+valor_produccion_secciones_despues_zona(Zona, Total) :-
+    findall(S, (seccion(S, Z), Z > Zona), Secciones),
+    findall(V, (member(S, Secciones), valor_produccion_total_seccion(S, V)), Valores),
+    sumlist(Valores, Total).
+
+% NUEVAS CONSULTAS ADICIONALES
+personas_en_zona_por_genero(Zona, Genero, Lista) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, Genero)), Lista).
+
+secciones_en_zona(Zona, Lista) :-
+    findall(S, seccion(S, Zona), Lista).
+
+puestos_por_genero(Genero, Lista) :-
+    findall((Persona, Seccion), (puesto(Persona, Seccion), sexo(Persona, Genero)), Lista).
+
+valor_produccion_por_genero_en_seccion(Seccion, Genero, Total) :-
+    findall(P, (puesto(P, Seccion), sexo(P, Genero)), Personas),
+    valor_total_produccion(Personas, Total).
+
+total_valor_mina(Total) :-
+    findall(V, valor_produccion_por_zona(_, V), Valores),
+    sumlist(Valores, Total).
+
+
+
+      `,
+      sampleQueries: [
+        "progenitor(ludwig, Hijo), puesto(Hijo, Seccion), seccion(Seccion, Zona).",
+      ],
+    },
     "sistema-combinado": {
       title: "Sistema Experto de Paraderos y Árbol Genealógico",
       description: "Arbol genealogico y paraderos de transporte público",
@@ -2423,18 +3452,6 @@ descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDesce
       ],
     },
   },
-  "14": {
-    "sistema-minas": {
-      title: "Sistema de Minas",
-      description:
-        "Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.",
-      initialProgram: ``,
-      sampleQueries: [
-        "total_valor_mina(Total)",
-        "puestos_por_genero(Genero, Lista)",
-      ],
-    },
-  },
   "15": {
     "sistema-legal": {
       title: "Sistema Experto Legal",
@@ -2446,14 +3463,14 @@ descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDesce
 % ================================================================
 % SISTEMA EXPERTO LEGAL AVANZADO
 % ================================================================
-:- dynamic persona/4.
-:- dynamic caso/6.
-:- dynamic estadistica_cache/3.
-:- dynamic log_evento/3.
-:- dynamic alerta/3.
 :- use_module(library(date)).
 :- use_module(library(aggregate)).
 :- use_module(library(lists)).
+:- dynamic(persona/4).
+:- dynamic(caso/6).
+:- dynamic(estadistica_cache/3).
+:- dynamic(log_evento/3).
+:- dynamic(alerta/3).
 
 
 % ================================================================
@@ -3097,7 +4114,9 @@ mostrar_ranking :-
         
         
         `,
-      sampleQueries: ["ranking_personas_por_casos(Ranking)."],
+      sampleQueries: [
+        "findall(P, (persona(P, _, _, eeuu), caso(P, _, _, alta, activo, _)), People).",
+      ],
     },
   },
 };
