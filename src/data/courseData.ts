@@ -259,7 +259,8 @@ export const weeks: Week[] = [
         name: "Sistema experto - Reino Fungi",
         type: "prolog",
         id: "sistema-experto-reino-fungi",
-        description:"Modela la clasificación científica de los hongos. Permite identificar especies según sus características y consultar sus propiedades."
+        description:
+          "Modela la clasificación científica de los hongos. Permite identificar especies según sus características y consultar sus propiedades.",
       },
       {
         name: "Reino Fungi",
@@ -317,6 +318,20 @@ export const weeks: Week[] = [
     ],
     homework: [
       {
+        id: "sistema-combinado",
+        name: "Sistema Experto de Paraderos y Árbol Genealógico",
+        type: "prolog",
+        description:
+          "Sistema que combina un árbol genealógico y un sistema experto de paraderos de transporte público. Permite consultar relaciones familiares y ubicaciones de paraderos.",
+      },
+      {
+        name: "Sistema de Paraderos",
+        type: "graph",
+        url: "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
+        description:
+          "Visualización del los hechos base del  sistema experto de paraderos de transporte público.",
+      },
+      {
         name: "Redes Generativas Adversarias",
         type: "slides",
         url: "https://www.canva.com/design/DAGqG0KSfhc/vCQYbb9O6th56slLc-AkGQ/edit",
@@ -337,22 +352,24 @@ export const weeks: Week[] = [
     ],
     homework: [
       {
+        id: "sistema-minas",
+        name: "Sistema de Minas",
+        type: "prolog",
+        description:
+          "Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.",
+      },
+      {
+        name: "Sistema de Minas",
+        type: "graph",
+        url: "/FISI-IA-2025-G6/mina_familiar_updated.html",
+        description:
+          "Visualización del los hechos base del sistema experto de minas.",
+      },
+      {
         name: "IA Creativa, Ética y Futuro",
         type: "slides",
         url: "https://www.canva.com/design/DAGrN5liS80/G0DL8l_rbs_tH0LbtmI_gQ/edit?utm_content=DAGrN5liS80&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
       },
-      {
-        id: "sistema-combinado",
-        name: "Sistema Experto de Paraderos y Árbol Genealógico",
-        type: "prolog",
-        description:
-          "Sistema que combina un árbol genealógico y un sistema experto de paraderos de transporte público. Permite consultar relaciones familiares y ubicaciones de paraderos.",
-      },
-      {
-        name: "Sistema de Paraderos",
-        type: "graph",
-        url: "https://www.canva.com/design/DAGraCYNUpA/zEcWxqplFJqilhqqt1Ar7A/edit?ui=eyJIIjp7IkEiOnRydWV9fQ",
-      }
     ],
   },
   {
@@ -372,7 +389,7 @@ export const weeks: Week[] = [
       },
       {
         id: "sistema-legal",
-        name: "Sistema experto legal",
+        name: "Trabajo Final - Sistema experto legal",
         type: "prolog",
         description:
           "Sistema que analiza casos legales para descubrir estadísticas, identificar patrones y marcar a individuos de alto riesgo según factores como la edad y  el tipo de caso.",
@@ -381,7 +398,7 @@ export const weeks: Week[] = [
         name: "Sistema experto legal",
         type: "graph",
         url: "https://www.canva.com/design/DAGtNJJcCh4/euqDKpy_08GvLZmpFVpxOg/edit",
-      }
+      },
     ],
   },
   {
@@ -389,7 +406,35 @@ export const weeks: Week[] = [
     title: "Examen Final",
     description: "Evaluación final cubriendo todo el material del curso.",
     topics: ["Repaso general", "Evaluación final"],
-    homework: [],
+    homework: [
+      {
+        name: "Examen Final",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1IQP6byAa_i1s_jgaubAddVOPZUgCvO5k/edit?usp=sharing&ouid=108748101525097255424&rtpof=true&sd=true",
+        description: "Ordoñez Neyra Andrés Rafael",
+      },
+      {
+        name: "Examen Final",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1Z5pNOi__ouWnE90LrX7atnZLLBiLcnAMYcdDhhY3wfo/edit?usp=drivesdk",
+        description:
+          "Titto Carhuas Carolhay",
+      },
+      {
+        name: "Examen Final",
+        type: "doc",
+        url: "https://docs.google.com/document/d/1rpguf7w2Sv8sjfqjaBtW7dlK2Bv3w1upFOuh3WqJG3c/edit?usp=sharing",
+        description:
+          "Contreras Auqui Erikson",
+      },
+      {
+        name: "Examen Final",
+        type: "doc",
+        url: "https://docs.google.com/document/d/15-HDt94bbv0bR5axw-hu2-T_AE7ONoLWBDxCwY1tYqw/edit?tab=t.0",
+        description:
+          "Quispe Carbajal Kevin, Tantahuillca Navarro Alexander",
+      }
+    ],
   },
 ];
 

@@ -6,7 +6,7 @@ import Logo from "@/assets/unmsm.png";
 
 <template>
   <header
-    class="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    class="fixed top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full"
   >
     <div
       class="container mx-auto h-16 flex items-center justify-between px-4"

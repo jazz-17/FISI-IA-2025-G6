@@ -963,7 +963,7 @@ total_primas(N,Y) :- findall(X, prima(X,Y), Lista), length(Lista,N).
       ],
     },
   },
-  "14": {
+  "13": {
     "sistema-combinado": {
       title: "Sistema Experto de Paraderos y Árbol Genealógico",
       description: "Arbol genealogico y paraderos de transporte público",
@@ -2423,6 +2423,18 @@ descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDesce
       ],
     },
   },
+  "14": {
+    "sistema-minas": {
+      title: "Sistema de Minas",
+      description:
+        "Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.",
+      initialProgram: ``,
+      sampleQueries: [
+        "total_valor_mina(Total)",
+        "puestos_por_genero(Genero, Lista)",
+      ],
+    },
+  },
   "15": {
     "sistema-legal": {
       title: "Sistema Experto Legal",
@@ -2430,16 +2442,15 @@ descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDesce
       imageUrl:
         "https://www.canva.com/design/DAGtNJJcCh4/euqDKpy_08GvLZmpFVpxOg/edit",
       initialProgram: `
+        
 % ================================================================
-% SISTEMA EXPERTO LEGAL AVANZADO% ================================================================
-:- use_module(library(date)).
-:- use_module(library(aggregate)).
-:- use_module(library(lists)).
-:- dynamic(persona/4).
-:- dynamic(caso/6).
-:- dynamic(estadistica_cache/3).
-:- dynamic(log_evento/3).
-:- dynamic(alerta/3).
+% SISTEMA EXPERTO LEGAL AVANZADO
+% ================================================================
+:- dynamic persona/4.
+:- dynamic caso/6.
+:- dynamic estadistica_cache/3.
+:- dynamic log_evento/3.
+:- dynamic alerta/3.
 :- use_module(library(date)).
 :- use_module(library(aggregate)).
 :- use_module(library(lists)).
@@ -2451,7 +2462,7 @@ descendientes_idiomas_suben_despues(Ancestro, ListaIdiomas, Paradero, ListaDesce
 
 
 % Base de datos inicial de personas
-persona(juana, 34, hombre, eeuu).
+persona(john, 34, hombre, eeuu).
 persona(emily, 27, mujer, canada).
 persona(michael, 16, hombre, eeuu).
 persona(sophia, 45, mujer, canada).
@@ -2482,9 +2493,8 @@ persona(jacob, 18, hombre, eeuu).
 persona(madison, 42, mujer, reino_unido).
 persona(elijah, 36, hombre, australia).
 
-
 % Casos legales
-caso(juana, violencia_familiar, 'Violencia domestica reportada', alta, activo, fecha(2025,6,1)).
+caso(john, violencia_familiar, 'Violencia domestica reportada', alta, activo, fecha(2025,6,1)).
 caso(emily, herencia, 'Disputa por herencia familiar', media, pendiente, fecha(2025,5,15)).
 caso(michael, desalojo, 'Amenaza de desalojo por impago', alta, activo, fecha(2025,6,10)).
 caso(sophia, pension_alimentos, 'Solicitud pension alimenticia', alta, activo, fecha(2025,5,20)).
@@ -2514,9 +2524,15 @@ caso(chloe, herencia, 'Herencia de padres fallecidos', media, pendiente, fecha(2
 caso(jacob, desalojo, 'Joven emancipado', media, activo, fecha(2025,5,27)).
 caso(madison, pension_alimentos, 'Pension tras divorcio', alta, activo, fecha(2025,6,6)).
 caso(elijah, estafa, 'Fraude en inversiones', alta, investigacion, fecha(2025,5,24)).
+caso(fatima, violencia_familiar, 'Agresi n fisica a hijos', media, activo, fecha(2025,6,14)).
+caso(zara, violencia_familiar, 'Pelea por herencia', alta, pendiente, fecha(2025,7,15)).
+caso(zara, herencia, 'Hogar en litigio', media, activo, fecha(2025,6,19)).
+caso(akira, herencia, 'Disputa entre hermanos', alta, activo, fecha(2025,7,20)).
+caso(akira, pension_alimentos,'Reincidente hace 4 meses', media, pendiente, fecha(2024,2,18)).
+caso(akira, estafa, 'Multiples cr ditos hipotecados', media, baja, fecha(2025,4,20)).
 
 
-% Regiones geográficas
+% Regiones geogr ficas
 region(eeuu, norteamerica).
 region(canada, norteamerica).
 region(reino_unido, europa).
@@ -2547,7 +2563,7 @@ region(brasil, sudamerica).
 % ================================================================
 
 
-% Consulta 1: Porcentaje de género con casos
+% Consulta 1: Porcentaje de g nero con casos
 porcentaje_genero_con_caso(Genero, Porcentaje) :-
     findall(P, persona(P, _, Genero, _), TotalPersonas),
     findall(P, (persona(P, _, Genero, _), caso(P, _, _, _, _, _)), PersonasConCaso),
@@ -2555,36 +2571,26 @@ porcentaje_genero_con_caso(Genero, Porcentaje) :-
     length(PersonasConCaso, ConCaso),
     Total > 0,
     Porcentaje is (ConCaso * 100) / Total.
-
-
-% Consulta 2: Distribución de tipos de caso por género
+% Consulta 2: Distribuci n de tipos de caso por g nero
 distribucion_tipos_por_genero(Genero, Distribucion) :-
     findall(Tipo, (persona(P, _, Genero, _), caso(P, Tipo, _, _, _, _)), Tipos),
     contar_ocurrencias(Tipos, Distribucion).
-
-
-% Consulta 3: Casos por país
+% Consulta 3: Casos por pa s
 casos_por_pais(Pais, Cantidad) :-
     findall(P, (persona(P, _, _, Pais), caso(P, _, _, _, _, _)), Casos),
     sort(Casos, CasosUnicos),
     length(CasosUnicos, Cantidad).
-
-
-% Consulta 4: Personas con múltiples casos
+% Consulta 4: Personas con m ltiples casos
 personas_con_multiples_casos(Personas) :-
     findall(P, (persona(P, _, _, _), findall(_, caso(P, _, _, _, _, _), Casos), length(Casos, N), N > 1), Personas),
     list_to_set(Personas, PersonasUnicas),
     Personas = PersonasUnicas.
-
-
-% Consulta 5: Casos urgentes por región
+% Consulta 5: Casos urgentes por regi n
 casos_urgentes_por_region(Region, Cantidad) :-
     findall(P, (persona(P, _, _, Pais), region(Pais, Region), caso(P, _, _, alta, _, _)), Casos),
     sort(Casos, CasosUnicos),
     length(CasosUnicos, Cantidad).
-
-
-% Consulta 6: Tiempo promedio de resolución
+% Consulta 6: Tiempo promedio de resoluci n
 tiempo_promedio_resolucion(Tipo, DiasPromedio) :-
     findall(D, caso_resuelto(_, Tipo, _, D), Duraciones),
     length(Duraciones, N), N > 0,
@@ -2592,7 +2598,7 @@ tiempo_promedio_resolucion(Tipo, DiasPromedio) :-
     DiasPromedio is Suma / N.
 
 
-% Consulta 7: Estadísticas de edad por tipo de caso
+% Consulta 7: Estad sticas de edad por tipo de caso
 estadisticas_edad_por_tipo(Tipo, Min, Max, Promedio) :-
     findall(Edad, (persona(P, Edad, _, _), caso(P, Tipo, _, _, _, _)), Edades),
     Edades \= [],
@@ -2606,57 +2612,45 @@ estadisticas_edad_por_tipo(Tipo, Min, Max, Promedio) :-
 % Consulta 8: Personas en riesgo (menores con casos urgentes)
 personas_en_riesgo(Personas) :-
     findall(P, (persona(P, Edad, _, _), Edad < 18, caso(P, _, _, alta, _, _)), Personas).
-
-
-% Consulta 9: Casos por prioridad y género
+% Consulta 9: Casos por prioridad y g nero
 casos_por_prioridad_genero(Prioridad, Genero, Cantidad) :-
     findall(P, (persona(P, _, Genero, _), caso(P, _, _, Prioridad, _, _)), Casos),
     sort(Casos, CasosUnicos),
     length(CasosUnicos, Cantidad).
-
-
-% Consulta 10: Top países con más casos
+% Consulta 10: Top pa ses con m s casos
 top_paises_con_casos(N, Top) :-
     findall(Pais-Cant, (region(Pais, _), casos_por_pais(Pais, Cant)), PaisesCant),
     sort(2, @>=, PaisesCant, Ordenados),
     length(Ordenados, L),
     (N > L -> N1 = L ; N1 = N),
     primeros_n(N1, Ordenados, Top).
-
-
 % ================================================================
 % NUEVAS CONSULTAS INTUITIVAS (AGREGADAS)
 % ================================================================
 
 
-% 1. Consulta básica de personas con filtros
+% 1. Consulta b sica de personas con filtros
 consultar_personas(Genero, RangoEdad, Pais, Personas) :-
-    (Genero == todos -> true ; true),
-    (Pais == todos -> true ; true),
+    (Genero == todos -> true ; persona(_, _, Genero, _)),
+    (Pais == todos -> true ; persona(_, _, _, Pais)),
     rango_edad(RangoEdad, MinEdad, MaxEdad),
     findall(P, (persona(P, Edad, Genero, Pais),
                   Edad >= MinEdad, Edad =< MaxEdad), Personas).
-
-
 % Rangos de edad predefinidos
 rango_edad(menores, 0, 17).
 rango_edad(adultos_jovenes, 18, 35).
 rango_edad(adultos, 36, 65).
 rango_edad(mayores, 66, 120).
 rango_edad(todos, 0, 120).
-
-
-% 2. Consulta de casos con múltiples filtros
+% 2. Consulta de casos con m ltiples filtros
 consultar_casos(Tipo, Prioridad, Estado, FechaInicio, FechaFin, Casos) :-
-    (Tipo == todos -> true ; true),
-    (Prioridad == todas -> true ; true),
-    (Estado == todos -> true ; true),
+    (Tipo == todos -> true ; caso(_, Tipo, _, _, _, _)),
+    (Prioridad == todas -> true ; caso(_, _, _, Prioridad, _, _)),
+    (Estado == todos -> true ; caso(_, _, _, _, Estado, _)),
     findall([P, Tipo, Desc],
             (caso(P, Tipo, Desc, Prioridad, Estado, Fecha),
              entre_fechas(Fecha, FechaInicio, FechaFin)), Casos).
-
-
-% 3. Estadísticas demográficas básicas
+% 3. Estad sticas demogr ficas b sicas
 estadisticas_demograficas(Genero, Pais, Estadisticas) :-
     findall(Edad, persona(_, Edad, Genero, Pais), Edades),
     Edades \= [],
@@ -2666,27 +2660,19 @@ estadisticas_demograficas(Genero, Pais, Estadisticas) :-
     sum_list(Edades, Suma),
     Promedio is Suma / Cantidad,
     Estadisticas = [cantidad-Cantidad, min-Min, max-Max, promedio-Promedio].
-
-
-% 4. Búsqueda de patrones predefinidos
+% 4. B squeda de patrones predefinidos
 buscar_patrones(riesgo_familiar, Resultados) :-
     findall(P, (persona(P, Edad, _, _), Edad < 18,
                   caso(P, violencia_familiar, _, alta, _, _)), Resultados).
-
-
 buscar_patrones(estafas_vulnerables, Resultados) :-
     findall(P, (persona(P, Edad, _, _), Edad > 60,
                   caso(P, estafa, _, alta, _, _)), Resultados).
-
-
 buscar_patrones(multiples_problemas, Resultados) :-
     findall(P, (persona(P, _, _, _),
                   (caso(P, Tipo1, _, _, _, _),
                    caso(P, Tipo2, _, _, _, _),
                    Tipo1 \= Tipo2)), Resultados).
-
-
-% 5. Distribución geográfica de casos
+% 5. Distribuci n geogr fica de casos
 distribucion_geografica(TipoCaso, Distribucion) :-
     findall(Region-Cantidad,
             (region(Pais, Region),
@@ -2696,17 +2682,182 @@ distribucion_geografica(TipoCaso, Distribucion) :-
             Distribucion).
 
 
-% 6. Evolución temporal de casos
-% 6. Evolución temporal de casos CORREGIDO
+% 6. Evoluci n temporal de casos
 evolucion_temporal(TipoCaso, Meses, Datos) :-
     findall([Mes-Cantidad],
             (between(1, Meses, Mes),
              findall(P, caso(P, TipoCaso, _, _, _, fecha(_, Mes, _)), Casos),
              length(Casos, Cantidad)),
             Datos).
+% ================================================================
+% CONSULTAS SIMPLIFICADAS PARA USUARIOS NO T CNICOS
+% ================================================================
+
+
+% Versi n FINAL - Calcula el porcentaje de g nero DENTRO de un tipo de caso espec fico
+porcentaje_genero_en_caso(TipoCaso, Genero, Porcentaje) :-
+    % Total de personas con este tipo de caso
+    findall(P, caso(P, TipoCaso, _, _, _, _), TotalCasosRaw),
+    % Asegurarse de contar solo personas  nicas en el caso, no duplicados si una persona tiene m ltiples casos del mismo tipo
+    list_to_set(TotalCasosRaw, TotalCasosUnicos),
+    length(TotalCasosUnicos, Total),
+
+    % Personas del g nero espec fico con este tipo de caso
+    findall(P, (persona(P, _, Genero, _), caso(P, TipoCaso, _, _, _, _)), CasosGeneroRaw),
+    list_to_set(CasosGeneroRaw, CasosGeneroUnicos),
+    length(CasosGeneroUnicos, Cantidad),
+
+    Total > 0, % Evitar divisi n por cero
+    Porcentaje is (Cantidad * 100) / Total.
 
 
 
+% 2. Distribuci n de casos por g nero (todos los casos)
+distribucion_casos_por_genero(Genero, Distribucion) :-
+    findall(Tipo, (persona(P, _, Genero, _), caso(P, Tipo, _, _, _, _)), Tipos),
+    contar_ocurrencias(Tipos, Distribucion).
+% 3. Cantidad de personas de un g nero en casos de alta prioridad
+casos_urgentes_por_genero(Genero, Cantidad) :-
+    findall(P, (persona(P, _, Genero, _), caso(P, _, _, alta, _, _)), Casos),
+    sort(Casos, CasosUnicos),
+    length(CasosUnicos, Cantidad).
+% 4. Personas menores de edad en un tipo de caso espec fico
+menores_en_caso(TipoCaso, Personas) :-
+    findall([P, Edad], (persona(P, Edad, _, _), Edad < 18, caso(P, TipoCaso, _, _, _, _)), Personas).
+% 5. Porcentaje de casos de un tipo por pa s
+porcentaje_caso_por_pais(TipoCaso, Pais, Porcentaje) :-
+    findall(_, persona(_, _, _, Pais), TotalPais),
+    findall(_, (persona(P, _, _, Pais), caso(P, TipoCaso, _, _, _, _)), CasosPais),
+    length(TotalPais, Total),
+    length(CasosPais, Casos),
+    Total > 0,
+    Porcentaje is (Casos * 100) / Total.
+% 6. Consulta simple por tipo de caso y g nero
+consultar_caso_genero(TipoCaso, Genero, Resultados) :-
+    findall([P, Edad, Pais],
+            (persona(P, Edad, Genero, Pais), caso(P, TipoCaso, _, _, _, _)),
+            Resultados).
+% 7. Resumen estadistico por g nero (con la modificaci n del "tipo_mas_comun")
+% Versi n corregida del predicado resumen_estadistico_genero/2
+resumen_estadistico_genero(Genero, Resumen) :-
+    % Total personas de ese g nero
+    findall(P, persona(P, _, Genero, _), TotalPersonas),
+    length(TotalPersonas, TotalP),
+
+    % Personas con casos ( nicas)
+    findall(P, (persona(P, _, Genero, _), caso(P, _, _, _, _, _)), ConCasosRaw),
+    list_to_set(ConCasosRaw, ConCasosUnicos),
+    length(ConCasosUnicos, TotalConCasos),
+
+    % Casos urgentes ( nicos)
+    findall(P, (persona(P, _, Genero, _), caso(P, _, _, alta, _, _)), UrgentesRaw),
+    list_to_set(UrgentesRaw, UrgentesUnicos),
+    length(UrgentesUnicos, TotalUrgentes),
+
+    % Tipo de caso m s com n
+    findall(Tipo, (persona(P, _, Genero, _), caso(P, Tipo, _, _, _, _)), Tipos),
+    (Tipos \= [] ->
+        contar_ocurrencias(Tipos, DistribucionTipos),
+        sort(2, @>=, DistribucionTipos, TiposOrdenados),
+        TiposOrdenados = [[TipoMasComun, _]|_]
+    ;
+        TipoMasComun = 'Ninguno'
+    ),
+
+    % C lculo seguro del porcentaje
+    Porcentaje is (TotalConCasos*100.0)/max(TotalP, 1), % Evita divisi n por cero
+
+    % Construcci n del resumen
+    Resumen = [
+        total_personas-TotalP,
+        personas_con_casos-TotalConCasos,
+        porcentaje_con_casos-Porcentaje,
+        casos_urgentes-TotalUrgentes,
+        tipo_mas_comun-TipoMasComun
+    ].
+
+% Predicado auxiliar para evitar divisi n por cero
+max(X, Y, Max) :- X >= Y -> Max = X ; Max = Y.
+max(X, Y) :- max(X, Y, _).
+
+
+% Consulta f cil para estad sticas de g nero
+estadisticas_genero(Genero) :-
+    % 1. Obtener datos b sicos
+    findall(P, persona(P, _, Genero, _), Personas),
+    length(Personas, TotalPersonas),
+
+    % 2. Personas con casos ( nicas)
+    findall(P, (persona(P, _, Genero, _), caso(P, _, _, _, _, _)), ConCasos),
+    sort(ConCasos, ConCasosUnicos),
+    length(ConCasosUnicos, TotalConCasos),
+
+    % 3. C lculo de porcentaje seguro
+    Porcentaje is (TotalConCasos*100)/max(TotalPersonas,1),
+
+    % 4. Mostrar resultados en formato simple
+    format('~n=== ESTADISTICAS PARA ~w ===~n', [Genero]),
+    format('Total de personas: ~w~n', [TotalPersonas]),
+    format('Personas con casos: ~w (~1f%)~n', [TotalConCasos, Porcentaje]),
+
+    % 5. Mostrar tipos de casos m s comunes
+    findall(Tipo, (persona(P, _, Genero, _), caso(P, Tipo, _, _, _, _)), Tipos),
+    (Tipos \= [] ->
+        contar_ocurrencias(Tipos, Distribucion),
+        sort(2, @>=, Distribucion, Ordenados),
+        write('Tipos de casos mas frecuentes:~n'),
+        forall(member([Tipo,Cant], Ordenados),
+               format('- ~w: ~w casos~n', [Tipo, Cant]))
+    ;
+        write('No hay casos registrados~n')
+    ),
+    write('============================~n~n').
+
+% Predicado auxiliar para evitar divisi n por cero
+max(A, B, Mayor) :- (A >= B -> Mayor = A ; Mayor = B).
+max(A, B) :- max(A, B, _).
+
+
+
+% ================================================================
+% NUEVA CONSULTA: PERSONAS POR TIPO DE CASO Y RANGO DE EDAD
+% ================================================================
+
+% Predicado principal para listar personas en un tipo de caso y rango de edad.
+% Uso: consultar_personas_en_caso_y_rango(TipoCaso, EdadMinima, EdadMaxima).
+consultar_personas_en_caso_y_rango(TipoCaso, EdadMinima, EdadMaxima) :-
+    % 1. Encontrar personas que cumplan las condiciones
+    findall(P, (
+        persona(P, Edad, _, _), % La persona y su edad
+        Edad >= EdadMinima,     % La edad es mayor o igual a la m nima
+        Edad =< EdadMaxima,     % La edad es menor o igual a la m xima
+        caso(P, TipoCaso, _, _, _, _) % La persona tiene un caso del TipoCaso especificado
+    ), PersonasUnicasRaw),
+    % 2. Asegurarse de que la lista de personas sea  nica (sin duplicados)
+    list_to_set(PersonasUnicasRaw, PersonasEncontradas),
+    % 3. Mostrar los resultados de forma clara
+    escribir_resultado_personas_en_caso_y_rango(TipoCaso, EdadMinima, EdadMaxima, PersonasEncontradas).
+
+% Predicado auxiliar para formatear y mostrar los resultados de la consulta anterior.
+escribir_resultado_personas_en_caso_y_rango(TipoCaso, EdadMinima, EdadMaxima, Personas) :-
+    format('~n=== PERSONAS EN CASOS DE "~w" ENTRE ~w Y ~w A OS ===~n', [TipoCaso, EdadMinima, EdadMaxima]),
+    (   Personas = [] ->
+        write('No se encontraron personas que cumplan el criterio en la base de datos.~n')
+    ;   length(Personas, Total),
+        format('Total de personas encontradas: ~w~n', [Total]),
+        write('----------------------------------------------------~n'),
+        forall(member(P, Personas), (
+            persona(P, Edad, Genero, Pais), % Obtener detalles de la persona
+            % Si el caso existe (ya sabemos que existe por el findall), obtener su descripci n y prioridad
+            caso(P, TipoCaso, Descripcion, Prioridad, Estado, Fecha), % Obtener detalles espec ficos del caso
+            format('- ~w (Edad: ~w, G nero: ~w, Pa s: ~w)~n', [P, Edad, Genero, Pais]),
+            format('  Detalles del caso: "~w" (Prioridad: ~w, Estado: ~w, Fecha: ~w)~n', [Descripcion, Prioridad, Estado, Fecha])
+        ))
+    ),
+    write('====================================================~n~n').
+
+
+consultar_personas_en_caso_y_rango(violencia_familiar, 25, 40).
 
 % ================================================================
 % PREDICADOS AUXILIARES
@@ -2717,14 +2868,10 @@ evolucion_temporal(TipoCaso, Meses, Datos) :-
 contar_ocurrencias(Lista, Conteo) :-
     msort(Lista, Ordenada),
     contar_ocurrencias_aux(Ordenada, Conteo).
-
-
 contar_ocurrencias_aux([], []).
 contar_ocurrencias_aux([X|Xs], [[X, N]|Resto]) :-
     contar_repeticiones(X, [X|Xs], N, Restantes),
     contar_ocurrencias_aux(Restantes, Resto).
-
-
 contar_repeticiones(_, [], 0, []).
 contar_repeticiones(X, [X|Xs], N, Resto) :-
     contar_repeticiones(X, Xs, N1, Resto),
@@ -2736,23 +2883,19 @@ contar_repeticiones(X, [Y|Xs], 0, [Y|Xs]) :-
 % Obtener los primeros N elementos
 primeros_n(0, _, []) :- !.
 primeros_n(N, [H|T], [H|R]) :- N > 0, N1 is N-1, primeros_n(N1, T, R).
-
-
-% Predicado temporal para casos resueltos (deberías implementar tu lógica real)
+% Predicado temporal para casos resueltos (deber as implementar tu l gica real)
 caso_resuelto(Persona, Tipo, Prioridad, Dias) :-
     caso(Persona, Tipo, _, Prioridad, resuelto, fecha(A1,M1,D1)),
     fecha_resolucion(fecha(A2,M2,D2)), % Sin variables no usadas
     dias_transcurridos(fecha(A1,M1,D1), fecha(A2,M2,D2), Dias).
-fecha_resolucion(fecha(2025, 12, 31)). % Fecha de resolución ficticia
+fecha_resolucion(fecha(2025, 12, 31)). % Fecha de resoluci n ficticia
 
 
-% Calcular días entre fechas
+% Calcular d as entre fechas
 dias_transcurridos(fecha(A1,M1,D1), fecha(A2,M2,D2), Dias) :-
     date_time_stamp(date(A1,M1,D1,0,0,0,0,-,-), T1),
     date_time_stamp(date(A2,M2,D2,0,0,0,0,-,-), T2),
     Dias is round((T2-T1)/86400).
-
-
 % Manejo de fechas mejorado
 entre_fechas(Fecha, Ini, Fin) :-
     Fecha = fecha(A,M,D),
@@ -2762,83 +2905,59 @@ entre_fechas(Fecha, Ini, Fin) :-
     date_time_stamp(date(Ai,Mi,Di,0,0,0,0,-,-), Ti),
     date_time_stamp(date(Af,Mf,Df,0,0,0,0,-,-), Tf),
     T >= Ti, T =< Tf.
-
-
 % ================================================================
-% MOSTRAR RESULTADOS (VERSIÓN OPTIMIZADA)
+% MOSTRAR RESULTADOS (VERSI N OPTIMIZADA)
 % ================================================================
 
 
 % Consultas originales
 mostrar_resultado(porcentaje_genero_con_caso(Genero, P)) :-
     format('Porcentaje de ~w con casos: ~2f%~n', [Genero, P]).
-
-
 mostrar_resultado(distribucion_tipos_por_genero(Genero, D)) :-
-    format('Distribución para ~w:~n', [Genero]),
+    format('Distribuci n para ~w:~n', [Genero]),
     forall(member([Tipo, N], D), format('- ~w: ~w casos~n', [Tipo, N])).
-
-
 mostrar_resultado(casos_por_pais(Pais, C)) :-
     format('Casos en ~w: ~w~n', [Pais, C]).
-
-
 mostrar_resultado(personas_con_multiples_casos(P)) :-
-    format('Personas con múltiples casos (~w):~n', [length(P)]),
+    format('Personas con m ltiples casos (~w):~n', [length(P)]),
     forall(member(Persona, P), (
         persona(Persona, Edad, Genero, _),
-        format('- ~w (~w años, ~w)~n', [Persona, Edad, Genero])
+        format('- ~w (~w a os, ~w)~n', [Persona, Edad, Genero])
     )).
-
-
 mostrar_resultado(casos_urgentes_por_region(Region, C)) :-
     format('Casos urgentes en ~w: ~w~n', [Region, C]).
-
-
 mostrar_resultado(tiempo_promedio_resolucion(Tipo, D)) :-
-    format('Tiempo promedio para resolver ~w: ~1f días~n', [Tipo, D]).
-
-
+    format('Tiempo promedio para resolver ~w: ~1f d as~n', [Tipo, D]).
 mostrar_resultado(estadisticas_edad_por_tipo(Tipo, Min, Max, Prom)) :-
-    format('Estadísticas de edad para ~w:~n', [Tipo]),
-    format('- Mínima: ~w años~n', [Min]),
-    format('- Máxima: ~w años~n', [Max]),
-    format('- Promedio: ~1f años~n', [Prom]).
-
-
+    format('Estad sticas de edad para ~w:~n', [Tipo]),
+    format('- M nima: ~w a os~n', [Min]),
+    format('- M xima: ~w a os~n', [Max]),
+    format('- Promedio: ~1f a os~n', [Prom]).
 mostrar_resultado(personas_en_riesgo(P)) :-
     format('Personas en riesgo (~w):~n', [length(P)]),
     forall(member(Persona, P), (
         persona(Persona, Edad, _, Pais),
-        format('- ~w (~w años, ~w)~n', [Persona, Edad, Pais])
+        format('- ~w (~w a os, ~w)~n', [Persona, Edad, Pais])
     )).
-
-
 mostrar_resultado(casos_por_prioridad_genero(Prioridad, Genero, C)) :-
     format('Casos ~w para ~w: ~w~n', [Prioridad, Genero, C]).
-
-
 mostrar_resultado(top_paises_con_casos(N, Top)) :-
-    format('Top ~w países con más casos:~n', [N]),
+    format('Top ~w pa ses con m s casos:~n', [N]),
     forall(member(Pais-Cant, Top), format('- ~w: ~w casos~n', [Pais, Cant])).
-
-
 % Consultas intuitivas
 mostrar_resultado(consultar_personas(Genero, Rango, Pais, Personas)) :-
-    format('Personas filtradas [Género: ~w, Edad: ~w, País: ~w]:~n', [Genero, Rango, Pais]),
+    format('Personas filtradas [G nero: ~w, Edad: ~w, Pa s: ~w]:~n', [Genero, Rango, Pais]),
     (   Personas = [] ->
         write('  No se encontraron resultados.\n')
     ;   length(Personas, Total),
         format('  Total: ~w personas~n', [Total]),
         forall(member(P, Personas), (
-            persona(P, Edad, Genero, Pais),
+            persona(P, Edad, Genero, PaisActual), % Renombrar Pais para evitar conflicto
             findall(T, caso(P, T, _, _, _, _), Casos),
             length(Casos, NCasos),
-            format('  - ~w (~w años, ~w casos)~n', [P, Edad, NCasos])
+            format('  - ~w (~w a os, ~w, ~w casos)~n', [P, Edad, Genero, NCasos])
         ))
     ).
-
-
 % Mostrar resultados CORREGIDO (una sola vez)
 mostrar_resultado(consultar_casos(Tipo, Prioridad, Estado, _, _, Casos)) :-
     format('Casos filtrados [Tipo: ~w, Prioridad: ~w, Estado: ~w]:~n', [Tipo, Prioridad, Estado]),
@@ -2848,20 +2967,16 @@ mostrar_resultado(consultar_casos(Tipo, Prioridad, Estado, _, _, Casos)) :-
         format('  Total: ~w casos~n', [Total]),
         forall(member([P,_T,D], Casos), (
             persona(P, Edad, Genero, _),
-            format('  - ~w (~w, ~w años): ~w~n', [P, Genero, Edad, D])
+            format('  - ~w (~w, ~w a os): ~w~n', [P, Genero, Edad, D])
         ))
     ).
-
-
 mostrar_resultado(estadisticas_demograficas(Genero, Pais, Stats)) :-
-    format('Estadísticas demográficas [Género: ~w, País: ~w]:~n', [Genero, Pais]),
+    format('Estad sticas demogr ficas [G nero: ~w, Pa s: ~w]:~n', [Genero, Pais]),
     forall(member(Key-Value, Stats), (
         format('  - ~|~w~t~20+: ~w~n', [Key, Value])
     )).
-
-
 mostrar_resultado(buscar_patrones(Tipo, Resultados)) :-
-    format('Resultados del patrón "~w":~n', [Tipo]),
+    format('Resultados del patr n "~w":~n', [Tipo]),
     (   Resultados = [] ->
         write('  No se encontraron coincidencias.\n')
     ;   length(Resultados, Total),
@@ -2870,13 +2985,11 @@ mostrar_resultado(buscar_patrones(Tipo, Resultados)) :-
             persona(P, Edad, Genero, Pais),
             findall(T, caso(P, T, _, _, _, _), Tipos),
             atomic_list_concat(Tipos, ', ', TiposStr),
-            format('  - ~w (~w, ~w años, ~w): ~w~n', [P, Genero, Edad, Pais, TiposStr])
+            format('  - ~w (~w, ~w a os, ~w): ~w~n', [P, Genero, Edad, Pais, TiposStr])
         ))
     ).
-
-
 mostrar_resultado(distribucion_geografica(Tipo, Distribucion)) :-
-    format('Distribución geográfica de casos de ~w:~n', [Tipo]),
+    format('Distribuci n geogr fica de casos de ~w:~n', [Tipo]),
     (   Distribucion = [] ->
         write('  No hay datos disponibles.\n')
     ;   forall(member(Region-Cant, Distribucion), (
@@ -2888,18 +3001,92 @@ mostrar_resultado(distribucion_geografica(Tipo, Distribucion)) :-
 
 
 mostrar_resultado(evolucion_temporal(Tipo, Meses, Datos)) :-
-    format('Evolución de casos de ~w (últimos ~w meses):~n', [Tipo, Meses]),
+    format('Evoluci n de casos de ~w ( ltimos ~w meses):~n', [Tipo, Meses]),
     (   Datos = [] ->
         write('  No hay datos disponibles.\n')
     ;   forall(member([Mes-Cant], Datos), (
             format('  - Mes ~|~\`0t~2+~w: ~t~w~5+ casos~n', [Mes, Cant])
         ))
     ).
+mostrar_resultado(porcentaje_genero_en_caso(Tipo, Genero, P)) :-
+    format('Porcentaje de ~w en casos de ~w: ~1f%~n', [Genero, Tipo, P]).
+mostrar_resultado(distribucion_casos_por_genero(Genero, D)) :-
+    format('Distribuci n de casos para ~w:~n', [Genero]),
+    forall(member([Tipo, N], D), format('- ~w: ~w casos~n', [Tipo, N])).
+mostrar_resultado(casos_urgentes_por_genero(Genero, C)) :-
+    format('Casos urgentes para ~w: ~w~n', [Genero, C]).
+mostrar_resultado(menores_en_caso(Tipo, Personas)) :-
+    format('Menores de edad en casos de ~w (~w):~n', [Tipo, length(Personas)]),
+    forall(member([P, Edad], Personas), (
+        persona(P, _, Genero, Pais),
+        format('- ~w (~w a os, ~w, ~w)~n', [P, Edad, Genero, Pais])
+    )).
+mostrar_resultado(porcentaje_caso_por_pais(Tipo, Pais, P)) :-
+    format('Porcentaje de casos de ~w en ~w: ~1f%~n', [Tipo, Pais, P]).
+mostrar_resultado(consultar_caso_genero(Tipo, Genero, Resultados)) :-
+    format('Personas ~w en casos de ~w (~w):~n', [Genero, Tipo, length(Resultados)]),
+    forall(member([P, Edad, Pais], Resultados), (
+        format('- ~w (~w a os, ~w)~n', [P, Edad, Pais])
+    )).
 
+% ESTA REGLA ESPEC FICA DEBE IR ANTES DE LA GEN RICA
+mostrar_resultado(resumen_estadistico_genero(Genero, Resumen)) :-
+    % Verificaci n de seguridad
+    (is_list(Resumen) ->
+        format('=== RESUMEN ESTAD STICO PARA ~w ===~n', [Genero]),
+        (member(total_personas-Total, Resumen) ->
+            format('Total personas: ~w~n', [Total]) ; true),
+        (member(personas_con_casos-ConCasos, Resumen) ->
+            format('Personas con casos: ~w~n', [ConCasos]) ; true),
+        (member(porcentaje_con_casos-Porcentaje, Resumen) ->
+            format('Porcentaje con casos: ~1f%~n', [Porcentaje]) ; true),
+        (member(casos_urgentes-Urgentes, Resumen) ->
+            format('Casos urgentes: ~w~n', [Urgentes]) ; true),
+        (member(tipo_mas_comun-TipoComun, Resumen) ->
+            format('Tipo de caso m s com n: ~w~n', [TipoComun]) ; true),
+        write('=====================================~n')
+    ;
+        write('Error: El resumen no tiene formato v lido~n')
+    ),
+    !.
+    
+% :- use_module(library(lists)). % Necesario para member/2 y otros helpers de listas.
 
-mostrar_resultado(_) :-
-    write('Consulta ejecutada correctamente.\n').
+% ================================================================
+% CONSULTA PARA RANKING DE PERSONAS CON M S CASOS
+% ================================================================
 
+% Predicado para generar el ranking de personas con m s casos.
+% Ranking: Unificar  con la lista de pares Conteo-Nombre, ordenada de mayor a menor.
+ranking_personas_por_casos(Ranking) :-
+    % 1. Recoleta todos los nombres de las personas que tienen un caso.
+    %    findall/3 busca en todos los hechos \`caso(Nombre, ...)\` y crea la lista 'Nombres'.
+    findall(Nombre, caso(Nombre, _, _, _, _, _), Nombres),
+
+    % 2. Crea una lista con los nombres  nicos para no contar dos veces a la misma persona.
+    sort(Nombres, NombresUnicos),
+
+    % 3. Para cada nombre  nico, cuenta cu ntas veces aparece en la lista original.
+    %    Esto nos da el n mero de casos por persona.
+    findall(Conteo-NombreUnico,
+            (member(NombreUnico, NombresUnicos),
+             % Contamos las ocurrencias de cada NombreUnico en la lista completa de Nombres
+             aggregate_all(count, member(NombreUnico, Nombres), Conteo)),
+            Pares),
+
+    % 4. Ordena la lista de pares en orden descendente basado en el conteo.
+    %    - '1' indica que se ordena por el primer elemento del par (el Conteo).
+    %    - '@>=' especifica el orden descendente.
+    sort(1, @>=, Pares, Ranking).
+
+% Predicado adicional para mostrar el resultado de forma clara.
+mostrar_ranking :-
+    ranking_personas_por_casos(Ranking),
+    write('=== TOP DE PERSONAS CON M S CASOS ==='), nl,
+    write('-------------------------------------'), nl,
+    forall(member(Conteo-Nombre, Ranking),
+           format('~w casos - ~w~n', [Conteo, Nombre])),
+    write('-------------------------------------'), nl.
 
 % ================================================================
 % INICIO DEL SISTEMA
@@ -2907,77 +3094,10 @@ mostrar_resultado(_) :-
 :- write('Sistema Experto Legal v4.0 cargado correctamente.'), nl,
    write('Escriba "ayuda." para ver las consultas disponibles.'), nl,
    write('Escriba "iniciar_sistema." para comenzar.'), nl.
-
-
-?- findall(P, caso(P, violencia_familiar, _, _, _, _), CasosTotales), 
-   length(CasosTotales, Total), 
-   findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), CasosMujeres), 
-   length(CasosMujeres, Mujeres), 
-   Total > 0, 
-   Porcentaje is (Mujeres * 100) / Total, 
-   format('Porcentaje de mujeres en violencia familiar: ~2f%~n', [Porcentaje]).
-
-
-
-
-
-
-
-
-findall([Nombre, Edad, Genero, Pais], 
-        (persona(Nombre, Edad, Genero, Pais), 
-         Edad > 25, 
-         caso(Nombre, violencia_familiar, _, _, _, _)), 
-        Resultados).
-
-
-
-
-findall(P, persona(P, _, mujer, _), MujeresTotales),
-findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresConViolencia),
-length(MujeresTotales, Total),
-length(MujeresConViolencia, ConCaso),
-Total > 0,  % Evitar división por cero
-Porcentaje is (ConCaso * 100) / Total,
-format('Porcentaje de mujeres con violencia familiar: ~1f% (~w de ~w)~n', [Porcentaje, ConCaso, Total]).
-
-
-
-
-
-
-
-% Predicado principal
-porcentaje_mujeres_entre_violencia(Porcentaje) :-
-    findall(P, caso(P, violencia_familiar, _, _, _, _), TotalCasos),
-    findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresCasos),
-    length(TotalCasos, Total),
-    length(MujeresCasos, Mujeres),
-    Total > 0,  % Evita división por cero
-    Porcentaje is (Mujeres * 100) / Total.
-
-% Predicado para mostrar el resultado
-mostrar_porcentaje_mujeres_violencia :-
-    porcentaje_mujeres_entre_violencia(Porcentaje),
-    findall(P, caso(P, violencia_familiar, _, _, _, _), TotalCasos),
-    findall(P, (persona(P, _, mujer, _), caso(P, violencia_familiar, _, _, _, _)), MujeresCasos),
-    length(TotalCasos, Total),
-    length(MujeresCasos, Mujeres),
-    format('Análisis de casos de violencia familiar:~n'),
-    format('- Total de casos: ~w~n', [Total]),
-    format('- Casos que son mujeres: ~w~n', [Mujeres]),
-    format('- Porcentaje de mujeres: ~1f%~n', [Porcentaje]).
-
-
-      
-      
-      `,
-
-      sampleQueries: [
-        "aplicar_ley(robo, Ley).",
-        "sancion(penal, Tipo).",
-        "caso_tipo(contrato, TipoCaso).",
-      ],
+        
+        
+        `,
+      sampleQueries: ["ranking_personas_por_casos(Ranking)."],
     },
   },
 };
