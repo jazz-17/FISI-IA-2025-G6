@@ -15,4 +15,498 @@
         },
       };
     }
-  </script> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="Z29GD32" prefix="v0" component-url="/FISI-IA-2025-G6/_astro/PrologInterpreter.BUysUZ7F.js" component-export="default" renderer-url="/FISI-IA-2025-G6/_astro/client.BXu-_hXn.js" props="{&quot;title&quot;:[0,&quot;Sistema de Minas&quot;],&quot;description&quot;:[0,&quot;Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.&quot;],&quot;initialProgram&quot;:[0,&quot;&quot;],&quot;sampleQueries&quot;:[1,[[0,&quot;total_valor_mina(Total)&quot;],[0,&quot;puestos_por_genero(Genero, Lista)&quot;]]],&quot;sourceCodeUrl&quot;:[0],&quot;imageUrl&quot;:[0]}" ssr client="load" opts="{&quot;name&quot;:&quot;PrologInterpreter&quot;,&quot;value&quot;:true}" await-children><div class="min-h-screen bg-background flex flex-col grow"><header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm"><div class="max-w-7xl mx-auto px-6 py-4 flex items-center space-x-4"><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2 text-gray-600 ml-[-5rem] dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg> Volver al Curso <!--]--></button><div class="flex-shrink-0"><img src="/FISI-IA-2025-G6/_astro/swi_logo.CShJYm1_.svg" alt="Prolog Logo" class="h-10 w-10 object-contain"></div><div class="flex-1 min-w-0"><h1 class="text-2xl font-semibold text-gray-900 dark:text-white truncate">Sistema de Minas</h1><p class="mt-1 text-sm text-gray-500 dark:text-gray-400 truncate">Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.</p></div><div class="flex items-center space-x-6"><!----><!----></div></div></header><div class="px-4 py-6 grow flex"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 grow"><div class="space-y-4 min-h-full flex flex-col"><div class="bg-card border rounded-lg p-4 flex flex-col grow"><div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold">Editor Prolog</h2><div class="flex gap-2"><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg> Cargar Programa <!--]--></button></div></div><textarea class="p-3 bg-background border grow rounded-md font-mono text-sm resize-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Escribe tu programa Prolog aquí..."></textarea></div><div class="bg-card border rounded-lg p-4"><h3 class="text-lg font-semibold mb-4">Consultas</h3><div class="space-y-3"><div class="flex gap-2"><input value="likes(sam, X)." type="text" class="flex-1 p-2 bg-background border rounded-md font-mono text-sm focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="?- likes(sam, X)."><button data-slot="button" class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play w-4 h-4"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg> Ejecutar <!--]--></button></div><div><p class="text-sm text-muted-foreground mb-2"> Consultas de ejemplo: </p><div class="flex flex-wrap gap-2"><!--[--><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 font-mono text-xs"><!--[-->total_valor_mina(Total)<!--]--></button><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 font-mono text-xs"><!--[-->puestos_por_genero(Genero, Lista)<!--]--></button><!--]--></div></div></div></div></div><div class="bg-card border rounded-lg p-4 flex flex-col"><div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold">Consola de Salida</h2><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw w-4 h-4"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> Limpiar <!--]--></button></div><div class="bg-background border rounded-md p-4 grow overflow-y-auto"><pre class="font-mono text-sm whitespace-pre-wrap">Ejecuta una consulta para ver los resultados...</pre><!----></div></div></div></div></div><!--astro:end--></astro-island>  </body></html>
+  </script> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();;(()=>{var A=Object.defineProperty;var g=(i,o,a)=>o in i?A(i,o,{enumerable:!0,configurable:!0,writable:!0,value:a}):i[o]=a;var d=(i,o,a)=>g(i,typeof o!="symbol"?o+"":o,a);{let i={0:t=>m(t),1:t=>a(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(a(t)),5:t=>new Set(a(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>1/0*t},o=t=>{let[l,e]=t;return l in i?i[l](e):void 0},a=t=>t.map(o),m=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([l,e])=>[l,o(e)]));class y extends HTMLElement{constructor(){super(...arguments);d(this,"Component");d(this,"hydrator");d(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let c=this.querySelectorAll("astro-slot"),n={},h=this.querySelectorAll("template[data-astro-template]");for(let r of h){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("data-astro-template")||"default"]=r.innerHTML,r.remove())}for(let r of c){let s=r.closest(this.tagName);s!=null&&s.isSameNode(this)&&(n[r.getAttribute("name")||"default"]=r.innerHTML)}let p;try{p=this.hasAttribute("props")?m(JSON.parse(this.getAttribute("props"))):{}}catch(r){let s=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(s+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${s}`,this.getAttribute("props"),r),r}let u;await this.hydrator(this)(this.Component,p,n,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});d(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),c.disconnect(),this.childrenConnectedCallback()},c=new MutationObserver(()=>{var n;((n=this.lastChild)==null?void 0:n.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});c.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}async start(){let e=JSON.parse(this.getAttribute("opts")),c=this.getAttribute("client");if(Astro[c]===void 0){window.addEventListener(`astro:${c}`,()=>this.start(),{once:!0});return}try{await Astro[c](async()=>{let n=this.getAttribute("renderer-url"),[h,{default:p}]=await Promise.all([import(this.getAttribute("component-url")),n?import(n):()=>()=>{}]),u=this.getAttribute("component-export")||"default";if(!u.includes("."))this.Component=h[u];else{this.Component=h;for(let f of u.split("."))this.Component=this.Component[f]}return this.hydrator=p,this.hydrate},e,this)}catch(n){console.error(`[astro-island] Error hydrating ${this.getAttribute("component-url")}`,n)}}attributeChangedCallback(){this.hydrate()}}d(y,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",y)}})();</script><astro-island uid="21YzX5" prefix="v0" component-url="/FISI-IA-2025-G6/_astro/PrologInterpreter.BUysUZ7F.js" component-export="default" renderer-url="/FISI-IA-2025-G6/_astro/client.BXu-_hXn.js" props="{&quot;title&quot;:[0,&quot;Sistema de Minas&quot;],&quot;description&quot;:[0,&quot;Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.&quot;],&quot;initialProgram&quot;:[0,&quot;\n% --------------\n% CLAN FAMILIAR\n% --------------\n      \n:- use_module(library(lists)).\n\n    \n% Padres\npadre(ludwig, gretel).\npadre(ludwig, hans).\npadre(ludwig, katerina).\npadre(ludwig, erik).\npadre(ludwig, elsa).\n\npadre(albrecht, bruno).\npadre(albrecht, monika).\n\npadre(wilhelm, julian).\npadre(wilhelm, felix).\npadre(wilhelm, isabella).\n\npadre(bruno, leon).\npadre(bruno, sofia).\npadre(bruno, maximilian).\npadre(bruno, elena).\n\npadre(leon, lara).\n\n% Madres\nmadre(helga, gretel).\nmadre(helga, hans).\nmadre(helga, katerina).\nmadre(helga, erik).\nmadre(helga, elsa).\n\nmadre(frieda, bruno).\nmadre(frieda, monika).\n\nmadre(elsa, leon).\nmadre(elsa, sofia).\nmadre(elsa, maximilian).\nmadre(elsa, elena).\n\nmadre(sofia, julian).\nmadre(sofia, felix).\nmadre(sofia, isabella).\n\nmadre(amelia, lara).\n\n% Género\nsexo(ludwig, hombre).\nsexo(helga, mujer).\nsexo(albrecht, hombre).\nsexo(frieda, mujer).\nsexo(gretel, mujer).\nsexo(hans, hombre).\nsexo(katerina, mujer).\nsexo(erik, hombre).\nsexo(elsa, mujer).\nsexo(bruno, hombre).\nsexo(monika, mujer).\nsexo(amelia, mujer).\nsexo(wilhelm, hombre).\nsexo(julian, hombre).\nsexo(felix, hombre).\nsexo(isabella, mujer).\nsexo(leon, hombre).\nsexo(sofia, mujer).\nsexo(maximilian, hombre).\nsexo(elena, mujer).\nsexo(lara, mujer).\n\n% -------------------------------------\n% SECCIONES DE LA MINA Y ZONAS\n% -------------------------------------\n\n% seccion(Seccion, Zona)\nseccion(extraccion, 1).\nseccion(ventilacion, 1).\nseccion(geologia, 2).\nseccion(ingenieria, 2).\nseccion(supervision, 3).\nseccion(transporte, 3).\nseccion(mantenimiento, 3).\nseccion(clasificacion, 3).\nseccion(tallado, 4).\nseccion(joyeria, 4).\nseccion(seguridad, 4).\nseccion(logistica, 5).\nseccion(administracion, 6).\nseccion(ventas, 5).\n\n% -------------------------------------\n% PUESTOS DE CADA PERSONA\n% -------------------------------------\n\n% puesto(Persona, Seccion)\npuesto(elsa, extraccion).\npuesto(gretel, extraccion).\npuesto(felix, ventilacion).\npuesto(lara, geologia).\npuesto(monika, geologia).\npuesto(leon, ingenieria).\npuesto(isabella, supervision).\npuesto(amelia, supervision).\npuesto(sofia, supervision).\npuesto(albrecht, transporte).\npuesto(katerina, clasificacion).\npuesto(hans, clasificacion).\npuesto(wilhelm, mantenimiento).\npuesto(julian, tallado).\npuesto(erik, joyeria).\npuesto(bruno, logistica).\npuesto(maximilian, logistica).\npuesto(katerina, administracion).\npuesto(frieda, administracion).\npuesto(ludwig, ventas).\npuesto(helga, ventas).\npuesto(elena, seguridad).\n\n% -------------------------------------\n% REGLAS AUXILIARES\n% -------------------------------------\n\n% Progenitor (padre o madre)\nprogenitor(P, Hijo) :- padre(P, Hijo).\nprogenitor(P, Hijo) :- madre(P, Hijo).\n\n% Descendiente\ndescendiente(X, Y) :- progenitor(Y, X).\ndescendiente(X, Y) :- progenitor(P, X), descendiente(P, Y).\n\n% Saber en qué zona trabaja una persona\ntrabaja_en_zona(Persona, Zona) :-\n    puesto(Persona, Seccion),\n    seccion(Seccion, Zona).\n\n% Obtener personas que trabajan en una zona\npersonas_en_zona(Zona, Persona) :-\n    seccion(Seccion, Zona),\n    puesto(Persona, Seccion).\n\n% Hermanos (comparten un progenitor)\nhermano(X, Y) :-\n    padre(P, X), padre(P, Y),\n    madre(M, X), madre(M, Y),\n    X = Y.\n\n% Abuelos\nabuelo(A, N) :- padre(A, P), progenitor(P, N).\nabuela(A, N) :- madre(A, P), progenitor(P, N).\n\n% Reglas para nieto y bisnieto\nnieto(Nieto, Abuelo) :- progenitor(Abuelo, Padre), progenitor(Padre, Nieto).\nbisnieto(BisNieto, BisAbuelo) :- progenitor(BisAbuelo, Abuelo), progenitor(Abuelo, Padre), progenitor(Padre, BisNieto).\n\n% ------------------------------------------\n% Personas que trabajan después de una zona\n% ------------------------------------------\npersonas_despues(Zona, Lista) :-\n    findall(Persona,\n            (puesto(Persona, S), seccion(S, ZonaS), ZonaS &gt; Zona),\n            Lista).\n\npersonas_despues_inmediato(Zona, Lista) :-\n    SiguienteZona is Zona + 1,\n    findall(Persona,\n            (puesto(Persona, S), seccion(S, SiguienteZona)),\n            Lista).\n\n% ------------------------------------------\n% Personas que trabajan entre dos zonas\n% ------------------------------------------\npersonas_entre_exclusivo(Z1, Z2, Lista) :-\n    findall(Persona,\n            (puesto(Persona, S), seccion(S, Zona),\n             Zona &gt; Z1, Zona &lt; Z2),\n            Lista).\n\npersonas_entre_inclusivo(Z1, Z2, Lista) :-\n    findall(Persona,\n            (puesto(Persona, S), seccion(S, Zona),\n             Zona &gt;= Z1, Zona =&lt; Z2),\n            Lista).\n\n% --------------------------------------------\n% Secciones que están después de una zona\n% --------------------------------------------\nsecciones_despues(Zona, Lista) :-\n    findall(S,\n            (seccion(S, ZonaS), ZonaS &gt; Zona),\n            Lista).\n\nsecciones_despues_inmediato(Zona, Lista) :-\n    SiguienteZona is Zona + 1,\n    findall(S,\n            seccion(S, SiguienteZona),\n            Lista).\n\n% ----------------------------------------\n% Secciones que están entre dos zonas\n% ----------------------------------------\nsecciones_entre_exclusivo(Z1, Z2, Lista) :-\n    findall(S,\n            (seccion(S, Zona), Zona &gt; Z1, Zona &lt; Z2),\n            Lista).\n\nsecciones_entre_inclusivo(Z1, Z2, Lista) :-\n    findall(S,\n            (seccion(S, Zona), Zona &gt;= Z1, Zona =&lt; Z2),\n            Lista).\n\n% Hermano con su puesto y zona\nhermanos_y_sus_puestos(Persona, Hermano, Seccion, Zona) :-\n    hermano(Persona, Hermano),\n    puesto(Hermano, Seccion),\n    seccion(Seccion, Zona).\n\n% -----------------------\n% Descendientes en la mina\n% -----------------------\ndescendientes_despues_zona(Ancestro, Zona, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         puesto(D, Sect),\n         seccion(Sect, Z),\n         Z &gt; Zona),\n    Lista).\n\ndescendientes_despues_inmediato(Ancestro, Zona, Lista) :-\n    Siguiente is Zona + 1,\n    findall(D,\n        (descendiente(D, Ancestro),\n         puesto(D, Sect),\n         seccion(Sect, Siguiente)),\n    Lista).\n\ndescendientes_en_zona(Ancestro, Zona, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         puesto(D, Sect),\n         seccion(Sect, Zona)),\n    Lista).\n\ndescendientes_entre_exclusivo(Ancestro, Zona1, Zona2, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         puesto(D, Sect),\n         seccion(Sect, Zona),\n         Zona &gt; Zona1,\n         Zona &lt; Zona2),\n    Lista).\n\ndescendientes_entre_inclusivo(Ancestro, Zona1, Zona2, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         puesto(D, Sect),\n         seccion(Sect, Zona),\n         Zona &gt;= Zona1,\n         Zona =&lt; Zona2),\n    Lista).\n\n% Descendientes con filtro de género\ndescendientes_por_genero_despues_zona(Ancestro, Zona, Genero, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         sexo(D, Genero),\n         puesto(D, Sect),\n         seccion(Sect, Z),\n         Z &gt; Zona),\n    Lista).\n\ndescendientes_por_genero_despues_inmediato(Ancestro, Zona, Genero, Lista) :-\n    ZonaSig is Zona + 1,\n    findall(D,\n        (descendiente(D, Ancestro),\n         sexo(D, Genero),\n         puesto(D, Sect),\n         seccion(Sect, ZonaSig)),\n    Lista).\n\ndescendientes_por_genero_en_zona(Ancestro, Zona, Genero, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         sexo(D, Genero),\n         puesto(D, Sect),\n         seccion(Sect, Zona)),\n    Lista).\n\ndescendientes_por_genero_entre_exclusivo(Ancestro, Zona1, Zona2, Genero, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         sexo(D, Genero),\n         puesto(D, Sect),\n         seccion(Sect, Zona),\n         Zona &gt; Zona1,\n         Zona &lt; Zona2),\n    Lista).\n\ndescendientes_por_genero_entre_inclusivo(Ancestro, Zona1, Zona2, Genero, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         sexo(D, Genero),\n         puesto(D, Sect),\n         seccion(Sect, Zona),\n         Zona &gt;= Zona1,\n         Zona =&lt; Zona2),\n    Lista).\n\ndescendientes_en_zona_y_seccion(Ancestro, Zona, Seccion, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         puesto(D, Seccion),\n         seccion(Seccion, Zona)),\n    Lista).\n\ndescendientes_en_zona_y_seccion_genero(Ancestro, Zona, Seccion, Genero, Lista) :-\n    findall(D,\n        (descendiente(D, Ancestro),\n         sexo(D, Genero),\n         puesto(D, Seccion),\n         seccion(Seccion, Zona)),\n    Lista).\n\n% Nietos\nnietos_en_zona(Persona, Zona, Lista) :-\n    findall(N,\n        (nieto(N, Persona),\n         puesto(N, Sect),\n         seccion(Sect, Zona)),\n    Lista).\n\nnietos_despues_zona(Abuelo, Zona, Lista) :-\n    findall(N,\n        (nieto(N, Abuelo),\n         puesto(N, Sect),\n         seccion(Sect, Z),\n         Z &gt; Zona),\n    Lista).\n\n% Bisnietos\nbisnietos_en_zona(Persona, Zona, Lista) :-\n    findall(BN,\n        (bisnieto(BN, Persona),\n         puesto(BN, Sect),\n         seccion(Sect, Zona)),\n    Lista).\n\nbisnietos_despues_zona(Abuelo, Zona, Lista) :-\n    findall(BN,\n        (bisnieto(BN, Abuelo),\n         puesto(BN, Sect),\n         seccion(Sect, Z),\n         Z &gt; Zona),\n    Lista).\n\n% ----------- MÓDULO DE CONTEO -------------\n\ncontar_lista(Lista, Total) :- length(Lista, Total).\n\n% Descendientes\ncantidad_descendientes_despues(Ancestro, Zona, Total) :-\n    descendientes_despues_zona(Ancestro, Zona, Lista),\n    contar_lista(Lista, Total).\n\ncantidad_descendientes_en_zona(Ancestro, Zona, Total) :-\n    descendientes_en_zona(Ancestro, Zona, Lista),\n    contar_lista(Lista, Total).\n\n% Nietos\ncantidad_nietos_despues(Ancestro, Zona, Total) :-\n    nietos_despues_zona(Ancestro, Zona, Lista),\n    contar_lista(Lista, Total).\n\n% Bisnietos\ncantidad_bisnietos_despues(Ancestro, Zona, Total) :-\n    bisnietos_despues_zona(Ancestro, Zona, Lista),\n    contar_lista(Lista, Total).\n\n% Consultas de conteo adicionales\ncantidad_personas_en_seccion(Seccion, Total) :-\n    findall(P, puesto(P, Seccion), Lista),\n    contar_lista(Lista, Total).\n\ncantidad_personas_por_genero_en_zona(Zona, Genero, Total) :-\n    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, Genero)), Lista),\n    contar_lista(Lista, Total).\n\n% --------------------------------\n% VALOR DE PRODUCCIÓN POR SECCIÓN\n% --------------------------------\n\ncosto_seccion(extraccion, 1000).\ncosto_seccion(ventilacion, 500).\ncosto_seccion(geologia, 1200).\ncosto_seccion(ingenieria, 1500).\ncosto_seccion(supervision, 800).\ncosto_seccion(transporte, 750).\ncosto_seccion(mantenimiento, 600).\ncosto_seccion(clasificacion, 2000).\ncosto_seccion(tallado, 3000).\ncosto_seccion(joyeria, 5000).\ncosto_seccion(seguridad, 400).\ncosto_seccion(logistica, 900).\ncosto_seccion(administracion, 1100).\ncosto_seccion(ventas, 2500).\n\nvalor_produccion_persona(Persona, Valor) :-\n    puesto(Persona, Seccion),\n    costo_seccion(Seccion, Valor).\n\n% Valor total de producción\nvalor_total_produccion(ListaPersonas, Total) :-\n    findall(V,\n        (member(Persona, ListaPersonas),\n         valor_produccion_persona(Persona, V)),\n        Valores),\n    sumlist(Valores, Total).\n\n% Valor de producción por género\nvalor_produccion_hombres(ListaPersonas, Total) :-\n    findall(V,\n        (member(Persona, ListaPersonas),\n         sexo(Persona, hombre),\n         valor_produccion_persona(Persona, V)),\n        Valores),\n    sumlist(Valores, Total).\n\nvalor_produccion_mujeres(ListaPersonas, Total) :-\n    findall(V,\n        (member(Persona, ListaPersonas),\n         sexo(Persona, mujer),\n         valor_produccion_persona(Persona, V)),\n        Valores),\n    sumlist(Valores, Total).\n\n% Valor de producción por zona\nvalor_produccion_por_zona(Zona, Total) :-\n    findall(V,\n        (puesto(Persona, Seccion),\n         seccion(Seccion, Zona),\n         valor_produccion_persona(Persona, V)),\n    Valores),\n    sumlist(Valores, Total).\n\n% Valor de producción por sección\nvalor_produccion_total_seccion(Seccion, Total) :-\n    findall(V,\n        (puesto(Persona, Seccion),\n         valor_produccion_persona(Persona, V)),\n    Valores),\n    sumlist(Valores, Total).\n\n% Reporte de valor de producción por sección\nreporte_valor_produccion_secciones(Lista) :-\n    findall((Seccion, Total),\n        (seccion(Seccion, _), valor_produccion_total_seccion(Seccion, Total)),\n    Lista).\n\n% Consultas de valor de producción adicionales\nvalor_produccion_mujeres_en_zona(Zona, Total) :-\n    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, mujer)), Mujeres),\n    valor_total_produccion(Mujeres, Total).\n\nvalor_produccion_hombres_en_zona(Zona, Total) :-\n    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, hombre)), Hombres),\n    valor_total_produccion(Hombres, Total).\n\nvalor_produccion_secciones_despues_zona(Zona, Total) :-\n    findall(S, (seccion(S, Z), Z &gt; Zona), Secciones),\n    findall(V, (member(S, Secciones), valor_produccion_total_seccion(S, V)), Valores),\n    sumlist(Valores, Total).\n\n% NUEVAS CONSULTAS ADICIONALES\npersonas_en_zona_por_genero(Zona, Genero, Lista) :-\n    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, Genero)), Lista).\n\nsecciones_en_zona(Zona, Lista) :-\n    findall(S, seccion(S, Zona), Lista).\n\npuestos_por_genero(Genero, Lista) :-\n    findall((Persona, Seccion), (puesto(Persona, Seccion), sexo(Persona, Genero)), Lista).\n\nvalor_produccion_por_genero_en_seccion(Seccion, Genero, Total) :-\n    findall(P, (puesto(P, Seccion), sexo(P, Genero)), Personas),\n    valor_total_produccion(Personas, Total).\n\ntotal_valor_mina(Total) :-\n    findall(V, valor_produccion_por_zona(_, V), Valores),\n    sumlist(Valores, Total).\n\n\n\n      &quot;],&quot;sampleQueries&quot;:[1,[[0,&quot;progenitor(ludwig, Hijo), puesto(Hijo, Seccion), seccion(Seccion, Zona).&quot;]]],&quot;sourceCodeUrl&quot;:[0],&quot;imageUrl&quot;:[0]}" ssr client="load" opts="{&quot;name&quot;:&quot;PrologInterpreter&quot;,&quot;value&quot;:true}" await-children><div class="min-h-screen bg-background flex flex-col grow"><header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm"><div class="max-w-7xl mx-auto px-6 py-4 flex items-center space-x-4"><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2 text-gray-600 ml-[-5rem] dark:text-gray-300 hover:text-gray-800 dark:hover:text-white transition-colors"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left w-4 h-4"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg> Volver al Curso <!--]--></button><div class="flex-shrink-0"><img src="/FISI-IA-2025-G6/_astro/swi_logo.CShJYm1_.svg" alt="Prolog Logo" class="h-10 w-10 object-contain"></div><div class="flex-1 min-w-0"><h1 class="text-2xl font-semibold text-gray-900 dark:text-white truncate">Sistema de Minas</h1><p class="mt-1 text-sm text-gray-500 dark:text-gray-400 truncate">Sistema de peración minera, con consultas sobre genealogía, distribución de la fuerza laboral y valor de la producción en secciones y zonas.</p></div><div class="flex items-center space-x-6"><!----><!----></div></div></header><div class="px-4 py-6 grow flex"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6 grow"><div class="space-y-4 min-h-full flex flex-col"><div class="bg-card border rounded-lg p-4 flex flex-col grow"><div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold">Editor Prolog</h2><div class="flex gap-2"><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download-icon lucide-download w-4 h-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg> Cargar Programa <!--]--></button></div></div><textarea class="p-3 bg-background border grow rounded-md font-mono text-sm resize-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Escribe tu programa Prolog aquí...">
+% --------------
+% CLAN FAMILIAR
+% --------------
+      
+:- use_module(library(lists)).
+
+    
+% Padres
+padre(ludwig, gretel).
+padre(ludwig, hans).
+padre(ludwig, katerina).
+padre(ludwig, erik).
+padre(ludwig, elsa).
+
+padre(albrecht, bruno).
+padre(albrecht, monika).
+
+padre(wilhelm, julian).
+padre(wilhelm, felix).
+padre(wilhelm, isabella).
+
+padre(bruno, leon).
+padre(bruno, sofia).
+padre(bruno, maximilian).
+padre(bruno, elena).
+
+padre(leon, lara).
+
+% Madres
+madre(helga, gretel).
+madre(helga, hans).
+madre(helga, katerina).
+madre(helga, erik).
+madre(helga, elsa).
+
+madre(frieda, bruno).
+madre(frieda, monika).
+
+madre(elsa, leon).
+madre(elsa, sofia).
+madre(elsa, maximilian).
+madre(elsa, elena).
+
+madre(sofia, julian).
+madre(sofia, felix).
+madre(sofia, isabella).
+
+madre(amelia, lara).
+
+% Género
+sexo(ludwig, hombre).
+sexo(helga, mujer).
+sexo(albrecht, hombre).
+sexo(frieda, mujer).
+sexo(gretel, mujer).
+sexo(hans, hombre).
+sexo(katerina, mujer).
+sexo(erik, hombre).
+sexo(elsa, mujer).
+sexo(bruno, hombre).
+sexo(monika, mujer).
+sexo(amelia, mujer).
+sexo(wilhelm, hombre).
+sexo(julian, hombre).
+sexo(felix, hombre).
+sexo(isabella, mujer).
+sexo(leon, hombre).
+sexo(sofia, mujer).
+sexo(maximilian, hombre).
+sexo(elena, mujer).
+sexo(lara, mujer).
+
+% -------------------------------------
+% SECCIONES DE LA MINA Y ZONAS
+% -------------------------------------
+
+% seccion(Seccion, Zona)
+seccion(extraccion, 1).
+seccion(ventilacion, 1).
+seccion(geologia, 2).
+seccion(ingenieria, 2).
+seccion(supervision, 3).
+seccion(transporte, 3).
+seccion(mantenimiento, 3).
+seccion(clasificacion, 3).
+seccion(tallado, 4).
+seccion(joyeria, 4).
+seccion(seguridad, 4).
+seccion(logistica, 5).
+seccion(administracion, 6).
+seccion(ventas, 5).
+
+% -------------------------------------
+% PUESTOS DE CADA PERSONA
+% -------------------------------------
+
+% puesto(Persona, Seccion)
+puesto(elsa, extraccion).
+puesto(gretel, extraccion).
+puesto(felix, ventilacion).
+puesto(lara, geologia).
+puesto(monika, geologia).
+puesto(leon, ingenieria).
+puesto(isabella, supervision).
+puesto(amelia, supervision).
+puesto(sofia, supervision).
+puesto(albrecht, transporte).
+puesto(katerina, clasificacion).
+puesto(hans, clasificacion).
+puesto(wilhelm, mantenimiento).
+puesto(julian, tallado).
+puesto(erik, joyeria).
+puesto(bruno, logistica).
+puesto(maximilian, logistica).
+puesto(katerina, administracion).
+puesto(frieda, administracion).
+puesto(ludwig, ventas).
+puesto(helga, ventas).
+puesto(elena, seguridad).
+
+% -------------------------------------
+% REGLAS AUXILIARES
+% -------------------------------------
+
+% Progenitor (padre o madre)
+progenitor(P, Hijo) :- padre(P, Hijo).
+progenitor(P, Hijo) :- madre(P, Hijo).
+
+% Descendiente
+descendiente(X, Y) :- progenitor(Y, X).
+descendiente(X, Y) :- progenitor(P, X), descendiente(P, Y).
+
+% Saber en qué zona trabaja una persona
+trabaja_en_zona(Persona, Zona) :-
+    puesto(Persona, Seccion),
+    seccion(Seccion, Zona).
+
+% Obtener personas que trabajan en una zona
+personas_en_zona(Zona, Persona) :-
+    seccion(Seccion, Zona),
+    puesto(Persona, Seccion).
+
+% Hermanos (comparten un progenitor)
+hermano(X, Y) :-
+    padre(P, X), padre(P, Y),
+    madre(M, X), madre(M, Y),
+    X = Y.
+
+% Abuelos
+abuelo(A, N) :- padre(A, P), progenitor(P, N).
+abuela(A, N) :- madre(A, P), progenitor(P, N).
+
+% Reglas para nieto y bisnieto
+nieto(Nieto, Abuelo) :- progenitor(Abuelo, Padre), progenitor(Padre, Nieto).
+bisnieto(BisNieto, BisAbuelo) :- progenitor(BisAbuelo, Abuelo), progenitor(Abuelo, Padre), progenitor(Padre, BisNieto).
+
+% ------------------------------------------
+% Personas que trabajan después de una zona
+% ------------------------------------------
+personas_despues(Zona, Lista) :-
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, ZonaS), ZonaS &gt; Zona),
+            Lista).
+
+personas_despues_inmediato(Zona, Lista) :-
+    SiguienteZona is Zona + 1,
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, SiguienteZona)),
+            Lista).
+
+% ------------------------------------------
+% Personas que trabajan entre dos zonas
+% ------------------------------------------
+personas_entre_exclusivo(Z1, Z2, Lista) :-
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, Zona),
+             Zona &gt; Z1, Zona &lt; Z2),
+            Lista).
+
+personas_entre_inclusivo(Z1, Z2, Lista) :-
+    findall(Persona,
+            (puesto(Persona, S), seccion(S, Zona),
+             Zona &gt;= Z1, Zona =&lt; Z2),
+            Lista).
+
+% --------------------------------------------
+% Secciones que están después de una zona
+% --------------------------------------------
+secciones_despues(Zona, Lista) :-
+    findall(S,
+            (seccion(S, ZonaS), ZonaS &gt; Zona),
+            Lista).
+
+secciones_despues_inmediato(Zona, Lista) :-
+    SiguienteZona is Zona + 1,
+    findall(S,
+            seccion(S, SiguienteZona),
+            Lista).
+
+% ----------------------------------------
+% Secciones que están entre dos zonas
+% ----------------------------------------
+secciones_entre_exclusivo(Z1, Z2, Lista) :-
+    findall(S,
+            (seccion(S, Zona), Zona &gt; Z1, Zona &lt; Z2),
+            Lista).
+
+secciones_entre_inclusivo(Z1, Z2, Lista) :-
+    findall(S,
+            (seccion(S, Zona), Zona &gt;= Z1, Zona =&lt; Z2),
+            Lista).
+
+% Hermano con su puesto y zona
+hermanos_y_sus_puestos(Persona, Hermano, Seccion, Zona) :-
+    hermano(Persona, Hermano),
+    puesto(Hermano, Seccion),
+    seccion(Seccion, Zona).
+
+% -----------------------
+% Descendientes en la mina
+% -----------------------
+descendientes_despues_zona(Ancestro, Zona, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Z),
+         Z &gt; Zona),
+    Lista).
+
+descendientes_despues_inmediato(Ancestro, Zona, Lista) :-
+    Siguiente is Zona + 1,
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Siguiente)),
+    Lista).
+
+descendientes_en_zona(Ancestro, Zona, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+descendientes_entre_exclusivo(Ancestro, Zona1, Zona2, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona &gt; Zona1,
+         Zona &lt; Zona2),
+    Lista).
+
+descendientes_entre_inclusivo(Ancestro, Zona1, Zona2, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona &gt;= Zona1,
+         Zona =&lt; Zona2),
+    Lista).
+
+% Descendientes con filtro de género
+descendientes_por_genero_despues_zona(Ancestro, Zona, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Z),
+         Z &gt; Zona),
+    Lista).
+
+descendientes_por_genero_despues_inmediato(Ancestro, Zona, Genero, Lista) :-
+    ZonaSig is Zona + 1,
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, ZonaSig)),
+    Lista).
+
+descendientes_por_genero_en_zona(Ancestro, Zona, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+descendientes_por_genero_entre_exclusivo(Ancestro, Zona1, Zona2, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona &gt; Zona1,
+         Zona &lt; Zona2),
+    Lista).
+
+descendientes_por_genero_entre_inclusivo(Ancestro, Zona1, Zona2, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Sect),
+         seccion(Sect, Zona),
+         Zona &gt;= Zona1,
+         Zona =&lt; Zona2),
+    Lista).
+
+descendientes_en_zona_y_seccion(Ancestro, Zona, Seccion, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         puesto(D, Seccion),
+         seccion(Seccion, Zona)),
+    Lista).
+
+descendientes_en_zona_y_seccion_genero(Ancestro, Zona, Seccion, Genero, Lista) :-
+    findall(D,
+        (descendiente(D, Ancestro),
+         sexo(D, Genero),
+         puesto(D, Seccion),
+         seccion(Seccion, Zona)),
+    Lista).
+
+% Nietos
+nietos_en_zona(Persona, Zona, Lista) :-
+    findall(N,
+        (nieto(N, Persona),
+         puesto(N, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+nietos_despues_zona(Abuelo, Zona, Lista) :-
+    findall(N,
+        (nieto(N, Abuelo),
+         puesto(N, Sect),
+         seccion(Sect, Z),
+         Z &gt; Zona),
+    Lista).
+
+% Bisnietos
+bisnietos_en_zona(Persona, Zona, Lista) :-
+    findall(BN,
+        (bisnieto(BN, Persona),
+         puesto(BN, Sect),
+         seccion(Sect, Zona)),
+    Lista).
+
+bisnietos_despues_zona(Abuelo, Zona, Lista) :-
+    findall(BN,
+        (bisnieto(BN, Abuelo),
+         puesto(BN, Sect),
+         seccion(Sect, Z),
+         Z &gt; Zona),
+    Lista).
+
+% ----------- MÓDULO DE CONTEO -------------
+
+contar_lista(Lista, Total) :- length(Lista, Total).
+
+% Descendientes
+cantidad_descendientes_despues(Ancestro, Zona, Total) :-
+    descendientes_despues_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+cantidad_descendientes_en_zona(Ancestro, Zona, Total) :-
+    descendientes_en_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+% Nietos
+cantidad_nietos_despues(Ancestro, Zona, Total) :-
+    nietos_despues_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+% Bisnietos
+cantidad_bisnietos_despues(Ancestro, Zona, Total) :-
+    bisnietos_despues_zona(Ancestro, Zona, Lista),
+    contar_lista(Lista, Total).
+
+% Consultas de conteo adicionales
+cantidad_personas_en_seccion(Seccion, Total) :-
+    findall(P, puesto(P, Seccion), Lista),
+    contar_lista(Lista, Total).
+
+cantidad_personas_por_genero_en_zona(Zona, Genero, Total) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, Genero)), Lista),
+    contar_lista(Lista, Total).
+
+% --------------------------------
+% VALOR DE PRODUCCIÓN POR SECCIÓN
+% --------------------------------
+
+costo_seccion(extraccion, 1000).
+costo_seccion(ventilacion, 500).
+costo_seccion(geologia, 1200).
+costo_seccion(ingenieria, 1500).
+costo_seccion(supervision, 800).
+costo_seccion(transporte, 750).
+costo_seccion(mantenimiento, 600).
+costo_seccion(clasificacion, 2000).
+costo_seccion(tallado, 3000).
+costo_seccion(joyeria, 5000).
+costo_seccion(seguridad, 400).
+costo_seccion(logistica, 900).
+costo_seccion(administracion, 1100).
+costo_seccion(ventas, 2500).
+
+valor_produccion_persona(Persona, Valor) :-
+    puesto(Persona, Seccion),
+    costo_seccion(Seccion, Valor).
+
+% Valor total de producción
+valor_total_produccion(ListaPersonas, Total) :-
+    findall(V,
+        (member(Persona, ListaPersonas),
+         valor_produccion_persona(Persona, V)),
+        Valores),
+    sumlist(Valores, Total).
+
+% Valor de producción por género
+valor_produccion_hombres(ListaPersonas, Total) :-
+    findall(V,
+        (member(Persona, ListaPersonas),
+         sexo(Persona, hombre),
+         valor_produccion_persona(Persona, V)),
+        Valores),
+    sumlist(Valores, Total).
+
+valor_produccion_mujeres(ListaPersonas, Total) :-
+    findall(V,
+        (member(Persona, ListaPersonas),
+         sexo(Persona, mujer),
+         valor_produccion_persona(Persona, V)),
+        Valores),
+    sumlist(Valores, Total).
+
+% Valor de producción por zona
+valor_produccion_por_zona(Zona, Total) :-
+    findall(V,
+        (puesto(Persona, Seccion),
+         seccion(Seccion, Zona),
+         valor_produccion_persona(Persona, V)),
+    Valores),
+    sumlist(Valores, Total).
+
+% Valor de producción por sección
+valor_produccion_total_seccion(Seccion, Total) :-
+    findall(V,
+        (puesto(Persona, Seccion),
+         valor_produccion_persona(Persona, V)),
+    Valores),
+    sumlist(Valores, Total).
+
+% Reporte de valor de producción por sección
+reporte_valor_produccion_secciones(Lista) :-
+    findall((Seccion, Total),
+        (seccion(Seccion, _), valor_produccion_total_seccion(Seccion, Total)),
+    Lista).
+
+% Consultas de valor de producción adicionales
+valor_produccion_mujeres_en_zona(Zona, Total) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, mujer)), Mujeres),
+    valor_total_produccion(Mujeres, Total).
+
+valor_produccion_hombres_en_zona(Zona, Total) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, hombre)), Hombres),
+    valor_total_produccion(Hombres, Total).
+
+valor_produccion_secciones_despues_zona(Zona, Total) :-
+    findall(S, (seccion(S, Z), Z &gt; Zona), Secciones),
+    findall(V, (member(S, Secciones), valor_produccion_total_seccion(S, V)), Valores),
+    sumlist(Valores, Total).
+
+% NUEVAS CONSULTAS ADICIONALES
+personas_en_zona_por_genero(Zona, Genero, Lista) :-
+    findall(P, (puesto(P, S), seccion(S, Zona), sexo(P, Genero)), Lista).
+
+secciones_en_zona(Zona, Lista) :-
+    findall(S, seccion(S, Zona), Lista).
+
+puestos_por_genero(Genero, Lista) :-
+    findall((Persona, Seccion), (puesto(Persona, Seccion), sexo(Persona, Genero)), Lista).
+
+valor_produccion_por_genero_en_seccion(Seccion, Genero, Total) :-
+    findall(P, (puesto(P, Seccion), sexo(P, Genero)), Personas),
+    valor_total_produccion(Personas, Total).
+
+total_valor_mina(Total) :-
+    findall(V, valor_produccion_por_zona(_, V), Valores),
+    sumlist(Valores, Total).
+
+
+
+      </textarea></div><div class="bg-card border rounded-lg p-4"><h3 class="text-lg font-semibold mb-4">Consultas</h3><div class="space-y-3"><div class="flex gap-2"><input value="likes(sam, X)." type="text" class="flex-1 p-2 bg-background border rounded-md font-mono text-sm focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="?- likes(sam, X)."><button data-slot="button" class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play w-4 h-4"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg> Ejecutar <!--]--></button></div><div><p class="text-sm text-muted-foreground mb-2"> Consultas de ejemplo: </p><div class="flex flex-wrap gap-2"><!--[--><button data-slot="button" class="inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 font-mono text-xs"><!--[-->progenitor(ludwig, Hijo), puesto(Hijo, Seccion), seccion(Seccion, Zona).<!--]--></button><!--]--></div></div></div></div></div><div class="bg-card border rounded-lg p-4 flex flex-col"><div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold">Consola de Salida</h2><button data-slot="button" class="justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#39;size-&#39;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-8 rounded-md px-3 has-[&gt;svg]:px-2.5 flex items-center gap-2"><!--[--><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw w-4 h-4"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg> Limpiar <!--]--></button></div><div class="bg-background border rounded-md p-4 grow overflow-y-auto"><pre class="font-mono text-sm whitespace-pre-wrap">Ejecuta una consulta para ver los resultados...</pre><!----></div></div></div></div></div><!--astro:end--></astro-island>  </body></html>
